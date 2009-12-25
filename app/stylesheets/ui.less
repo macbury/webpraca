@@ -36,6 +36,10 @@ thead th:first-child { border-left:none !important; }
 thead th.optional { font-weight:normal !important; }
 tr.alt { background:#f6f6f6; }
 
+/* IDS */
+
+#job_price_from, #job_price_to { width: 50px; text-align: right; }
+
 /* Custom class */
 
 .rounded_corners (@radius: 5px) {
@@ -138,6 +142,8 @@ tr.alt { background:#f6f6f6; }
 
 /* TextFields */
 
+select { min-width: 150px; }
+
 input[type="text"], input[type="password"], textarea {
 	padding: 4px 3px !important;
 	border: 1px solid #96A6C5;
@@ -152,4 +158,37 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
   border-right: 1px solid #7FAEFF; 
   border-left: 1px solid #4478A8;
   border-top: 1px solid #4478A8;
+}
+
+form > fieldset {
+	border: 2px solid #ddd !important;
+	.rounded_corners;
+	padding: 10px 15px !important;
+	margin: 10px 5px !important;
+}
+
+form > fieldset > legend {
+	font-weight: bold;
+	padding: 0 15px 0px 0 !important;
+	margin-left: -22px !important;
+	background: #fff;
+	font-size: 16px;
+	color: #333 !important;
+}
+
+fieldset > h2, form h2, h3 {
+	font-size: 14px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	border-bottom: 2px solid #ddd;
+}
+
+/* Wrapper */
+
+@wrapper_width: 800px;
+
+.wrapper {
+	margin: 20px auto;
+	width: @wrapper_width;
+	min-height: 400px;
 }

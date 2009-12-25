@@ -1,7 +1,7 @@
 module ApplicationHelper
 	def collection_from_types(hash)
 		out = []
-		types.each_with_index { |e,i| out << [e,i] }
+		hash.each_with_index { |e,i| out << [e,i] }
 		return out
 	end
 	
@@ -18,4 +18,10 @@ module ApplicationHelper
 	def rss_link(title, path)
     tag :link, :type => 'application/rss+xml', :title => title, :href => path
   end
+
+	def inline_errors(object, attribute)
+		errors = object.errors.on(attribute)
+		
+		content_tag :p, errors.class == Array ? errors.join(', ') : errors, :class => 'inline-errors' unless errors.nil?
+	end
 end

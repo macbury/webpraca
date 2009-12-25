@@ -5,3 +5,11 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+['Ruby On Rails', 'Merb', 'Django', 'ASP .NET', 'Sinatra', 'Pylons', 'Symfony', 'CakePHP', 'Kohana', 'Spring', 'Struts', 'LifeRay'].each do |name|
+	Framework.find_or_create_by_name(name)
+end
+
+['Warszawa', 'Kraków', 'Gdańsk', 'Radom', 'Kielce', 'Lublin', 'Łódź', 'Gdynia', 'Toruń'].each do |name|
+	Localization.find_or_create_by_name(name)
+end

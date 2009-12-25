@@ -98,7 +98,18 @@ pl:
   activerecord:
     models:
       user: "Użytkownik"
+      job: "Praca"
     attributes:
+      job:
+        title: "Tytuł"
+        place_id: "Lokalizacja"
+        description: "Opis"
+        dlugosc_trwania: "Długość trwania"
+        remote_job: "Praca zdalna"
+        type_id: "Typ"
+        company_name: "Nazwa"
+        website: "Strona WWW"
+        framework_name: "Framework"
       user:
         password: "Hasło"
         password_confirmation: "Powtórz hasło"

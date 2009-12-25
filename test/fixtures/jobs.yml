@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type_id: 1
+  price_from: 1
+  price_to: 1
+  remote_job: false
+  title: MyString
+  permalink: MyString
+  description: MyText
+  end_at: 2009-12-25
+  company_name: MyString
+  website: MyString
+  localization_id: 1
+  NIP: 1
+  REGON: 1
+  KRS: 1
+  email: MyString
+  karma: 1
+
+two:
+  type_id: 1
+  price_from: 1
+  price_to: 1
+  remote_job: false
+  title: MyString
+  permalink: MyString
+  description: MyText
+  end_at: 2009-12-25
+  company_name: MyString
+  website: MyString
+  localization_id: 1
+  NIP: 1
+  REGON: 1
+  KRS: 1
+  email: MyString
+  karma: 1

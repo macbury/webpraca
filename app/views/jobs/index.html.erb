@@ -1,0 +1,18 @@
+<h2><%= title "Oferty pracy" %></h2>
+
+<ul class="jobs">
+<% @jobs.each do |job| %>
+  <li class="<%= cycle('normal', 'alt') %>">
+		<%= job_label(job) %>
+    <%= link_to job.title, seo_job_path(job) %> dla <%= link_to job.company_name, job.website, :target => "_blank" %> / <%= job.localization.name %>
+		<abbr class="date" title="<%= job.created_at.xmlschema %>">
+		<%= distance_of_time_in_words_to_now job.created_at %> temu
+		</abbr>
+  </li>
+<% end %>
+</ul>
+<%= will_paginate @job %>
+
+<br />
+
+<%= link_to 'New job', new_job_path %>
