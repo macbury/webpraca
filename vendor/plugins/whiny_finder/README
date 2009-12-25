@@ -1,0 +1,6 @@
+Whiny Finder
+============
+
+Adds a `find!` method to ActiveRecord::Base as well as `find_by_#{field}!`. Both
+of these will raise ActiveRecord::RecordNotFound instead of returning nil if no
+records are returned.

@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+   
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<%= display_meta_tags :site => 'nowa aplikacja' %>
+	<meta name="viewport" content="width=900" />
+	<%#= rss_link(@page_title, some_url(:format => :rss)) %>
+
+	<%= stylesheet_link_tag 'formtastic', 'formtastic_changes', 'ui' %>
+	<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
+	<%= javascript_include_tag 'jquery.min.js', 'jquery.form', 'rails', 'application.js' %>
+</head>
+<body>
+	<%= yield %>
+</body>
+</html>

@@ -1,0 +1,7 @@
+$(function(){
+<% flash.each do | type, message | %>
+	flash('<%= type %>', '<%= message %>');
+<% end %>
+<% flash.discard %>
+<%= yield %>
+});
