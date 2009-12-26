@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091226135553) do
+ActiveRecord::Schema.define(:version => 20091226192231) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20091226135553) do
     t.integer  "framework_id"
     t.integer  "rank"
     t.string   "token"
+    t.boolean  "published"
   end
 
   create_table "localizations", :force => true do |t|

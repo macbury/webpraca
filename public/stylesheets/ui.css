@@ -4,6 +4,7 @@ body {
   font: 12px Arial;
   color: #393733;
   overflow: auto;
+  background: #ffffff url('/images/bg-body.png') repeat-x top;
 }
 h1, h2, h3, h4 { margin: 0 0 5px 0; }
 a {
@@ -41,8 +42,8 @@ thead th {
 thead th:first-child { border-left: none !important; }
 thead th.optional { font-weight: normal !important; }
 tr.alt { background: #f6f6f6; }
-#job_price_from, #job_price_to {
-  width: 50px;
+.prices input[type="text"] {
+  width: 50px !important;
   text-align: right;
 }
 #job_captcha_image {
@@ -239,9 +240,68 @@ h3 {
   border-bottom: 2px solid #dddddd;
 }
 .wrapper {
-  margin: 20px auto;
-  width: 800px;
-  min-height: 400px;
+  margin: 0px auto;
+  width: 950px;
+  min-height: 600px;
+  height: auto !important;
+  height: 100%;
+}
+.wrapper > .header {
+  height: 120px;
+  width: 950px;
+  position: relative;
+}
+.header > h1#logo {
+  width: 347px;
+  height: 80px;
+  position: absolute;
+  top: 25px;
+  left: 20px;
+}
+.header > h1#logo a {
+  width: 347px;
+  height: 80px;
+  outline: 0;
+  background: url(/images/logo-trans.png) 0 0 no-repeat;
+  text-indent: -1000em;
+  float: left;
+}
+.header > ul.menu {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.header > ul.menu li {
+  display: inline;
+  margin-left: 3px;
+  padding-left: 6px;
+  border-left: 1px solid #dddddd;
+  background-color: transparent;
+  color: #0099cc;
+  font-weight: bold;
+}
+.header > ul.menu li:first-child { border: 0; }
+.content {
+  float: left;
+  width: 755px;
+  padding-right: 10px;
+}
+.content p {
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+.sidebar {
+  float: right;
+  width: 175px;
+  padding: 10px 0 0 0;
+}
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .jobs {
   margin: 0;

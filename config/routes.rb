@@ -1,6 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :jobs
-
+	map.with_options :controller => 'jobs', :action => 'index' do |job| 
+		job.connect '/lokalizacja/:localization/:page'
+		job.localization '/lokalizacja/:localization'
+		job.connect '/framework/:framework/:page'
+		job.framework '/framework/:framework'
+	end
+	
+	map.resources :jobs, :member => { :publish => :get }, :collection => { :search => :any }
   map.resources :user_sessions
   map.resources :users
 	

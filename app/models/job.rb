@@ -8,9 +8,6 @@ class Job < ActiveRecord::Base
 	
 	validates_presence_of :title, :description, :email, :company_name, :localization_id, :framework_id
 	
-	#validates_length_of :framework_name, :within => 3..255, :on => :create
-	#validates_presence_of :framework_name, :on => :create
-	
 	validates_length_of :title, :within => 3..255
 	validates_length_of :description, :within => 10..5000
 	validates_inclusion_of :type_id, :in => 0..JOB_TYPES.size-1
@@ -37,7 +34,7 @@ class Job < ActiveRecord::Base
 	belongs_to :framework
 	belongs_to :localization
 	
-	attr_protected :rank, :permalink, :end_at, :token
+	attr_protected :rank, :permalink, :end_at, :token, :published
 	attr_accessor  :framework_name, :localization_name
 	
 	before_create :create_from_name, :generate_token
@@ -49,9 +46,8 @@ class Job < ActiveRecord::Base
 	end
 	
 	def generate_token
-		length=512
 		alphanumerics = ('a'..'z').to_a.concat(('A'..'Z').to_a.concat(('0'..'9').to_a))
-		salt = alphanumerics.sort_by{rand}.to_s[0..length]
+		salt = alphanumerics.sort_by{rand}.to_s[0..1024]
 		
 		self.token = Digest::SHA1.hexdigest("--#{salt}--#{self.id}--#{Date.current}--")
 		
@@ -99,6 +95,11 @@ class Job < ActiveRecord::Base
 	
 	def highlited?
 		self.rank >= 6
+	end
+	
+	def publish!
+		self.published = true
+		save
 	end
 	
 	def to_param

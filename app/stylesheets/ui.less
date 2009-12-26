@@ -12,6 +12,7 @@ body {
 	font: 12px Arial;
 	color: @text_color;
 	overflow: auto;
+	background: #fff url('/images/bg-body.png') repeat-x top;
 }
 
 h1, h2, h3, h4 { margin: 0 0 5px 0; }
@@ -38,7 +39,7 @@ tr.alt { background:#f6f6f6; }
 
 /* IDS */
 
-#job_price_from, #job_price_to { width: 50px; text-align: right; }
+.prices input[type="text"] { width: 50px !important; text-align: right; }
 #job_captcha_image { margin-bottom: -22px; margin-right: 10px; }
 #job_captcha_solution { width: 200px; }
 
@@ -187,13 +188,77 @@ fieldset > h2, form h2, h3 {
 
 /* Wrapper */
 
-@wrapper_width: 800px;
+@wrapper_width: 950px;
 
 .wrapper {
-	margin: 20px auto;
+	margin: 0px auto;
 	width: @wrapper_width;
-	min-height: 400px;
+	min-height: 600px;
+	height: auto !important; 
+	height: 100%;
 }
+
+/* Header */
+
+.wrapper > .header {
+	height:120px; 
+	width: @wrapper_width; 
+	position:relative;
+}
+
+@logo_width: 347px;
+@logo_height: 80px;
+
+.header > h1#logo { 
+	width: @logo_width; 
+	height: @logo_height; 
+	position: absolute; 
+	top: 25px; 
+	left: 20px; 
+}
+
+.header > h1#logo a { 
+	width: @logo_width; 
+	height: @logo_height; 
+	outline:0; 
+	background: url(/images/logo-trans.png) 0 0 no-repeat; 
+	text-indent:-1000em; 
+	float:left; 
+}
+
+.header > ul.menu { 
+	position:absolute; 
+	top: 20px; 
+	right: 20px;
+	.reset;
+}
+
+.header > ul.menu li{
+	display:inline; 
+	margin-left: 3px; 
+	padding-left: 6px;
+	border-left: 1px solid #ddd;
+	background-color:transparent; 
+	color:#0099CC;
+	font-weight: bold;
+}
+
+.header > ul.menu li:first-child { border: 0; }
+
+/* content */
+
+.content { float: left; width: 755px; padding-right: 10px; }
+.content p { margin: 0 0 10px 0; padding: 0;}
+
+/* Sidebar */
+
+.sidebar {
+  float: right;
+  width: 175px;
+  padding: 10px 0 0 0;
+}
+
+.sidebar ul { .reset; }
 
 /* Jobs */
 

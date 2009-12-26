@@ -6,6 +6,7 @@ class JobMailer < ActionMailer::Base
 		@subject = "webpraca.net - Dodano nową oferte"
 		@body[:job] = job
 		@body[:job_path] = seo_job_url(job)
+		@body[:publish_path] = publish_job_url(job, :token => job.token)
 		@body[:edit_path] = edit_job_url(job, :token => job.token)
 	end
 	

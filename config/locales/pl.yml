@@ -99,12 +99,18 @@ pl:
     models:
       user: "Użytkownik"
       job: "Praca"
+      search: "Wyszukiwarka"
       comment:
         attributes:
           captcha_solution:
             blank: 'musi być podane'
             invalid: 'odpowiedź jest niepoprawna'
     attributes:
+      "searchlogic/search":
+        description_like: "Zawierający tekst"
+        type_id_equals: "Typ"
+        localization_id_equals: "Lokalizacja"
+        framework_id_equals: "Używane frameworki"
       job:
         title: "Tytuł"
         place_id: "Lokalizacja"

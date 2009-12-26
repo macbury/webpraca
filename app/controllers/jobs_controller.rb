@@ -1,10 +1,11 @@
 class JobsController < ApplicationController
-	validates_captcha :except => [:index, :show, :destroy]
+	validates_captcha :only => [:create, :new, :edit, :update]
   # GET /jobs
   # GET /jobs.xml
   def index
 		query = Job.search
-
+		@page_title = ['Oferty pracy']
+		
 		options = {
 								:page => params[:page], 
 								:per_page => 30,
@@ -13,29 +14,47 @@ class JobsController < ApplicationController
 							}
 		
 		query.end_at_greater_than_or_equal_to(Date.current)
-		#query.etat_equals(params[:etat]) if params[:etat]
-		#query.place_id_equals(params[:place]) if params[:place]
+		query.published_is(true)
 		
-		#if params[:type]
-		#	type = OFFER_TYPES.map{ |type| PermalinkFu.escape(type) }.index(params[:type])
-		#	query.type_id_equals(type)
-		#end
+		if params[:localization]
+			@localization = Localization.find_by_permalink!(params[:localization])
+			@page_title << @localization.name
+			query.localization_id_is(@localization.id)
+		end
+		
+		if params[:framework]
+			@framework = Framework.find_by_permalink!(params[:framework])
+			@page_title << @framework.name
+			options[:include] << :framework
+			query.framework_id_is(@framework.id)
+		end
 		
     @jobs = query.paginate(options)
-		
-		@places = query.all 			:select => "count(jobs.localization_id) as jobs_count, localizations.*",
-															:joins => :localization,
-															:group => Localization.column_names.map{|c| "localizations.#{c}"}.join(','),
-															:order => "localizations.name"
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @jobs }
 			format.rss
 			format.atom
     end
   end
-
+	
+	def search
+		@page_title = "Szukaj oferty"
+		
+		@search = Job.search(params[:search])
+		@search.end_at_greater_than_or_equal_to(Date.current)
+		@search.published_is(true)
+		
+		@jobs = @search.all  :limit => 30, 
+												 :order => "created_at DESC, rank DESC"
+		
+    respond_to do |format|
+      format.html { render :action => (params[:search].nil? || params[:search].empty?) ? "search" : "results" }
+			format.rss { render :action => "index" }
+			format.atom { render :action => "index" }
+    end
+	end
+	
   # GET /jobs/1
   # GET /jobs/1.xml
   def show
@@ -64,7 +83,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-        flash[:notice] = 'Job was successfully created.'
+        flash[:notice] = 'Na twój e-mail został wysłany link którym opublikujesz ofertę.'
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
@@ -96,7 +115,16 @@ class JobsController < ApplicationController
       end
     end
   end
-
+	
+	def publish
+		@job = Job.find_by_permalink_and_token!(params[:id], params[:token])
+		@job.publish!
+		
+		flash[:notice] = "Twoja oferta jest już widoczna!"
+		
+		redirect_to @job
+	end
+	
   # DELETE /jobs/1
   # DELETE /jobs/1.xml
   def destroy

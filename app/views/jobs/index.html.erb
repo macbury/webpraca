@@ -1,4 +1,7 @@
-<h2><%= title "Oferty pracy" %></h2>
+<% content_for :sidebar do %>
+	<%= render :partial => "/jobs/sidebar" %>
+<% end %>
+<h2><%#= @page_title.join(' dla ') %></h2>
 
 <ul class="jobs">
 <% @jobs.each do |job| %>
@@ -11,8 +14,4 @@
   </li>
 <% end %>
 </ul>
-<%= will_paginate @job %>
-
-<br />
-
-<%= link_to 'New job', new_job_path %>
+<%= will_paginate @jobs %>

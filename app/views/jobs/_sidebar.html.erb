@@ -1,0 +1,19 @@
+<div class="sidebar">
+	<h3>Lokalizacje</h3>
+	<ul>
+		<% for place in Localization.find_job_localizations %>
+		<li>
+			<%= link_to place.name, localization_path(place.permalink) %> <b>(<%= place.jobs_count %>)</b>
+		</li>
+		<% end %>
+	</ul>
+	
+	<h3>Frameworki</h3>
+	<ul>
+		<% for framework in Framework.find_job_frameworks %>
+		<li>
+			<%= link_to framework.name, framework_path(framework.permalink) %> <b>(<%= framework.jobs_count %>)</b>
+		</li>
+		<% end %>
+	</ul>
+</div>

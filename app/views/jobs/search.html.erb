@@ -1,0 +1,19 @@
+<h2><%= @page_title %></h2>
+<% semantic_form_for @search, :url => search_jobs_path, :html => { :method => :post } do |f| %>
+	<% f.inputs :name => "Wyszukiwarka" do %>
+		<%= f.input :description_like, :required => false, :label => "Zawierający tekst" %>
+		<%= f.input :type_id_equals, :required => false, :as => :check_boxes, :collection => collection_from_types(JOB_LABELS), :label => "Typ" %>
+		<%= f.input :localization_id_equals, :required => false, :as => :check_boxes, :collection => Localization.all.map { |l| [l.name, l.id] }, :wrapper_html => { :class => "columns" }, :label => "Lokalizacja" %>
+		<%= f.input :framework_id_equals, :required => false, :as => :check_boxes, :collection => Framework.all.map { |frame| [frame.name, frame.id] }, :wrapper_html => { :class => "columns" }, :label => "Używane frameworki" %>
+		<li class="numeric prices">
+			<label>Widełki zarobkowe:</label>
+			<%= f.text_field :price_from_greater_than_or_equal_to %> do <%= f.text_field :price_to_less_than_or_equal_to %> PLN
+		</li>
+	<% end %>
+	<p>
+		<%= f.submit "Szukaj!" %> 
+		<% if params[:search] %>
+			albo <%= link_to "Subskrybuj wyszkukiwanie", search_jobs_url(stripped_params(:format => :rss)) %>
+		<% end %>
+	</p>
+<% end %>

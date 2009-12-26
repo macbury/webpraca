@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<%= display_meta_tags :site => 'webpraca.net' %>
+	<%= display_meta_tags :site => "webpraca.net" %>
 	<meta name="viewport" content="width=900" />
 	<%= rss_link("RSS", jobs_url(:format => :rss)) %>
 	<%= rss_link("ATOM", jobs_url(:format => :atom)) %>
@@ -15,7 +15,22 @@
 </head>
 <body>
 	<div class="wrapper">
-		<%= yield %>
+		<div class="header">
+			<h1 id="logo"><%= link_to "webpraca.net", root_path %></h1>
+			<ul class="menu">
+				<li><%= link_to "Dodaj Ofertę!", jobs_path %></li>
+				<li><%= link_to "Szukaj", search_jobs_path %></li>
+				<li><%= link_to "Oferty", jobs_path %></li>
+				<li><%= link_to "O nas", jobs_path %></li>
+				<li><%= link_to "Kontakt", jobs_path %></li>
+			</ul>
+		</div>
+		
+		<div class="sidebar"><%= yield :sidebar %></div>
+		<div class="content">
+			<%= yield %>
+		</div>
+
 	</div>
 </body>
 </html>
