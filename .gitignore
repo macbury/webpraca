@@ -3,4 +3,5 @@ log/*.log
 tmp/**/*
 public/*.xml.gz
 config/database.yml
+config/mailer.yml
 db/*.sqlite3
