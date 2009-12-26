@@ -192,3 +192,62 @@ fieldset > h2, form h2, h3 {
 	width: @wrapper_width;
 	min-height: 400px;
 }
+
+/* Jobs */
+
+.jobs {
+	.reset;
+	.clear;
+}
+
+.jobs > li { clear: both; padding: 5px; }
+.jobs > .alt { background:#f6f6f6; }
+.jobs > li > .ranked { font-weight: bold; }
+
+.jobs > li > .date { 
+	font-size: 11px;
+	font-style: italic;
+	color: #7C7C7C;
+}
+
+/* Etykiety */
+
+.etykieta {
+	display: block;
+	float: left;
+	font-size: 10px;
+	margin-right: 5px;
+	margin-top: -2px;
+	text-align: center;
+	width: 70px;
+	.rounded_corners(2px);
+	padding: 2px 3px;
+	color: #fff;
+}
+
+.etykieta.zdalnie {
+	background: #357CCB;
+	border: 1px solid #2C6AB0;
+}
+
+.etykieta.zlecenie {
+	background: #F8854E;
+	border: 1px solid #D27244;
+}
+
+.etykieta.etat {
+	background: #408000;
+	border: 1px solid #366E01;
+}
+
+.etykieta.praktyka {
+	background: #FF6;
+	border: 1px solid #E2E25C;
+	color: #31627E;
+}
+
+.etykieta.wolontariat {
+	background: #D6D6D6;
+	border: 1px solid #B1B1B1;
+	color: #31627E;
+}

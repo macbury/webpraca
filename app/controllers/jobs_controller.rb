@@ -7,7 +7,7 @@ class JobsController < ApplicationController
 		options = {
 								:page => params[:page], 
 								:per_page => 30,
-								:order => "rank ASC, created_at DESC",
+								:order => "rank DESC, created_at DESC",
 								:include => [:localization]
 							}
 		
@@ -31,6 +31,7 @@ class JobsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @jobs }
 			format.rss
+			format.atom
     end
   end
 

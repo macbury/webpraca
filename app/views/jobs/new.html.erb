@@ -1,4 +1,4 @@
-<h2><%= title @job.new_record? ? "Nowa oferta" : "Edycja oferty" %></h2>
+<h2><%= title @job.new_record? ? "Nowa oferta" : ["Edycja oferty", @job.title] %></h2>
 
 <% semantic_form_for(@job) do |f| %>
 	<% f.inputs :name => 'Szczegóły oferty pracy' do %>
@@ -22,7 +22,7 @@
 		</li>
 		<li class="numeric prices">
 			<label>Widełki zarobkowe:</label>
-			<%= f.text_field :price_from %> do <%= f.text_field :price_to %>
+			<%= f.text_field :price_from %> do <%= f.text_field :price_to %> PLN
 			<%= inline_errors @job, :price_from %>
 			<%= inline_errors @job, :price_to %>
 		</li>

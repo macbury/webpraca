@@ -6,8 +6,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<%= display_meta_tags :site => 'webpraca.net' %>
 	<meta name="viewport" content="width=900" />
-	<%#= rss_link(@page_title, some_url(:format => :rss)) %>
-
+	<%= rss_link("RSS", jobs_url(:format => :rss)) %>
+	<%= rss_link("ATOM", jobs_url(:format => :atom)) %>
+	
 	<%= stylesheet_link_tag 'markitup', 'textile','formtastic', 'formtastic_changes', 'ui' %>
 	<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 	<%= javascript_include_tag 'jquery.min.js', 'jquery.form', 'jquery.markitup', 'textile', 'rails', 'application.js' %>

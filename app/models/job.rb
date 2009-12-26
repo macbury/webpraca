@@ -1,5 +1,6 @@
 JOB_TYPES = ["zlecenie (konkretna usługa do wykonania)", "poszukiwanie współpracowników / oferta pracy", "wolontariat (praca za reklamy, bannery, itp. lub praca za darmo)", "staż/praktyka"]
 JOB_LABELS = ["zlecenie", "etat", "wolontariat", "praktyka"]
+JOB_RANK_VALUES = { :price => 3, :default => 1 }
 
 class Job < ActiveRecord::Base
 	xss_terminate
@@ -44,9 +45,14 @@ class Job < ActiveRecord::Base
 	
 	def calculate_rank
 		self.rank = 0
-		[:REGON, :NIP, :KRS, :price_to, :price_from].each do |attribute|
+		[:REGON, :NIP, :KRS].each do |attribute|
 			val = send(attribute)
+			inc = JOB_RANK_VALUES[attribute] || JOB_RANK_VALUES[:default]
 			self.rank += 1 unless (val.nil? || val.empty?)
+		end
+		
+		if ((!self.price_from.nil? && self.price_from > 0) || (!self.price_to.nil? && self.price_to > 0))
+			self.rank += JOB_RANK_VALUES[:price]
 		end
 	end
 	
@@ -75,7 +81,10 @@ class Job < ActiveRecord::Base
 		date = created_at.nil? ? Date.current.to_date : created_at.to_date
 		write_attribute(:end_at, date+val.to_i.days)
 	end
-
+	
+	def highlited?
+		self.rank >= 6
+	end
 	
 	def to_param
 		permalink
