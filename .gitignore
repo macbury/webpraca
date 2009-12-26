@@ -2,6 +2,7 @@
 log/*.log
 tmp/**/*
 public/*.xml.gz
+public/images/captchas/*
 config/database.yml
 config/mailer.yml
 db/*.sqlite3
