@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+irb = RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
+ 
+libs = " -r irb/completion"
+libs << " -r rubygems"
+libs << " -r #{File.dirname(__FILE__) + '/../lib/validates_captcha.rb'}"
+
+puts "Loading ValidatesCaptcha gem"
+exec "#{irb} #{libs} -Ilib --simple-prompt"
+

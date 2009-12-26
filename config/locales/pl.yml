@@ -99,6 +99,11 @@ pl:
     models:
       user: "Użytkownik"
       job: "Praca"
+      comment:
+        attributes:
+          captcha_solution:
+            blank: 'musi być podane'
+            invalid: 'odpowiedź jest niepoprawna'
     attributes:
       job:
         title: "Tytuł"

@@ -1,0 +1,1 @@
+ValidatesCaptcha.provider = ValidatesCaptcha::Provider::StaticImage.new

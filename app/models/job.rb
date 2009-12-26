@@ -37,11 +37,26 @@ class Job < ActiveRecord::Base
 	belongs_to :framework
 	belongs_to :localization
 	
-	attr_protected :rank, :permalink, :end_at
+	attr_protected :rank, :permalink, :end_at, :token
 	attr_accessor  :framework_name, :localization_name
 	
-	before_create :create_from_name
-	before_save :calculate_rank
+	before_create :create_from_name, :generate_token
+	before_save   :calculate_rank
+	after_create  :send_notification
+	
+	def send_notification
+		JobMailer.deliver_job_posted(self)
+	end
+	
+	def generate_token
+		length=512
+		alphanumerics = ('a'..'z').to_a.concat(('A'..'Z').to_a.concat(('0'..'9').to_a))
+		salt = alphanumerics.sort_by{rand}.to_s[0..length]
+		
+		self.token = Digest::SHA1.hexdigest("--#{salt}--#{self.id}--#{Date.current}--")
+		
+		generate_token unless Job.find_by_token(self.token).nil?
+	end
 	
 	def calculate_rank
 		self.rank = 0

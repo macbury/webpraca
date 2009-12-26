@@ -9,13 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091225232422) do
+ActiveRecord::Schema.define(:version => 20091226135553) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "brain_busters", :force => true do |t|
+    t.string "question"
+    t.string "answer"
   end
 
   create_table "frameworks", :force => true do |t|
@@ -45,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20091225232422) do
     t.datetime "updated_at"
     t.integer  "framework_id"
     t.integer  "rank"
+    t.string   "token"
   end
 
   create_table "localizations", :force => true do |t|

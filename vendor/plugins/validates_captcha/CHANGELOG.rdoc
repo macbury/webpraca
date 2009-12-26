@@ -1,0 +1,28 @@
+== 0.9.6 (October 30, 2009)
+
+* Do not make captcha_challenge and captcha_solution attr_accessible. Instead overwrite AR#attributes= so they can be mass assigned.
+
+
+== 0.9.5 (October 9, 2009)
+
+* API change: renamed Provider::Image to Provider::DynamicImage in order to guard against confusion
+
+* API change: renamed ReversibleEncrypter to SymmetricEncryptor
+
+* ReversibleEncrypter::Simple class now uses ActiveSupport's MessageEncryptor instead of custom implementation
+
+
+== 0.9.4 (October 7, 2009)
+
+* Include new StaticImage provider
+
+
+== 0.9.3 (September 29, 2009)
+
+* Change API, include new Question provider, make it the default one
+
+
+== 0.9.2 (September 27, 2009)
+
+* Initial version
+

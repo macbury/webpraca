@@ -45,6 +45,11 @@ tr.alt { background: #f6f6f6; }
   width: 50px;
   text-align: right;
 }
+#job_captcha_image {
+  margin-bottom: -22px;
+  margin-right: 10px;
+}
+#job_captcha_solution { width: 200px; }
 .reset {
   margin: 0;
   padding: 0;

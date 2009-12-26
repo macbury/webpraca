@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+	validates_captcha :except => [:index, :show, :destroy]
   # GET /jobs
   # GET /jobs.xml
   def index
@@ -7,7 +8,7 @@ class JobsController < ApplicationController
 		options = {
 								:page => params[:page], 
 								:per_page => 30,
-								:order => "rank DESC, created_at DESC",
+								:order => "created_at DESC, rank DESC",
 								:include => [:localization]
 							}
 		
@@ -42,7 +43,6 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @job }
     end
   end
 
@@ -55,12 +55,6 @@ class JobsController < ApplicationController
       format.html # new.html.erb
       format.xml  { render :xml => @job }
     end
-  end
-
-  # GET /jobs/1/edit
-  def edit
-    @job = Job.find_by_permalink!(params[:id])
-		render :action => "new"
   end
 
   # POST /jobs
@@ -79,11 +73,17 @@ class JobsController < ApplicationController
       end
     end
   end
-
+	
+	# GET /jobs/1/edit
+  def edit
+    @job = Job.find_by_permalink_and_token!(params[:id], params[:token])
+		render :action => "new"
+  end
+	
   # PUT /jobs/1
   # PUT /jobs/1.xml
   def update
-    @job = Job.find_by_permalink!(params[:id])
+    @job = Job.find_by_permalink_and_token!(params[:id], params[:token])
 
     respond_to do |format|
       if @job.update_attributes(params[:job])
@@ -100,7 +100,7 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.xml
   def destroy
-    @job = Job.find(params[:id])
+    @job = Job.find_by_permalink_and_token!(params[:id], params[:token])
     @job.destroy
 
     respond_to do |format|
@@ -108,4 +108,5 @@ class JobsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 end

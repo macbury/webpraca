@@ -1,0 +1,320 @@
+= Validates Captcha
+
+A captcha verification approach for Rails apps, directly integrated into 
+ActiveRecord's validation mechanism and providing helpers for ActionController 
+and ActionView.
+
+RDoc documentation (including this README as start page) can be found at 
+http://m4n.github.com/validates_captcha. Validates Captcha was first 
+announced {here}[http://m4n.github.com/2009/09/28/introducing-validates-captcha.html].
+
+By default, question/answer captcha challenges are used, but you can also switch 
+to the built-in image captcha providers. If you stick to ValidatesCaptcha’s API, 
+you can even implement your own captcha challenge provider.
+
+
+
+== Basic Usage
+
+Validates Captcha extends ActiveRecord, ActionController and ActionView with 
+helper methods that make it a snap to integrate captcha verification in your 
+Rails application.
+
+<b>Step #1:</b> Extend your view’s form with the necessary captcha display and 
+input logic.
+
+  # app/views/comments/new.html.erb
+  <% form_for @comment do |f| %>
+    <%= f.error_messages %>
+
+    <!-- standard input fields: -->
+    <p>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </p>    
+    <!-- ... -->
+    
+    <!-- now something new: -->
+    <p>
+      <%= f.label :captcha %><br />
+      <%= f.captcha_challenge  # displays the question or image %>
+      <%= f.captcha_field      # displays the input field %>
+    </p>
+    
+    <p>
+      <%= f.submit 'Create' %>
+    </p>
+  <% end %>
+
+<b>Step #2:</b> Tell the controller that you want to validate 
+captchas.
+
+  class CommentsController < ApplicationController
+    validates_captcha
+    
+    def create
+      # scaffold comment creation code ...
+    end
+    
+    # more actions here ...
+  end
+  
+This activates captcha validation in every action of the controller 
+whenever an instance of class +Comment+ is saved.
+
+<b>Step #3:</b> There's no step three!
+
+To summarize: Put the following in your view.
+
+  <%= f.captcha_challenge %>
+  <%= f.captcha_field %>
+  
+And what you see below in the corresponding controller.
+
+  validates_captcha
+
+Done.
+
+== Customization
+
+Because the +validates_captcha+ controller method internally creates an 
+around filter, you can (de)activate captcha validation for specific actions.
+
+  validates_captcha :only => [:create, :update]
+  validates_captcha :except => :reset
+
+The class for which captcha validation is activated is derived from 
+the name of the controller. So putting +validates_captcha+ in a 
++UsersController+ validates instances of the +User+ class.
+
+You can customize the validated class using the +validates_captcha_of+ method.
+
+  class ArticlesController < ApplicationController
+    validates_captcha_of Post
+    validates_captcha_of :blog_entries, :except => :persist
+    validates_captcha_of 'users', :only => :store
+  end
+  
+Two kinds of errors are added to the model if captcha validation fails: 
++:blank+ if no captcha solution is submitted and +:invalid+ if a captcha 
+solution is submitted but does not solve the captcha's challenge. You can 
+localize the error messages for the captcha as you usually do for the 
+other attributes.
+
+  models:
+    comment:
+      attributes:
+        captcha_solution:
+          blank: 'must not be empty'
+          invalid: 'does not match the code displayed on the image'
+
+What if the image captcha's text is unreadable or a user does not know the 
+correct answer to the captcha question? There's also a form helper method 
+for captcha regeneration available. You can call it like this.
+
+  <p>
+    Don't know the answer? <%= f.regenerate_captcha_challenge_link %>
+  </p>
+
+This generates an anchor tag that, when clicked, generates a new captcha 
+challenge and updates the display. It makes an AJAX request to fetch a 
+new challenge and updates the question/image after the request is complete.
+
++regenerate_captcha_challenge_link+ internally calls Rails' +link_to_remote+
+helper method. So it relies on the Prototype javascript framework to be 
+available on the page.
+
+The anchor's text defaults to 'New question' (question challenge) and 
+'Regenerate Captcha' (image challenge) respectively. You can set this to 
+a custom value by providing a +:text+ key in the options hash.
+
+  <%= f.regenerate_captcha_challenge_link :text => 'Another captcha, please' %>
+
+Apart from controllers, you can activate captcha validation for a model 
+using the class level +with_captcha_validation+ method added to 
+ActiveRecord::Base.
+
+  Comment.with_captcha_validation do
+    @comment = Comment.new(...)
+    @comment.save
+  end
+  
+This activates captcha validation on entering the block and deactivates it 
+on leaving the block.
+
+Two new attribute-like methods are added to ActiveRecord: +captcha_challenge+ 
+and +captcha_solution+.  Those are made +attr_accessible+.  The former is 
+initialized to a randomly generated captcha challenge on instantiation. 
+
+For a record to be valid, the value assigned to +captcha_solution=+ must 
+solve the return value of +captcha_challenge+.  Within a +with_captcha_validation+ 
+block, calling +valid?+ (as is done by +save+, +update_attributes+, etc.) 
+will also validate the value of +captcha_solution+ against +captcha_challenge+.  
+Outside +with_captcha_validation+, no captcha validation is performed.
+
+
+
+== Question/answer challenge captchas (default provider)
+
+You can set the captcha provider to use question/answer challenges with 
+the code below. It is best to put this in a Rails initializer.
+
+  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Question.new # this is the default
+
+If you want to replace the few default questions and answers, here's how 
+to do it.
+
+  ValidatesCaptcha::Provider::Question.questions_and_answers = {
+    "What's the opposite of bad?" => "good",
+    "What are the initials of the creator of Rails?" => "DHH",
+    "What's the sum of 3 and four?" => ["7", "seven"],
+    ... }
+
+
+
+== Dynamic image challenge captchas
+
+You can set the captcha provider to use dynamically created image challenges 
+with the code below.  Dynamic means that the captcha image is created on invocation.  
+If you want to utilize this provider, it is best to put this in a Rails initializer.
+
+  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::DynamicImage.new
+
+By default, image captchas have a length of 6 characters and the text displayed 
+on the captcha image is created by randomly selecting characters from a 
+predefined alphabet constisting of visually distinguishable letters and digits.
+
+The number of characters and the alphabet used when generating strings can 
+be customized. Just put the following in a Rails initializer and adjust the 
+values to your needs.
+
+  ValidatesCaptcha::StringGenerator::Simple.alphabet = '01'
+  ValidatesCaptcha::StringGenerator::Simple.length = 8
+
+
+
+== Static image challenge captchas
+
+You can set the captcha provider to use static image challenges with 
+the code below.  Static means that there exist some pre-created images 
+in a folder accessible by the web application.  If you want to utilize 
+this provider, it is best to put this in a Rails initializer.
+
+  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::StaticImage.new
+
+There is a Rake tast for creating the static captcha images:
+
+  rake validates_captcha:create_static_images
+
+This will create 3 images for you. To create a different number of images, 
+provide a COUNT argument:
+
+  rake validates_captcha:create_static_images COUNT=50
+
+If you want to customize the path the images get saved to (or other stuff), 
+please see the documentation for ValidatesCaptcha::Provider::StaticImage.
+
+
+
+== Extensibility
+
+Don't like the built-in challenges? It's easy to extend them or to implement 
+your own.
+
+Validates Captcha delegates tasks like string and image generation, 
+encryption/decryption of captcha codes, and responding to captcha requests 
+to dedicated backend classes.
+
+Those classes can easily be replaced with your custom implementations.  So 
+you can achieve stronger encryption, can use a word list as image captcha text 
+generation source, or can replace the captcha image generator with one 
+that creates images that are harder to crack.
+
+Please see the documentation of the following classes for further information.
+
+* ValidatesCaptcha::StringGenerator::Simple
+* ValidatesCaptcha::SymmetricEncryptor::Simple
+* ValidatesCaptcha::ImageGenerator::Simple
+
+Or you can implement a custom captcha challenge provider and assign it to 
+ValidatesCaptcha#provider=. See the documentation on ValidatesCaptcha::Provider
+for an example.
+
+
+
+== Dependencies
+
+Using a Rack middleware to speed up the request/response cycle when fetching 
+captcha images, Validates Captcha requires Rails version 2.3 or greater.
+
+The image captcha provider uses ImageMagick's +convert+ command to create 
+the captcha.  So a recent and properly configured version of ImageMagick 
+must be installed on the system.  The version used while developing was 6.4.5.  
+But you are not bound to ImageMagick.  If you want to provide a custom image 
+generator, take a look at the documentation for 
+ValidatesCaptcha::ImageGenerator::Simple on how to create your own.
+
+
+
+== Installation
+  
+You can install Validates Captcha as a Gem with
+
+  % [sudo] gem install validates_captcha
+
+and then configure it in your +environment.rb+ file as shown below.
+
+  Rails::Initializer.run do |config|
+    # ...
+    config.gem 'validates_captcha'
+    # ...
+  end
+
+Or you can install it as a Rails plugin (discouraged) with the 
+following command.
+
+  % ./script/plugin install git://github.com/m4n/validates_captcha.git
+
+
+
+== Download
+
+The latest version of Validates Captcha can be found at 
+http://github.com/m4n/validates_captcha
+
+Documentation can be generated from its distribution directory with the 
+following command.
+
+  % [sudo] rake rdoc
+
+Tests can be executed from its distribution directory with the 
+following command.
+
+  % [sudo] rake test
+
+
+
+== Hacking
+
+Validates Captcha is {hosted on Github}[http://github.com/m4n/validates_captcha]. 
+Pull requests are welcome.
+
+
+
+== Bugs
+
+Please report bugs on the {Github issue tracker}[http://github.com/m4n/validates_captcha/issues]
+for this project.
+
+
+
+== License
+
+Validates Captcha is released under the MIT license.
+
+
+
+== Copyright
+
+Copyright (c) 2009 Martin Andert
+

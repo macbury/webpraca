@@ -1,83 +1,21 @@
+<% title [@job.localization.name, @job.company_name, @job.title] %>
+
+<h2><%= @job.title %></h2>
+
 <p>
-  <b>Type:</b>
-  <%=h @job.type_id %>
+	<%= job_label(@job) %> dla <%= link_to @job.company_name, @job.website, :target => "_blank" %> / <%= @job.localization.name %>
 </p>
 
 <p>
-  <b>Price from:</b>
-  <%=h @job.price_from %>
+	Dodano <abbr title="<%= @job.created_at.xmlschema %>"><%= distance_of_time_in_words_to_now @job.created_at %> temu</abbr><br/>
+	Do wygaśnięcia zostało <abbr title="<%= @job.end_at.xmlschema %>"><%= distance_of_time_in_words_to_now(@job.end_at) %></abbr><br/>
+	Wyświetlona: 0 <%#= @job.visits_count %> razy
 </p>
 
+<%= RedCloth.new(@job.description).to_html %>
 <p>
-  <b>Price to:</b>
-  <%=h @job.price_to %>
+<% if permitted_to? :edit, @job %>
+	<%= link_to 'Edytuj', edit_job_path(@job) %> |
+	<%= link_to 'Wstecz', jobs_path %>
+<% end %>
 </p>
-
-<p>
-  <b>Remote job:</b>
-  <%=h @job.remote_job %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%=h @job.title %>
-</p>
-
-<p>
-  <b>Permalink:</b>
-  <%=h @job.permalink %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @job.description %>
-</p>
-
-<p>
-  <b>End at:</b>
-  <%=h @job.end_at %>
-</p>
-
-<p>
-  <b>Company name:</b>
-  <%=h @job.company_name %>
-</p>
-
-<p>
-  <b>Website:</b>
-  <%=h @job.website %>
-</p>
-
-<p>
-  <b>Localization:</b>
-  <%=h @job.localization_id %>
-</p>
-
-<p>
-  <b>Nip:</b>
-  <%=h @job.NIP %>
-</p>
-
-<p>
-  <b>Regon:</b>
-  <%=h @job.REGON %>
-</p>
-
-<p>
-  <b>Krs:</b>
-  <%=h @job.KRS %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%=h @job.email %>
-</p>
-
-<p>
-  <b>Rank:</b>
-  <%=h @job.rank %>
-</p>
-
-
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
