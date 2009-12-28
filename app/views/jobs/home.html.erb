@@ -1,0 +1,22 @@
+<% content_for :sidebar do %>
+	<%= render :partial => "/jobs/sidebar" %>
+<% end %>
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><span>najpopularniejsze</span> oferty</h2>
+		</div>
+
+		<%= render :partial => "jobs", :object => @top_jobs %>
+	</div>
+	
+	<div>
+		<div class="title">
+			<h2><span>najnowsze</span> oferty</h2>
+		</div>
+
+		<%= render :partial => "jobs", :object => @recent_jobs %>
+	</div>
+	
+	<%= link_to 'pokaż więcej ofert', jobs_path, :class => "more" %>
+</div>

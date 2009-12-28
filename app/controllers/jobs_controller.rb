@@ -1,9 +1,19 @@
 class JobsController < ApplicationController
 	validates_captcha :only => [:create, :new, :edit, :update]
+	
+	def home
+		@page_title = ['najpopularniejsze oferty', 'najnowsze oferty']
+		
+		query = Job.search
+		query.active
+		
+		@recent_jobs = query.all(:order => "created_at DESC", :limit => 10, :include => :localization)
+		@top_jobs = query.all(:order => "rank DESC", :limit => 10, :include => :localization)
+	end
   # GET /jobs
   # GET /jobs.xml
   def index
-		query = Job.search
+		@query = Job.search
 		@page_title = ['Oferty pracy']
 		
 		options = {
@@ -13,23 +23,22 @@ class JobsController < ApplicationController
 								:include => [:localization]
 							}
 		
-		query.end_at_greater_than_or_equal_to(Date.current)
-		query.published_is(true)
+		@query.active
 		
 		if params[:localization]
 			@localization = Localization.find_by_permalink!(params[:localization])
 			@page_title << @localization.name
-			query.localization_id_is(@localization.id)
+			@query.localization_id_is(@localization.id)
 		end
 		
 		if params[:framework]
 			@framework = Framework.find_by_permalink!(params[:framework])
 			@page_title << @framework.name
 			options[:include] << :framework
-			query.framework_id_is(@framework.id)
+			@query.framework_id_is(@framework.id)
 		end
 		
-    @jobs = query.paginate(options)
+    @jobs = @query.paginate(options)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,8 +51,7 @@ class JobsController < ApplicationController
 		@page_title = "Szukaj oferty"
 		
 		@search = Job.search(params[:search])
-		@search.end_at_greater_than_or_equal_to(Date.current)
-		@search.published_is(true)
+		@search.active
 		
 		@jobs = @search.all  :limit => 30, 
 												 :order => "created_at DESC, rank DESC"

@@ -1,17 +1,27 @@
 <% content_for :sidebar do %>
 	<%= render :partial => "/jobs/sidebar" %>
 <% end %>
-<h2><%#= @page_title.join(' dla ') %></h2>
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><span>oferty</span> pracy</h2>
+		</div>
 
-<ul class="jobs">
-<% @jobs.each do |job| %>
-  <li class="<%= cycle('normal', 'alt') %>">
-		<%= job_label(job) %>
-    <%= link_to job.title, seo_job_path(job), :class => job.highlited? ? 'ranked' : nil %> dla <%= link_to job.company_name, job.website, :target => "_blank" %> / <%= job.localization.name %>
-		<abbr class="date" title="<%= job.created_at.xmlschema %>">
-		<%= distance_of_time_in_words_to_now job.created_at %> temu
-		</abbr>
-  </li>
-<% end %>
-</ul>
-<%= will_paginate @jobs %>
+		<% if @jobs.nil? || @jobs.empty? %>
+		<p class="info">Brak ofert</p>
+		<% else %>
+		<ul class="list">
+		<% @jobs.each do |job| %>
+		  <li class="<%= cycle('normal', 'alt') %>">
+				<%= job_label(job) %>
+		    <%= link_to job.title, seo_job_path(job), :class => job.highlited? ? 'ranked' : nil %> dla <%= link_to job.company_name, job.website, :target => "_blank" %> / <%= job.localization.name %>
+				<abbr class="date" title="<%= job.created_at.xmlschema %>">
+				<%= distance_of_time_in_words_to_now job.created_at %> temu
+				</abbr>
+		  </li>
+		<% end %>
+		</ul>
+		<%= will_paginate @jobs %>
+		<% end %>
+	</div>
+</div>

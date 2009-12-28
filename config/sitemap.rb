@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://www.example.com"
+SitemapGenerator::Sitemap.default_host = "http://webpraca.net"
 
 SitemapGenerator::Sitemap.add_links do |sitemap|
   # Put links creation logic here.
@@ -17,16 +17,20 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
   # Examples:
   
   # add '/articles'
-  sitemap.add articles_path, :priority => 0.7, :changefreq => 'daily'
+  sitemap.add jobs_path, :priority => 1.0, :changefreq => 'daily'
 
   # add all individual articles
-  Article.find(:all).each do |a|
-    sitemap.add article_path(a), :lastmod => a.updated_at
+  Job.active.each do |o|
+    sitemap.add seo_job_path(o), :lastmod => o.updated_at
   end
-
-  # add merchant path
-  sitemap.add '/purchase', :priority => 0.7, :host => "https://www.example.com"
   
+	Framework.all.each do |f|
+		sitemap.add framework_path(f), :lastmod => f.updated_at
+	end
+	
+	Localization.all.each do |l|
+		sitemap.add localization_path(l), :lastmod => l.updated_at
+	end
 end
 
 # Including Sitemaps from Rails Engines.

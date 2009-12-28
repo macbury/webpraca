@@ -16,5 +16,6 @@ form.formtastic fieldset ol li label { padding-top: 0.4em; }
 form.formtastic p.inline-errors { color:#cc0000; }
 form.formtastic #recaptcha_widget_div { margin-left: 25%; }
 form.formtastic .markItUpButton { margin-bottom: 2px !important; }
-form.formtastic .markItUpEditor { width: 100%; }
+form.formtastic .markItUpEditor { width: 99%; }
 form.formtastic .check_boxes.columns li { float: left; width: 33%; }
+form.formtastic fieldset ol li.numeric input, form.formtastic fieldset ol li.string input { width: 73%; }

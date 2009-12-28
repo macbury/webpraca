@@ -11,14 +11,18 @@
 	
 	<%= stylesheet_link_tag 'markitup', 'textile','formtastic', 'formtastic_changes', 'ui' %>
 	<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
-	<%= javascript_include_tag 'jquery.min.js', 'jquery.form', 'jquery.markitup', 'textile', 'rails', 'application.js' %>
+	<%= javascript_include_tag 'jquery.min.js', 'jquery.form', 'jquery.markitup', 'textile', 'rails', 'application' %>
 </head>
 <body>
+	<%- flash.each do |name, msg| -%>
+		<%= content_tag :div, msg, :class => "flash_#{name}" %>
+	<%- end -%>
 	<div class="wrapper">
 		<div class="header">
 			<h1 id="logo"><%= link_to "webpraca.net", root_path %></h1>
 			<ul class="menu">
-				<li><%= link_to "Dodaj Ofertę!", jobs_path %></li>
+				<li><%= link_to "Dodaj Ofertę!", new_job_path %></li>
+				<li><%= link_to "Strona główna", root_path %></li>
 				<li><%= link_to "Szukaj", search_jobs_path %></li>
 				<li><%= link_to "Oferty", jobs_path %></li>
 				<li><%= link_to "O nas", jobs_path %></li>
@@ -26,7 +30,19 @@
 			</ul>
 		</div>
 		
-		<div class="sidebar"><%= yield :sidebar %></div>
+		<div class="sidebar">
+			<%= yield :sidebar %>
+			
+			<div class="box">
+				<div>
+					<div class="title"><h3>reklama</h3></div>
+					<div>
+						<script type="text/javascript" id="AdTaily_Widget" key="X4ycGaq8yMlXCo4" src="http://static.adtaily.com/widget.js"></script>
+						<noscript>Reklamy na tej stronie sprzedawane są przez widget z AdTaily.com (PLBLOADTAILY0001)</noscript>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="content">
 			<%= yield %>
 		</div>

@@ -8,4 +8,10 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+class Object
+  def verbose
+    $verbose = true
+  end
+end
 require 'sitemap_generator/tasks' rescue LoadError

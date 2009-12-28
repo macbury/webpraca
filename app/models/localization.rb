@@ -5,12 +5,9 @@ class Localization < ActiveRecord::Base
 	has_permalink :name
 	
 	def self.find_job_localizations
-		query = Job.search
-		query.end_at_greater_than_or_equal_to(Date.current)
-		query.published_is(true)
-		
-		return query.all(:select => "count(jobs.localization_id) as jobs_count, localizations.*",
-											:joins => :localization,
+		return Localization.all(	:select => "count(jobs.localization_id) as jobs_count, localizations.*",
+											:joins => :jobs,
+											:conditions => ["((jobs.end_at >= ?) AND (jobs.published = ?))", Date.current, true],
 											:group => Localization.column_names.map{|c| "localizations.#{c}"}.join(','),
 											:order => "localizations.name")
 	end

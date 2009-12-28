@@ -6,6 +6,8 @@ class Job < ActiveRecord::Base
 	xss_terminate
 	has_permalink :title
 	
+	named_scope :active, :conditions => ["((jobs.end_at >= ?) AND (jobs.published = ?))", Date.current, true], :include => :localization
+	
 	validates_presence_of :title, :description, :email, :company_name, :localization_id, :framework_id
 	
 	validates_length_of :title, :within => 3..255
