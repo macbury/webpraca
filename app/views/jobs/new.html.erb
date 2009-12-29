@@ -1,62 +1,70 @@
-<h2><%= title @job.new_record? ? "Nowa oferta" : ["Edycja oferty", @job.title] %></h2>
-
-<% semantic_form_for(@job) do |f| %>
-	<%= hidden_field_tag 'token', params[:token] unless params[:token].nil? %>
-	<% f.inputs :name => 'Szczegóły oferty pracy' do %>
-		<%= f.input :title %>
-		<li class="select">
-			<%= f.label :localization_id, 'Lokalizacja*' %>
-			<%= f.select :localization_id, Localization.all(:order => 'name').map { |localization| [localization.name, localization.id] } %> albo 
-			<%= f.text_field :localization_name %>
-			<p class="inline-hints">np. 'Warszawa', 'Kraków, UK'</p>
-			<%= inline_errors @job, :localization_name %>
-		</li>
-		<%= f.input :type_id, :as => :radio, :collection => collection_from_types(JOB_TYPES) %>
-		<%= f.input :remote_job, :required => false %>
-		<%= f.input :dlugosc_trwania, :as => :numeric, :hint => "ile dni oferta ma być ważna(od 1 do 60 dni)" %>
-		<li class="select">
-			<%= f.label :framework_id, 'Framework*' %>
-			<%= f.select :framework_id, Framework.all(:order => 'name').map { |frame| [frame.name, frame.id] } %> albo 
-			<%= f.text_field :framework_name %>
-			<p class="inline-hints">główny framework którego znajomość jest wymagana, podaj pełną nazwę</p>
-			<%= inline_errors @job, :framework_name %>
-		</li>
-		<li class="numeric prices">
-			<label>Widełki zarobkowe:</label>
-			<%= f.text_field :price_from %> do <%= f.text_field :price_to %> PLN
-			<%= inline_errors @job, :price_from %>
-			<%= inline_errors @job, :price_to %>
-		</li>
-		<li>
-			<%= f.label :description, 'Opis*' %>
-			<%= f.text_area :description %>
-			<%= inline_errors @job, :description %>
-		</li>
-	<% end %>
-	
-	<% f.inputs :name => 'Firma zatrudniająca lub osoba zlecająca' do %>
-		<%= f.input :email, :hint => "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie." %>
-		<%= f.input :company_name %>
-		<%= f.input :website, :hint => "zaczynający się od http://", :required => false %>
-		<%= f.input :NIP, :required => false %>
-		<%= f.input :REGON, :required => false %>
-		<%= f.input :KRS, :required => false %>
-	<% end %>
-	
-	<% f.inputs :name => "Czy jesteś człowiekiem" do %>
-	<li class="string required">
-		<%= f.label :captcha, 'Kod z obrazka*' %>
-		<%= f.captcha_challenge %>
-		<%= f.captcha_field %>
-		<%= inline_errors @job, :captcha_solution %>
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><%= title @job.new_record? ? "Nowa oferta" : ["Edycja oferty", @job.title] %></h2>
+		</div>
 		
-	</li>
-	<% end %>
-	<p>
-		<%= f.submit @job.new_record? ? "Dodaj oferte" : "Zapisz zmiany" %>
-		<% unless @job.new_record? %>
-		, <%= link_to "usuń", @job, :method => :delete, :confirm => "Czy na pewno chcesz usunąć ofertę?" %>
+		<% semantic_form_for(@job) do |f| %>
+			<%= hidden_field_tag 'token', params[:token] unless params[:token].nil? %>
+			<% f.inputs :name => 'Szczegóły oferty pracy' do %>
+				<%= f.input :title %>
+				<li class="select">
+					<%= f.label :localization_id, 'Lokalizacja*' %>
+					<%= f.select :localization_id, Localization.all(:order => 'name').map { |localization| [localization.name, localization.id] } %> albo 
+					<%= f.text_field :localization_name %>
+					<p class="inline-hints">np. 'Warszawa', 'Kraków, UK'</p>
+					<%= inline_errors @job, :localization_name %>
+				</li>
+				<%= f.input :type_id, :as => :radio, :collection => collection_from_types(JOB_TYPES) %>
+				<%= f.input :remote_job, :required => false %>
+				<%= f.input :dlugosc_trwania, :as => :numeric, :hint => "ile dni oferta ma być ważna(od 1 do 60 dni)" %>
+				<li class="select">
+					<%= f.label :framework_id, 'Framework*' %>
+					<%= f.select :framework_id, Framework.all(:order => 'name').map { |frame| [frame.name, frame.id] } %> albo 
+					<%= f.text_field :framework_name %>
+					<p class="inline-hints">główny framework którego znajomość jest wymagana, podaj pełną nazwę</p>
+					<%= inline_errors @job, :framework_name %>
+				</li>
+				<li class="numeric prices">
+					<label>Widełki zarobkowe:</label>
+					<%= f.text_field :price_from %> do <%= f.text_field :price_to %> PLN
+					<%= inline_errors @job, :price_from %>
+					<%= inline_errors @job, :price_to %>
+				</li>
+				<li>
+					<%= f.label :description, 'Opis*' %>
+					<%= f.text_area :description %>
+					<%= inline_errors @job, :description %>
+				</li>
+			<% end %>
+
+			<% f.inputs :name => 'Firma zatrudniająca lub osoba zlecająca' do %>
+				<%= f.input :email, :hint => "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie." %>
+				<%= f.input :company_name %>
+				<%= f.input :website, :hint => "zaczynający się od http://", :required => false %>
+				<%= f.input :NIP, :required => false %>
+				<%= f.input :REGON, :required => false %>
+				<%= f.input :KRS, :required => false %>
+			<% end %>
+
+			<% f.inputs :name => "Czy jesteś człowiekiem" do %>
+			<li class="string required">
+				<%= f.label :captcha, 'Kod z obrazka*' %>
+				<%= f.captcha_challenge %>
+				<%= f.captcha_field %>
+				<%= inline_errors @job, :captcha_solution %>
+
+			</li>
+			<% end %>
+			<div class="buttons">
+				<div class="button">
+					<%= f.submit @job.new_record? ? "Dodaj oferte" : "Zapisz zmiany" %>
+				</div>
+				<% unless @job.new_record? %>
+				, <%= link_to "usuń", @job, :method => :delete, :confirm => "Czy na pewno chcesz usunąć ofertę?" %>
+				<% end %>
+				 albo <%= link_to 'anuluj', jobs_path %>
+			</div>
 		<% end %>
-		 albo <%= link_to 'anuluj', jobs_path %>
-	</p>
-<% end %>
+	</div>
+</div>

@@ -1,21 +1,32 @@
 <% title [@job.localization.name, @job.company_name, @job.title] %>
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><%= @job.title %></h2>
+		</div>
+		
+		<p>
+			<%= job_label(@job) %> dla <%= link_to @job.company_name, @job.website, :target => "_blank" %> / <%= @job.localization.name %>
+		</p>
 
-<h2><%= @job.title %></h2>
-
-<p>
-	<%= job_label(@job) %> dla <%= link_to @job.company_name, @job.website, :target => "_blank" %> / <%= @job.localization.name %>
-</p>
-
-<p>
-	Dodano <abbr title="<%= @job.created_at.xmlschema %>"><%= distance_of_time_in_words_to_now @job.created_at %> temu</abbr><br/>
-	Do wygaśnięcia zostało <abbr title="<%= @job.end_at.xmlschema %>"><%= distance_of_time_in_words_to_now(@job.end_at) %></abbr><br/>
-	Wyświetlona: 0 <%#= @job.visits_count %> razy
-</p>
-
-<%= RedCloth.new(@job.description).to_html %>
-<p>
-<% if permitted_to? :edit, @job %>
-	<%= link_to 'Edytuj', edit_job_path(@job) %> |
-	<%= link_to 'Wstecz', jobs_path %>
-<% end %>
-</p>
+		<p>
+			<strong>Dodano</strong> <abbr title="<%= @job.created_at.xmlschema %>"><%= distance_of_time_in_words_to_now @job.created_at %> temu</abbr><br/>
+			<strong>Do wygaśnięcia zostało</strong> <abbr title="<%= @job.end_at.xmlschema %>"><%= distance_of_time_in_words_to_now(@job.end_at) %></abbr><br/>
+			<strong>Wyświetlona</strong> 0 <%#= @job.visits_count %> razy
+		</p>
+		
+	</div>
+	
+	<div>
+		<div class="title mini">
+			<h3>Opis oferty</h3>
+		</div>
+		<%= RedCloth.new(@job.description).to_html %>
+		<p>
+		<% if permitted_to? :edit, @job %>
+			<%= link_to 'Edytuj', edit_job_path(@job) %> |
+			<%= link_to 'Wstecz', jobs_path %>
+		<% end %>
+		</p>
+	</div>
+</div>

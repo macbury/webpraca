@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
 	validates_captcha :only => [:create, :new, :edit, :update]
+	ads_pos :right, :except => [:index, :search]
 	
 	def home
 		@page_title = ['najpopularniejsze oferty', 'najnowsze oferty']
@@ -8,7 +9,7 @@ class JobsController < ApplicationController
 		query.active
 		
 		@recent_jobs = query.all(:order => "created_at DESC", :limit => 10, :include => :localization)
-		@top_jobs = query.all(:order => "rank DESC", :limit => 10, :include => :localization)
+		@top_jobs = query.all(:order => "rank DESC, created_at DESC", :limit => 10, :include => :localization)
 	end
   # GET /jobs
   # GET /jobs.xml
@@ -18,7 +19,7 @@ class JobsController < ApplicationController
 		
 		options = {
 								:page => params[:page], 
-								:per_page => 30,
+								:per_page => 25,
 								:order => "created_at DESC, rank DESC",
 								:include => [:localization]
 							}
@@ -114,7 +115,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.update_attributes(params[:job])
-        flash[:notice] = 'Job was successfully updated.'
+        flash[:notice] = 'Zapisano zmiany w ofercie.'
         format.html { redirect_to(@job) }
         format.xml  { head :ok }
       else

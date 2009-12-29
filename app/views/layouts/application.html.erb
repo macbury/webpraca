@@ -14,9 +14,6 @@
 	<%= javascript_include_tag 'jquery.min.js', 'jquery.form', 'jquery.markitup', 'textile', 'rails', 'application' %>
 </head>
 <body>
-	<%- flash.each do |name, msg| -%>
-		<%= content_tag :div, msg, :class => "flash_#{name}" %>
-	<%- end -%>
 	<div class="wrapper">
 		<div class="header">
 			<h1 id="logo"><%= link_to "webpraca.net", root_path %></h1>
@@ -30,23 +27,35 @@
 			</ul>
 		</div>
 		
+		<%- flash.each do |name, msg| -%>
+			<div class="<%= "flash #{name}" %>">
+				<a href="#" class="dismiss">X</a>
+				<p><%= msg %></p>
+			</div>
+		<%- end -%>
+		
 		<div class="sidebar">
 			<%= yield :sidebar %>
-			
-			<div class="box">
-				<div>
-					<div class="title"><h3>reklama</h3></div>
-					<div>
-						<script type="text/javascript" id="AdTaily_Widget" key="X4ycGaq8yMlXCo4" src="http://static.adtaily.com/widget.js"></script>
-						<noscript>Reklamy na tej stronie sprzedawane są przez widget z AdTaily.com (PLBLOADTAILY0001)</noscript>
-					</div>
-				</div>
-			</div>
+			<%= render :partial => "/shared/ads" if @ads_pos == :right %>
 		</div>
 		<div class="content">
 			<%= yield %>
+			
+			<%= render :partial => "/shared/ads" if @ads_pos.nil? %>
 		</div>
-
+		
+		<div class="clear"></div>
+		<div class="footer">
+			<span class="right">
+				<%= link_to "Strona główna", root_path %> | 
+				<%= link_to "Oferty", jobs_path %> | 
+				<%= link_to "Szukaj", search_jobs_path %> | 
+				<%= link_to "Oferty", jobs_path %> | 
+				<%= link_to "O nas", jobs_path %> | 
+				<%= link_to "Kontakt", jobs_path %>
+			</span>
+			<strong><%= link_to "webpraca.net", root_path %></strong> <sup>BETA</sup> &copy; 2010. 
+		</div>
 	</div>
 </body>
 </html>

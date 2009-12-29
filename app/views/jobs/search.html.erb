@@ -1,3 +1,6 @@
+<% content_for :sidebar do %>
+	<%= render :partial => "/jobs/sidebar" %>
+<% end %>
 <div class="box">
 	<div>
 		<div class="title">
@@ -17,12 +20,12 @@
 
 			<% end %>
 
-			<p>
-				<%= f.submit "Szukaj!" %> 
+			<div class="buttons">
+				<div class="button"><%= f.submit "Szukaj!" %></div>
 				<% if params[:search] %>
 					albo <%= link_to "Subskrybuj wyszkukiwanie", search_jobs_url(stripped_params(:format => :rss)) %>
 				<% end %>
-			</p>
+			</div>
 		<% end %>
 	</div>
 </div>

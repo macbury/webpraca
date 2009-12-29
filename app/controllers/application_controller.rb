@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
 
   protected
 	
+	# Ads Position
+	# :bottom or :right
+	def self.ads_pos(position, options = {})
+    before_filter(options) do |controller|
+      controller.instance_variable_set('@ads_pos', position)
+    end
+  end
+	
 	def user_for_authorization
 		Authorization.current_user = self.current_user
 	end
