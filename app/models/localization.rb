@@ -11,4 +11,8 @@ class Localization < ActiveRecord::Base
 											:group => Localization.column_names.map{|c| "localizations.#{c}"}.join(','),
 											:order => "localizations.name")
 	end
+	
+	def to_param
+		permalink
+	end
 end

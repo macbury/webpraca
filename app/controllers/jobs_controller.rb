@@ -1,7 +1,8 @@
 class JobsController < ApplicationController
 	validates_captcha :only => [:create, :new, :edit, :update]
-	ads_pos :right, :except => [:index, :search]
+	ads_pos :right, :except => [:search]
 	
+	ads_pos :none, :only => [:home]
 	def home
 		@page_title = ['najpopularniejsze oferty', 'najnowsze oferty']
 		
@@ -39,6 +40,12 @@ class JobsController < ApplicationController
 			@query.framework_id_is(@framework.id)
 		end
 		
+		if params[:type_id]
+			@type_id = JOB_LABELS.index(params[:type_id]) || 0
+			@page_title << JOB_LABELS[@type_id]
+			@query.type_id_is(@type_id)
+		end
+		
     @jobs = @query.paginate(options)
 
     respond_to do |format|
@@ -68,7 +75,8 @@ class JobsController < ApplicationController
   # GET /jobs/1.xml
   def show
     @job = Job.find_by_permalink!(params[:id])
-
+		@job.visited_by(request.remote_ip)
+		
     respond_to do |format|
       format.html # show.html.erb
     end

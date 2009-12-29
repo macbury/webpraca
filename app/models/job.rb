@@ -1,6 +1,6 @@
 JOB_TYPES = ["zlecenie (konkretna usługa do wykonania)", "poszukiwanie współpracowników / oferta pracy", "wolontariat (praca za reklamy, bannery, itp. lub praca za darmo)", "staż/praktyka"]
 JOB_LABELS = ["zlecenie", "etat", "wolontariat", "praktyka"]
-JOB_RANK_VALUES = { :price => 3, :default => 1 }
+JOB_RANK_VALUES = { :price => 0.8, :default => 0.3, :krs => 0.6, :nip => 0.5, :regon => 0.6 }
 
 class Job < ActiveRecord::Base
 	xss_terminate
@@ -26,15 +26,17 @@ class Job < ActiveRecord::Base
 	
 	validates_format_of :website, :with =>  /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
 	
-	validates_format_of :REGON, 
+	validates_format_of :regon, 
 			:with => /(^$)|(^[0-9]{7,14}$)/
-	validates_format_of :NIP,
+	validates_format_of :nip,
 			:with => /(^$)|(^\d{2,3}-\d{2,3}-\d{2,3}-\d{2,3}$)/
-	validates_format_of :KRS,
+	validates_format_of :krs,
 			:with => /(^$)|(^\d{10})$/
 	
 	belongs_to :framework
 	belongs_to :localization
+	
+	has_many :visits, :dependent => :delete_all
 	
 	attr_protected :rank, :permalink, :end_at, :token, :published
 	attr_accessor  :framework_name, :localization_name
@@ -42,6 +44,10 @@ class Job < ActiveRecord::Base
 	before_create :create_from_name, :generate_token
 	before_save   :calculate_rank
 	after_create  :send_notification
+	
+	def self.find_grouped_by_type
+		return Job.active.count(:type_id, :group => "type_id")
+	end
 	
 	def send_notification
 		JobMailer.deliver_job_posted(self)
@@ -57,16 +63,37 @@ class Job < ActiveRecord::Base
 	end
 	
 	def calculate_rank
-		self.rank = 0
-		[:REGON, :NIP, :KRS].each do |attribute|
+		self.rank = 1.0
+		
+		self.rank += visits_count * 0.01
+		
+		[:regon, :nip, :krs].each do |attribute|
 			val = send(attribute)
 			inc = JOB_RANK_VALUES[attribute] || JOB_RANK_VALUES[:default]
-			self.rank += 1 unless (val.nil? || val.empty?)
+			self.rank += inc unless (val.nil? || val.empty?)
 		end
 		
-		if ((!self.price_from.nil? && self.price_from > 0) || (!self.price_to.nil? && self.price_to > 0))
+		if widelki_zarobkowe?
 			self.rank += JOB_RANK_VALUES[:price]
+			
+			price = price_from || price_to
+			
+			if price >= 10_000 # ciekawe czy ktoś da tyle :P
+				self.rank += 0.8
+			elsif price >= 7000
+				self.rank += 0.7
+			elsif price >= 5000
+				self.rank += 0.6
+			elsif price >= 3000
+				self.rank += 0.3
+			elsif price < 2000
+				self.rank -= 0.6 # bo nikt za grosze nie chce pracować 
+			end
 		end
+	end
+	
+	def widelki_zarobkowe?
+		((!self.price_from.nil? && self.price_from > 0) || (!self.price_to.nil? && self.price_to > 0))
 	end
 	
 	def create_from_name
@@ -96,11 +123,17 @@ class Job < ActiveRecord::Base
 	end
 	
 	def highlited?
-		self.rank >= 6
+		self.rank >= 4.0
 	end
 	
 	def publish!
 		self.published = true
+		save
+	end
+	
+	def visited_by(ip)
+		visit = visits.find_or_create_by_ip(IPAddr.new(ip).to_i)
+		visits_count += 1 if visit.new_record?
 		save
 	end
 	

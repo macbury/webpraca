@@ -36,12 +36,24 @@
 		
 		<div class="sidebar">
 			<%= yield :sidebar %>
-			<%= render :partial => "/shared/ads" if @ads_pos == :right %>
+			<% if @ads_pos == :right %>
+			<div class="box">
+				<div>
+					<%= render :partial => "/shared/ads" %>
+				</div>
+			</div>
+			<% end %>
 		</div>
 		<div class="content">
 			<%= yield %>
 			
-			<%= render :partial => "/shared/ads" if @ads_pos.nil? %>
+			<% if @ads_pos == :bottom %>
+			<div class="box">
+				<div>
+					<%= render :partial => "/shared/ads" %>
+				</div>
+			</div>
+			<% end %>
 		</div>
 		
 		<div class="clear"></div>

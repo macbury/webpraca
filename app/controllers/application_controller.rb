@@ -12,8 +12,12 @@ class ApplicationController < ActionController::Base
 
   protected
 	
+	def not_for_production
+		redirect_to root_path if Rails.env == "production"
+	end
+	
 	# Ads Position
-	# :bottom or :right
+	# :bottom, :right, :none
 	def self.ads_pos(position, options = {})
     before_filter(options) do |controller|
       controller.instance_variable_set('@ads_pos', position)
@@ -30,6 +34,7 @@ class ApplicationController < ActionController::Base
   end
 	
 	def seo
+		@ads_pos = :bottom
 		@standard_tags = 'test, test, test'
 		set_meta_tags :description => 'moja fajna aplikacja',
 	                :keywords => @standard_tags

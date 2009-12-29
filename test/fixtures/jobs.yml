@@ -12,9 +12,9 @@ one:
   company_name: MyString
   website: MyString
   localization_id: 1
-  NIP: 1
-  REGON: 1
-  KRS: 1
+  nip: 1
+  regon: 1
+  krs: 1
   email: MyString
   karma: 1
 
@@ -30,8 +30,8 @@ two:
   company_name: MyString
   website: MyString
   localization_id: 1
-  NIP: 1
-  REGON: 1
-  KRS: 1
+  nip: 1
+  regon: 1
+  krs: 1
   email: MyString
   karma: 1

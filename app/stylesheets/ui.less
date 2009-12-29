@@ -16,7 +16,7 @@ body {
 }
 
 h1, h2, h3, h4 { margin: 0 0 5px 0; }
-a { color: @link_color; cursor: pointer; outline: none !important; text-decoration: none; padding: 1px 2px; }
+a { color: @link_color; cursor: pointer; outline: none !important; text-decoration: none; }
 a:hover, a:focus { color: @hover_color; }
 a img { border: 0; }
 
@@ -42,6 +42,7 @@ tr.alt { background:#f6f6f6; }
 .prices input[type="text"] { width: 50px !important; text-align: right; }
 #job_captcha_image { margin-bottom: -22px; margin-right: 10px; }
 #job_captcha_solution { width: 200px; }
+#AdTaily_Widget_Container { padding-top: 5px; }
 
 /* Custom class */
 
@@ -260,10 +261,11 @@ form > fieldset > legend {
 
 /* content */
 @content_padding_right: 10px;
+@content_width: @wrapper_width - @sidebar_width - @content_padding_right;
 
 .content { 
 	float: left; 
-	width: @wrapper_width - @sidebar_width - @content_padding_right; 
+	width: @content_width; 
 	padding-right: @content_padding_right; 
 	margin-top: 20px; 
 }
@@ -349,6 +351,19 @@ form > fieldset > legend {
 	text-align: center;
 }
 
+.list > li > .rank {
+	.rounded_corners(2px);
+	text-align: center;
+	min-width: 18px;
+	padding: 2px 3px;
+	font-weight: bold;
+	font-size: 9px;
+	float: right;
+	background: #FFFF98;
+	border: 1px solid #E2E28C;
+	margin-top: -1px;
+}
+
 .list > li > .date { 
 	font-size: 11px;
 	font-style: italic;
@@ -401,6 +416,8 @@ form > fieldset > legend {
 	color: #fff;
 }
 
+.etykieta:hover { color: #fff; }
+
 .etykieta.zdalnie {
 	background: #357CCB;
 	border: 1px solid #2C6AB0;
@@ -422,11 +439,15 @@ form > fieldset > legend {
 	color: #31627E;
 }
 
+.praktyka:hover { color: #31627E; }
+
 .etykieta.wolontariat {
 	background: #D6D6D6;
 	border: 1px solid #B1B1B1;
 	color: #31627E;
 }
+
+.wolontariat:hover { color: #31627E; }
 
 /* Pagination */
 
@@ -486,6 +507,43 @@ form > fieldset > legend {
 }
 * html .pagination { height: 1%; }
 *:first-child+html .pagination { overflow: hidden; }
+
+/* describe list */
+
+@dt_width: 180px;
+@dt_padding_right: 10px;
+@dl_padding_left: 10px;
+
+dl {
+	padding: 0px;
+	margin: 10px 0 0 0;
+	display: block;
+}
+ 
+dl dt {
+	width: @dt_width;
+	text-align: right;
+	color: #888;
+	float: left;
+	display: block;
+	padding: 0 @dt_padding_right 6px 0;
+	margin: 0;
+}
+ 
+dl dd {
+  width: @content_width - @dt_width - @dt_padding_right - @dl_padding_left - 15px;
+  border-left: 1px solid #ccc;
+  float: left;
+  padding: 0 0 10px @dl_padding_left;
+  margin: 0;
+}
+
+dl dd:last-child { padding-bottom: 0px; }
+
+dl dd ul {
+  padding: 5px 0 0 20px;
+  margin: 0;
+}
 
 /* footer */
 

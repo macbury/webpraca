@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	before_filter :not_for_production
+	
   def new
     @user = User.new
   end

@@ -4,6 +4,8 @@ ActionController::Routing::Routes.draw do |map|
 		job.localization '/lokalizacja/:localization'
 		job.connect '/framework/:framework/:page'
 		job.framework '/framework/:framework'
+		job.connect '/typ/:type_id/:page'
+		job.job_type '/typ/:type_id'
 	end
 	
 	map.resources :jobs, :member => { :publish => :get }, :collection => { :search => :any }

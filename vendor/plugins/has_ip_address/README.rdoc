@@ -1,0 +1,48 @@
+= has_ip_address
+
+An extension to ActiveRecord to store IP Addresses in the database as integers, in part to IPAddr.
+
+    class Visit < ActiveRecord::Base
+      has_ip_address
+    end
+
+Here's an example of using it:
+
+    >> visit = Visit.new
+    => #<Visit id: nil, ip_address: nil, created_at: nil, updated_at: nil>
+    >> visit.ip_address = "127.0.0.1"
+    => "127.0.0.1"
+    >> visit.ip_address
+    => #<IPAddr: IPv4:127.0.0.1/255.255.255.255>
+    >> visit.ip_address.to_i
+    => 2130706433
+    >> visit.ip_address.to_s
+    => "127.0.0.1"
+
+This assumes you are using a column named :ip_address. To change this behavior, pass in a parameter with the column you care to use:
+
+
+    class Visit < ActiveRecord::Base
+      has_ip_address :visit_ip
+    end
+
+== Known issues
+
+ * Setting ip_address to an invalid IP address will fail with an ArgumentError from IPAddr.
+   * Ideally, it should let you pass any value in without error, but invalid IP addresses will add a validation error during validation
+   * In the mean time, you probably want to only this when the IP Address will definitely be correct, ie from a controller's `request.remote_ip`.
+
+== Note on Patches/Pull Requests
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but
+   bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+== Copyright
+
+Copyright (c) 2009 Joshua Nichols. See LICENSE for details.

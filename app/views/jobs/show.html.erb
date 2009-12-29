@@ -4,17 +4,54 @@
 		<div class="title">
 			<h2><%= @job.title %></h2>
 		</div>
-		
-		<p>
-			<%= job_label(@job) %> dla <%= link_to @job.company_name, @job.website, :target => "_blank" %> / <%= @job.localization.name %>
-		</p>
 
-		<p>
-			<strong>Dodano</strong> <abbr title="<%= @job.created_at.xmlschema %>"><%= distance_of_time_in_words_to_now @job.created_at %> temu</abbr><br/>
-			<strong>Do wygaśnięcia zostało</strong> <abbr title="<%= @job.end_at.xmlschema %>"><%= distance_of_time_in_words_to_now(@job.end_at) %></abbr><br/>
-			<strong>Wyświetlona</strong> 0 <%#= @job.visits_count %> razy
-		</p>
-		
+		<dl>
+			<dt>Typ</dt>
+			<dd><%= job_label(@job) %></dd>
+			<dt>Pracodawca</dt>
+			<dd><%= link_to @job.company_name, @job.website, :target => "_blank" %></dd>
+			<dt>Lokalizacja</dt>
+			<dd><%= link_to @job.localization.name, localization_path(@job.localization) %></dd>
+			<dt>Framework</dt>
+			<dd><%= link_to @job.framework.name, framework_path(@job.framework) %></dd>
+			<% if @job.widelki_zarobkowe? %>
+			<dt>Widełko zarobkowe</dt>
+			<dd>
+				<%= "od #{number_to_currency(@job.price_from)}" unless @job.price_from.nil? %> 
+				<%= "do #{number_to_currency(@job.price_to)}" unless @job.price_to.nil? %>
+			</dd>
+			<% end %>
+			
+			<% unless (@job.regon.nil? || @job.regon.empty?) %>
+			<dt>REGON</dt>
+			<dd><%= @job.regon %>&nbsp;</dd>
+			<% end %>
+			<% unless (@job.nip.nil? || @job.nip.empty?) %>
+			<dt>NIP</dt>
+			<dd><%= @job.nip %>&nbsp;</dd>
+			<% end %>
+			<% unless (@job.krs.nil? || @job.krs.empty?) %>
+			<dt>KRS</dt>
+			<dd><%= link_to @job.krs, "http://krs.ms.gov.pl/Podmiot.aspx?nrkrs=#{@job.krs}", :target => "_blank" %>&nbsp;</dd>
+			<% end %>
+			
+			<dt>Data rozpoczęcia</dt>
+			<dd>
+				<%= l @job.created_at, :format => :long %>
+				<br />
+				<abbr title="<%= @job.created_at.xmlschema %>"><%= distance_of_time_in_words_to_now @job.created_at %> temu</abbr>
+			</dd>
+			<dt>Data zakończenia</dt>
+			<dd>
+				<%= l @job.end_at, :format => :long %>
+				<br />
+				za <abbr title="<%= @job.end_at.xmlschema %>"><%= distance_of_time_in_words_to_now(@job.end_at) %></abbr>
+			</dd>
+			<dt>Wyświetlona</dt>
+			<dd><%= @job.visits_count %> razy</dd>
+		</dl>
+
+		<div class="clear"></div>
 	</div>
 	
 	<div>

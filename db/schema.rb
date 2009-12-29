@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091226192231) do
+ActiveRecord::Schema.define(:version => 20091229204033) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -42,16 +42,17 @@ ActiveRecord::Schema.define(:version => 20091226192231) do
     t.string   "company_name"
     t.string   "website"
     t.integer  "localization_id"
-    t.string   "NIP"
-    t.string   "REGON"
-    t.string   "KRS"
+    t.string   "nip"
+    t.string   "regon"
+    t.string   "krs"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "framework_id"
-    t.integer  "rank"
+    t.float    "rank"
     t.string   "token"
     t.boolean  "published"
+    t.integer  "visits_count",    :default => 0
   end
 
   create_table "localizations", :force => true do |t|
@@ -81,11 +82,19 @@ ActiveRecord::Schema.define(:version => 20091226192231) do
     t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "visits_count",      :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+
+  create_table "visits", :force => true do |t|
+    t.integer  "ip"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

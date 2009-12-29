@@ -18,9 +18,9 @@ Założenia:
 		* nazwa ( Nazwa Firmy S. J. Nazwisko, Nazwisko, Nazwisko )
 		* strona www
 		* lokalizacje(miasto, ulica)
-		* NIP(000-000-00-00)
-		* REGON(0000000000)
-		* KRS(0000000)
+		* nip(000-000-00-00)
+		* regon(0000000000)
+		* krs(0000000)
 		* email
 * Oferta jest sortowana według rangi oraz daty dodania
 	* ranga jest wyliczana na podstawie ilości informacji wprowadzonych przy wypełnianiu informacji o firmie + widełki cenowe

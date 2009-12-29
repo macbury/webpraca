@@ -14,4 +14,8 @@ class Framework < ActiveRecord::Base
 											:group => Framework.column_names.map{|c| "frameworks.#{c}"}.join(','),
 											:order => "frameworks.name")
 	end
+	
+	def to_param
+		permalink
+	end
 end

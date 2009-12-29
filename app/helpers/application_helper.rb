@@ -24,4 +24,18 @@ module ApplicationHelper
 		
 		content_tag :p, errors.class == Array ? errors.join(', ') : errors, :class => 'inline-errors' unless errors.nil?
 	end
+	
+	def render_title_from_params(default="ofery pracy")
+		if @localization
+			title = ["#{default} w ", @localization.name]
+		elsif @framework
+			title = ["#{default} dla ", @framework.name]
+		elsif @type_id
+			title = ["#{default} dla ", JOB_LABELS[@type_id]]
+		else
+			title = default.split(' ')
+		end
+		
+		return content_tag(:span, title.first) + ' ' + title.last
+	end
 end
