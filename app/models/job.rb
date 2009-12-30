@@ -1,14 +1,24 @@
 JOB_TYPES = ["zlecenie (konkretna usługa do wykonania)", "poszukiwanie współpracowników / oferta pracy", "wolontariat (praca za reklamy, bannery, itp. lub praca za darmo)", "staż/praktyka"]
 JOB_LABELS = ["zlecenie", "etat", "wolontariat", "praktyka"]
-JOB_RANK_VALUES = { :price => 0.8, :default => 0.3, :krs => 0.6, :nip => 0.5, :regon => 0.6 }
+
+JOB_RANK_VALUES = { 
+										:default => 0.3, 
+										:price => 0.8, 
+										:krs => 0.6, 
+										:nip => 0.5, 
+										:regon => 0.6, 
+										:framework_id => 0.7, 
+										:website => 0.3
+									}
 
 class Job < ActiveRecord::Base
 	xss_terminate
 	has_permalink :title
 	
 	named_scope :active, :conditions => ["((jobs.end_at >= ?) AND (jobs.published = ?))", Date.current, true], :include => :localization
+	named_scope :has_text, lambda { |text| { :conditions => ["((jobs.title ILIKE ?) OR (jobs.description ILIKE ?))", "%#{text}%", "%#{text}%"] } }
 	
-	validates_presence_of :title, :description, :email, :company_name, :localization_id, :framework_id
+	validates_presence_of :title, :description, :email, :company_name, :localization_id
 	
 	validates_length_of :title, :within => 3..255
 	validates_length_of :description, :within => 10..5000
@@ -65,12 +75,13 @@ class Job < ActiveRecord::Base
 	def calculate_rank
 		self.rank = 1.0
 		
-		self.rank += visits_count * 0.01
+		self.rank += visits_count * 0.01 unless visits_count.nil?
 		
-		[:regon, :nip, :krs].each do |attribute|
+		[:regon, :nip, :krs, :framework_id, :website].each do |attribute|
 			val = send(attribute)
+
 			inc = JOB_RANK_VALUES[attribute] || JOB_RANK_VALUES[:default]
-			self.rank += inc unless (val.nil? || val.empty?)
+			self.rank += inc unless (val.nil? || (val.class == String && val.empty?))
 		end
 		
 		if widelki_zarobkowe?
@@ -123,7 +134,7 @@ class Job < ActiveRecord::Base
 	end
 	
 	def highlited?
-		self.rank >= 4.0
+		self.rank >= 4.75
 	end
 	
 	def publish!

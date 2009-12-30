@@ -19,8 +19,8 @@
 				<%= f.input :remote_job, :required => false %>
 				<%= f.input :dlugosc_trwania, :as => :numeric, :hint => "ile dni oferta ma być ważna(od 1 do 60 dni)" %>
 				<li class="select">
-					<%= f.label :framework_id, 'Framework*' %>
-					<%= f.select :framework_id, Framework.all(:order => 'name').map { |frame| [frame.name, frame.id] } %> albo 
+					<%= f.label :framework_id, 'Framework' %>
+					<%= f.select :framework_id, Framework.all(:order => 'name').map { |frame| [frame.name, frame.id] }, :include_blank => true %> albo 
 					<%= f.text_field :framework_name %>
 					<p class="inline-hints">główny framework którego znajomość jest wymagana, podaj pełną nazwę</p>
 					<%= inline_errors @job, :framework_name %>

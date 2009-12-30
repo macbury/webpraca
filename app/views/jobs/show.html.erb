@@ -2,18 +2,24 @@
 <div class="box">
 	<div>
 		<div class="title">
-			<h2><%= @job.title %></h2>
+			<h2>
+				<%= @job.title %>
+			</h2>
 		</div>
 
 		<dl>
 			<dt>Typ</dt>
 			<dd><%= job_label(@job) %></dd>
+			<dt>Ocena</dt>
+			<dd><%= format_rank(@job.rank) %></dd>
 			<dt>Pracodawca</dt>
 			<dd><%= link_to @job.company_name, @job.website, :target => "_blank" %></dd>
 			<dt>Lokalizacja</dt>
 			<dd><%= link_to @job.localization.name, localization_path(@job.localization) %></dd>
+			<% unless @job.framework.nil? %>
 			<dt>Framework</dt>
 			<dd><%= link_to @job.framework.name, framework_path(@job.framework) %></dd>
+			<% end %>
 			<% if @job.widelki_zarobkowe? %>
 			<dt>Widełko zarobkowe</dt>
 			<dd>

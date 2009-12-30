@@ -6,8 +6,8 @@ class Framework < ActiveRecord::Base
 	
 	def self.find_job_frameworks
 		query = Job.search
-		query.end_at_greater_than_or_equal_to(Date.current)
-		query.published_is(true)
+		query.active
+		query.framework_id_not_null
 		
 		return query.all(:select => "count(jobs.framework_id) as jobs_count, frameworks.*",
 											:joins => :framework,

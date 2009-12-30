@@ -1,14 +1,29 @@
 <% content_for :sidebar do %>
 	<%= render :partial => "/jobs/sidebar" %>
 <% end %>
+
+<% unless (@jobs.nil? || @jobs.empty?) %>
+	<div class="box">
+		<div>
+			<div class="title">
+				<h2>
+					<%= link_to image_tag('feed.png'), search_jobs_url(stripped_params(:format => :rss)), :title => "Subskrybuj wyszukiwanie", :class => "feed" %>
+					Wyniki dla <span>wyszukiwania</span>
+				</h2>
+			</div>
+			<%= render :partial => "jobs", :object => @jobs %>
+		</div>
+	</div>
+<% end %>
+
 <div class="box">
 	<div>
 		<div class="title">
-			<h2><%= @page_title %></h2>
+			<h2><span>Szukaj</span> oferty</h2>
 		</div>
 		<% semantic_form_for @search, :url => search_jobs_path, :html => { :method => :post } do |f| %>
 			<% f.inputs :name => "Wyszukiwarka" do %>
-				<%= f.input :description_like, :required => false, :label => "Zawierający tekst" %>
+				<%= f.input :has_text, :required => false, :label => "Zawierający tekst" %>
 				<%#= f.input :remote_job_not_null, :required => false, :as => :boolean, :label => "Praca zdalna" %>
 				<%= f.input :type_id_equals, :required => false, :as => :check_boxes, :collection => collection_from_types(JOB_LABELS), :label => "Typ" %>
 				<%= f.input :localization_id_equals, :required => false, :as => :check_boxes, :collection => Localization.all.map { |l| [l.name, l.id] }, :wrapper_html => { :class => "columns" }, :label => "Lokalizacja" %>
@@ -22,9 +37,6 @@
 
 			<div class="buttons">
 				<div class="button"><%= f.submit "Szukaj!" %></div>
-				<% if params[:search] %>
-					albo <%= link_to "Subskrybuj wyszkukiwanie", search_jobs_url(stripped_params(:format => :rss)) %>
-				<% end %>
 			</div>
 		<% end %>
 	</div>

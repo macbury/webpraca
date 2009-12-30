@@ -58,14 +58,15 @@ class JobsController < ApplicationController
 	def search
 		@page_title = "Szukaj oferty"
 		
-		@search = Job.search(params[:search])
-		@search.active
-		
-		@jobs = @search.all  :limit => 30, 
-												 :order => "created_at DESC, rank DESC"
-		
+		@search = Job.active.search(params[:search])
+		if params[:search]
+			@page_title = "Znalezione oferty"
+			@jobs = @search.paginate( :page => params[:page],
+																:per_page => 30,
+													 			:order => "created_at DESC, rank DESC" )
+		end
     respond_to do |format|
-      format.html { render :action => (params[:search].nil? || params[:search].empty?) ? "search" : "results" }
+      format.html
 			format.rss { render :action => "index" }
 			format.atom { render :action => "index" }
     end
