@@ -5,4 +5,5 @@ public/*.xml.gz
 public/images/captchas/*
 config/database.yml
 config/mailer.yml
+config/exception_notifer.yml
 db/*.sqlite3
