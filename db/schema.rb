@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091229204033) do
+ActiveRecord::Schema.define(:version => 20091230161334) do
+
+  create_table "applicants", :force => true do |t|
+    t.string   "email"
+    t.text     "body"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "cv_file_name"
+    t.string   "cv_content_type"
+    t.integer  "cv_file_size"
+    t.datetime "cv_updated_at"
+  end
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -31,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20091229204033) do
   end
 
   create_table "jobs", :force => true do |t|
-    t.integer  "type_id",         :default => 0
+    t.integer  "type_id",          :default => 0
     t.integer  "price_from"
     t.integer  "price_to"
     t.boolean  "remote_job"
@@ -52,7 +64,9 @@ ActiveRecord::Schema.define(:version => 20091229204033) do
     t.float    "rank"
     t.string   "token"
     t.boolean  "published"
-    t.integer  "visits_count",    :default => 0
+    t.integer  "visits_count",     :default => 0
+    t.boolean  "apply_online",     :default => true
+    t.integer  "applicants_count", :default => 0
   end
 
   create_table "localizations", :force => true do |t|

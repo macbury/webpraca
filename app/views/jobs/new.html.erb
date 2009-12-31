@@ -17,6 +17,7 @@
 				</li>
 				<%= f.input :type_id, :as => :radio, :collection => collection_from_types(JOB_TYPES) %>
 				<%= f.input :remote_job, :required => false %>
+				<%= f.input :apply_online, :required => false, :hint => "uaktywnia formularz umożliwiający przesyłanie aplikacji online w ofercie" %>
 				<%= f.input :dlugosc_trwania, :as => :numeric, :hint => "ile dni oferta ma być ważna(od 1 do 60 dni)" %>
 				<li class="select">
 					<%= f.label :framework_id, 'Framework' %>
@@ -27,7 +28,7 @@
 				</li>
 				<li class="numeric prices">
 					<label>Widełki zarobkowe:</label>
-					<%= f.text_field :price_from %> do <%= f.text_field :price_to %> PLN
+					<%= f.text_field :price_from %> do <%= f.text_field :price_to %> PLN na miesiąc, netto
 					<%= inline_errors @job, :price_from %>
 					<%= inline_errors @job, :price_to %>
 				</li>
@@ -46,15 +47,17 @@
 				<%= f.input :regon, :required => false %>
 				<%= f.input :krs, :required => false %>
 			<% end %>
+			
+			<% if @job.new_record? %>
+				<% f.inputs :name => "Czy jesteś człowiekiem" do %>
+				<li class="string required">
+					<%= f.label :captcha, 'Kod z obrazka*' %>
+					<%= f.captcha_challenge %>
+					<%= f.captcha_field %>
+					<%= inline_errors @job, :captcha_solution %>
 
-			<% f.inputs :name => "Czy jesteś człowiekiem" do %>
-			<li class="string required">
-				<%= f.label :captcha, 'Kod z obrazka*' %>
-				<%= f.captcha_challenge %>
-				<%= f.captcha_field %>
-				<%= inline_errors @job, :captcha_solution %>
-
-			</li>
+				</li>
+				<% end %>
 			<% end %>
 			<div class="buttons">
 				<div class="button">

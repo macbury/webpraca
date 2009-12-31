@@ -1,13 +1,12 @@
 class JobsController < ApplicationController
-	validates_captcha :only => [:create, :new, :edit, :update]
+	validates_captcha :only => [:create, :new]
 	ads_pos :right, :except => [:search]
 	
 	ads_pos :none, :only => [:home]
 	def home
 		@page_title = ['najpopularniejsze oferty', 'najnowsze oferty']
 		
-		query = Job.search
-		query.active
+		query = Job.active.search
 		
 		@recent_jobs = query.all(:order => "created_at DESC", :limit => 10, :include => :localization)
 		@top_jobs = query.all(:order => "rank DESC, created_at DESC", :limit => 10, :include => :localization)
@@ -16,8 +15,6 @@ class JobsController < ApplicationController
   # GET /jobs.xml
   def index
 		@query = Job.search
-		@page_title = ['Oferty pracy']
-		
 		options = {
 								:page => params[:page], 
 								:per_page => 25,
@@ -26,6 +23,13 @@ class JobsController < ApplicationController
 							}
 		
 		@query.active
+		
+		if params[:popular]
+			options[:order] = "rank DESC, created_at DESC"
+			@page_title = ['Najpopularniejsze oferty pracy']
+		else
+			@page_title = ['Najnowsze oferty pracy']
+		end
 		
 		if params[:localization]
 			@localization = Localization.find_by_permalink!(params[:localization])
@@ -56,11 +60,11 @@ class JobsController < ApplicationController
   end
 	
 	def search
-		@page_title = "Szukaj oferty"
+		@page_title = ["Szukaj oferty"]
 		
 		@search = Job.active.search(params[:search])
 		if params[:search]
-			@page_title = "Znalezione oferty"
+			@page_title = ["Znalezione oferty"]
 			@jobs = @search.paginate( :page => params[:page],
 																:per_page => 30,
 													 			:order => "created_at DESC, rank DESC" )

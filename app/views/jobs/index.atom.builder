@@ -1,5 +1,5 @@
 atom_feed do |feed|
-  feed.title("webpraca.net | Oferty")
+  feed.title(@page_title.join(' | '))
   unless @jobs.empty?
     feed.updated((@jobs.first.created_at))
   end

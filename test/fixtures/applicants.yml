@@ -1,0 +1,9 @@
+one:
+  email: MyString
+  body: MyText
+  job_id: 1
+
+two:
+  email: MyString
+  body: MyText
+  job_id: 1

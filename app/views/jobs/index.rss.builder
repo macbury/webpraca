@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version => "1.0" 
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title "webpraca.net | Oferty"
+    xml.title @page_title.join(' | ')
     xml.link jobs_url(stripped_params(:format => :html))
     
     for job in @jobs

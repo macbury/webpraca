@@ -24,10 +24,14 @@
 			<dt>Widełko zarobkowe</dt>
 			<dd>
 				<%= "od #{number_to_currency(@job.price_from)}" unless @job.price_from.nil? %> 
-				<%= "do #{number_to_currency(@job.price_to)}" unless @job.price_to.nil? %>
+				<%= "do #{number_to_currency(@job.price_to)}" unless @job.price_to.nil? %> na miesiąc, netto
 			</dd>
 			<% end %>
 			
+			<% unless @job.apply_online %>
+			<dt>Kontakt</dt>
+			<dd><%= link_to @job.email, "mailto: #{@job.email}" %></dd>
+			<% end %>
 			<% unless (@job.regon.nil? || @job.regon.empty?) %>
 			<dt>REGON</dt>
 			<dd><%= @job.regon %>&nbsp;</dd>
@@ -72,4 +76,5 @@
 		<% end %>
 		</p>
 	</div>
+	<%= link_to 'Aplikuj online!', new_job_applicant_path(@job), :class => "more" if @job.apply_online %>
 </div>

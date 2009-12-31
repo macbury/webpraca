@@ -9,7 +9,7 @@
 	<%= rss_link("RSS", jobs_url(:format => :rss)) %>
 	<%= rss_link("ATOM", jobs_url(:format => :atom)) %>
 	
-	<%= stylesheet_link_tag 'markitup', 'textile','formtastic', 'formtastic_changes', 'ui' %>
+	<%= stylesheet_link_tag 'markitup', 'textile','formtastic', 'formtastic_changes', 'ui', 'facybox_urls'  %>
 	<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 	<%= javascript_include_tag 'jquery.min.js', 'jquery.form', 'jquery.markitup', 'textile', 'rails', 'application' %>
 </head>
@@ -19,9 +19,10 @@
 			<h1 id="logo"><%= link_to "webpraca.net", root_path %></h1>
 			<ul class="menu">
 				<li><%= link_to "Dodaj Ofertę!", new_job_path %></li>
-				<li><%= link_to "Strona główna", root_path %></li>
 				<li><%= link_to "Szukaj", search_jobs_path %></li>
-				<li><%= link_to "Oferty", jobs_path %></li>
+				<li><%= link_to "Strona główna", root_path %></li>
+				<li><%= link_to "Najnowsze oferty", jobs_path %></li>
+				<li><%= link_to "Najpopularniejsze oferty", popular_jobs_path %></li>
 				<li><%= link_to "O nas", jobs_path %></li>
 				<li><%= link_to "Kontakt", jobs_path %></li>
 			</ul>

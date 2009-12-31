@@ -1,0 +1,34 @@
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><span>Aplikuj</span> online</h2>
+		</div>
+
+		<% semantic_form_for [@job, @applicant] do |f| %>
+			<% f.inputs :name => "Treść aplikacji" do %>
+				<li class="text">
+					<label>Do:</label>
+					<%= link_to @job.company_name, @job.website, :target => "_blank" %>
+				</li>
+				<%= f.input :email %>
+				<%= f.input :body, :hint => "wiadomość lub list motywacyjny" %>
+				<%= f.input :cv, :required => false, :hint => "Max. 5 MB. Rekomendowane formaty: PDF, DOC, TXT, RTF, ZIP, RAR." %>
+				<li class="string required">
+					<%= f.label :captcha, 'Kod z obrazka*' %>
+					<%= f.captcha_challenge %>
+					<%= f.captcha_field %>
+					<%= inline_errors @applicant, :captcha_solution %>
+
+				</li>
+			<% end %>
+		  <div class="buttons">
+		  	<div class="button">
+		  		<%= f.submit "Wyślij" %>
+		  	</div>
+				 albo <%= link_to "anuluj", @job %>
+		  </div>
+		<% end %>
+	</div>
+</div>
+
+

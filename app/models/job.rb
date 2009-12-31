@@ -8,7 +8,8 @@ JOB_RANK_VALUES = {
 										:nip => 0.5, 
 										:regon => 0.6, 
 										:framework_id => 0.7, 
-										:website => 0.3
+										:website => 0.3,
+										:apply_online => 0.2
 									}
 
 class Job < ActiveRecord::Base
@@ -46,7 +47,8 @@ class Job < ActiveRecord::Base
 	belongs_to :framework
 	belongs_to :localization
 	
-	has_many :visits, :dependent => :delete_all
+	has_many :applicants, :dependent => :delete_all
+	has_many :visits, 		:dependent => :delete_all
 	
 	attr_protected :rank, :permalink, :end_at, :token, :published
 	attr_accessor  :framework_name, :localization_name
@@ -77,11 +79,11 @@ class Job < ActiveRecord::Base
 		
 		self.rank += visits_count * 0.01 unless visits_count.nil?
 		
-		[:regon, :nip, :krs, :framework_id, :website].each do |attribute|
+		[:regon, :nip, :krs, :framework_id, :website, :apply_online].each do |attribute|
 			val = send(attribute)
 
 			inc = JOB_RANK_VALUES[attribute] || JOB_RANK_VALUES[:default]
-			self.rank += inc unless (val.nil? || (val.class == String && val.empty?))
+			self.rank += inc unless (val.nil? || (val.class == String && val.empty?) || (val.class == TrueClass))
 		end
 		
 		if widelki_zarobkowe?

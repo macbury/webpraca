@@ -5,4 +5,6 @@ $(document).ready(function () {
 		$(this).parent('.flash').hide();
 		return false;
 	});
+	
+
 });

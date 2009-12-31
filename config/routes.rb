@@ -6,9 +6,11 @@ ActionController::Routing::Routes.draw do |map|
 		job.framework '/framework/:framework'
 		job.connect '/typ/:type_id/:page'
 		job.job_type '/typ/:type_id'
+		job.connect '/najpopularniejsze/:page', :popular => true
+		job.popular_jobs '/najpopularniejsze', :popular => true
 	end
 	
-	map.resources :jobs, :member => { :publish => :get }, :collection => { :search => :any }
+	map.resources :jobs, :member => { :publish => :get }, :collection => { :search => :any }, :has_many => :applicants
   map.resources :user_sessions
   map.resources :users
 	

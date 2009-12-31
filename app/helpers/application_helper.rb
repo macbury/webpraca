@@ -10,6 +10,7 @@ module ApplicationHelper
 		p.delete(:controller)
 		p.delete(:action)
 		p.delete(:page)
+		p.delete(:authenticity_token)
 		p.merge!(o)
 		return p
 	end
@@ -25,7 +26,10 @@ module ApplicationHelper
 		content_tag :p, errors.class == Array ? errors.join(', ') : errors, :class => 'inline-errors' unless errors.nil?
 	end
 	
-	def render_title_from_params(default="ofery pracy")
+	def title_from_params(default="oferty pracy")
+		if default.class == Array
+			default = default.first
+		end
 		if @localization
 			title = ["#{default} w ", @localization.name]
 		elsif @framework
@@ -34,8 +38,16 @@ module ApplicationHelper
 			title = ["#{default} dla ", JOB_LABELS[@type_id]]
 		else
 			title = default.split(' ')
+			first = title.first
+			title.delete_at(0)
 		end
 		
-		return content_tag(:span, title.first) + ' ' + title.last
+		return [first,title]
+	end
+	
+	def render_title_from_params(default="ofery pracy")
+		title = title_from_params(default)
+		
+		return content_tag(:span, title[0]) + ' ' + title[1].join(' ')
 	end
 end

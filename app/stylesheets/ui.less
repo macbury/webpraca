@@ -40,8 +40,8 @@ tr.alt { background:#f6f6f6; }
 /* IDS */
 
 .prices input[type="text"] { width: 50px !important; text-align: right; }
-#job_captcha_image { margin-bottom: -22px; margin-right: 10px; }
-#job_captcha_solution { width: 200px; }
+#job_captcha_image, #applicant_captcha_image { margin-bottom: -22px; margin-right: 10px; }
+#job_captcha_solution, #applicant_captcha_solution { width: 200px; }
 #AdTaily_Widget_Container { padding-top: 5px; }
 
 /* Custom class */
@@ -251,25 +251,26 @@ form > fieldset > legend {
 
 @sidebar_width: 200px;
 
-.sidebar {
+.wrapper > .sidebar {
   float: right;
   width: @sidebar_width;
   margin-top: 20px;
 }
 
-.sidebar ul { .reset; }
+.wrapper > .sidebar ul { .reset; }
 
 /* content */
 @content_padding_right: 10px;
 @content_width: @wrapper_width - @sidebar_width - @content_padding_right;
 
-.content { 
+.wrapper > .content { 
 	float: left; 
 	width: @content_width; 
 	padding-right: @content_padding_right; 
 	margin-top: 20px; 
 }
-.content p { margin: 0 0 10px 0; padding: 0;}
+
+/*.wrapper > .content p { margin: 0 0 10px 0; padding: 0;} */
 
 /* Box */
 
@@ -393,7 +394,6 @@ form > fieldset > legend {
 	background-position: 0% -78px;
 	border: 1px solid #BBB;
 	color: inherit;
-	background-color: transparent !important;
 }
 
 .more:active {
@@ -555,10 +555,10 @@ dl dd ul {
 
 /* footer */
 
-.footer {
+.wrapper > .footer {
 	color: #fff;
 	margin-top: 10px;
 }
 
-.footer a { color: #fff; }
-.footer .right { margin-top: 3px; }
+.wrapper > .footer a { color: #fff; }
+.wrapper > .footer .right { margin-top: 3px; }
