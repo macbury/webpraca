@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091230161334) do
+ActiveRecord::Schema.define(:version => 20091231133840) do
 
   create_table "applicants", :force => true do |t|
     t.string   "email"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20091230161334) do
     t.string   "cv_content_type"
     t.integer  "cv_file_size"
     t.datetime "cv_updated_at"
+    t.string   "token"
   end
 
   create_table "assignments", :force => true do |t|

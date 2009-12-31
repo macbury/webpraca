@@ -5,4 +5,5 @@ end
 
 every 1.day, :at => '1:30 am' do
   rake "sitemap:refresh"
+	rake "webpraca:jobs:remove_old"
 end

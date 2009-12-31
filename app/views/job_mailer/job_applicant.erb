@@ -1,0 +1,13 @@
+Witaj <%= @job.company_name %>!,
+
+Pojawiła się osoba zainteresowana twoją ofertą: 
+<%= @job_path %>
+
+-----------------------------------------------------------------------------------
+E-Mail: <%= @applicant.email %>
+Treść:
+<%= @applicant.body %>
+-----------------------------------------------------------------------------------
+<%- if @applicant.have_attachment? -%>
+Załącznik: <%= @attachment_path %>
+<%- end -%>

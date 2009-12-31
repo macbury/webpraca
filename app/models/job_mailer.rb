@@ -1,9 +1,18 @@
 class JobMailer < ActionMailer::Base
   include ActionController::UrlWriter
-
+	
+	def job_applicant(applicant)
+		setup_email(applicant.job.email)
+		@subject = "webpraca.net - Pojawiła się osoba zainteresowana ofertą '#{applicant.job.title}'"
+		@body[:job] = applicant.job
+		@body[:applicant] = applicant
+		@body[:job_path] = seo_job_url(applicant.job)
+		@body[:attachment_path] = download_job_applicant_url(applicant.job, applicant.token) if applicant.have_attachment?
+	end
+	
 	def job_posted(job)
 		setup_email(job.email)
-		@subject = "webpraca.net - Dodano nową oferte"
+		@subject = "webpraca.net - Twoja oferta została dodana"
 		@body[:job] = job
 		@body[:job_path] = seo_job_url(job)
 		@body[:publish_path] = publish_job_url(job, :token => job.token)

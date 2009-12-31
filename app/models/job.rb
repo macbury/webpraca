@@ -17,6 +17,8 @@ class Job < ActiveRecord::Base
 	has_permalink :title
 	
 	named_scope :active, :conditions => ["((jobs.end_at >= ?) AND (jobs.published = ?))", Date.current, true], :include => :localization
+	named_scope :old, :conditions => ["jobs.end_at < ?", Date.current]
+	
 	named_scope :has_text, lambda { |text| { :conditions => ["((jobs.title ILIKE ?) OR (jobs.description ILIKE ?))", "%#{text}%", "%#{text}%"] } }
 	
 	validates_presence_of :title, :description, :email, :company_name, :localization_id

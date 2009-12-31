@@ -10,7 +10,9 @@ ActionController::Routing::Routes.draw do |map|
 		job.popular_jobs '/najpopularniejsze', :popular => true
 	end
 	
-	map.resources :jobs, :member => { :publish => :get }, :collection => { :search => :any }, :has_many => :applicants
+	map.resources :jobs, :member => { :publish => :get }, :collection => { :search => :any } do |jobs|
+		jobs.resources :applicants, :member => { :download => :get }
+	end
   map.resources :user_sessions
   map.resources :users
 	

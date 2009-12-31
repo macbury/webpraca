@@ -1,7 +1,7 @@
 class ApplicantsController < ApplicationController
 	before_filter :get_job
 	ads_pos :right
-	validates_captcha 
+	validates_captcha :except => :download
 	
   def create
     @applicant = @job.applicants.new(params[:applicant])
@@ -16,7 +16,15 @@ class ApplicantsController < ApplicationController
 	def new
 		@applicant = @job.applicants.new
 	end
-
+	
+	def download
+		@applicant = @job.applicants.find_by_token!(params[:id])
+		send_file @applicant.cv.path, 
+												:type => @applicant.cv_content_type,
+												:filename => @applicant.email.gsub('@', '(at)').gsub('.', '(dot)') + File.extname(@applicant.cv_file_name)
+												#:x_sendfile => true
+	end
+	
 	protected 
 	
 		def get_job

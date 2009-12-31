@@ -4,7 +4,8 @@
 			<h2><span>Aplikuj</span> online</h2>
 		</div>
 
-		<% semantic_form_for [@job, @applicant] do |f| %>
+		<% semantic_form_for [@job, @applicant], :html => { :multipart => true } do |f| %>
+			<%#= f.error_messages %>
 			<% f.inputs :name => "Treść aplikacji" do %>
 				<li class="text">
 					<label>Do:</label>
