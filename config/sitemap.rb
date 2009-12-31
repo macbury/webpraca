@@ -18,18 +18,20 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
   
   # add '/articles'
   sitemap.add jobs_path, :priority => 1.0, :changefreq => 'daily'
-
+	sitemap.add popular_jobs_path
   # add all individual articles
   Job.active.each do |o|
     sitemap.add seo_job_path(o), :lastmod => o.updated_at
   end
   
 	Framework.all.each do |f|
-		sitemap.add framework_path(f), :lastmod => f.updated_at
+		latest_job = f.jobs.first(:order => "created_at DESC")
+		sitemap.add framework_path(f), :lastmod => latest_job.nil? ? f.created_at : latest_job.created_at
 	end
 	
 	Localization.all.each do |l|
-		sitemap.add localization_path(l), :lastmod => l.updated_at
+		latest_job = l.jobs.first(:order => "created_at DESC")
+		sitemap.add localization_path(l), :lastmod => latest_job.nil? ? l.created_at : latest_job.created_at
 	end
 end
 

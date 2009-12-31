@@ -204,13 +204,16 @@ form > fieldset > legend {
 
 /* Header */
 
+@header_height: 80px;
+
 .wrapper > .header {
-	height: 80px; 
+	height: @header_height; 
 	width: @wrapper_width; 
 	position:relative;
 }
 
 @logo_width: 347px;
+@menu_color: #494B4E;
 
 .header > h1#logo { 
 	left: 20px;
@@ -229,8 +232,8 @@ form > fieldset > legend {
 	position:absolute; 
 	top: 0px;
 	padding: 5px 10px;
-	right: 20px;
-	background: #494B4E;
+	right: 0px;
+	background: @menu_color;
 }
 
 .header > ul.menu li{
@@ -556,9 +559,11 @@ dl dd ul {
 /* footer */
 
 .wrapper > .footer {
-	color: #fff;
-	margin-top: 10px;
+	color: #D8D8D9;
+	margin: 10px 0;
 }
 
-.wrapper > .footer a { color: #fff; }
+.wrapper > .footer strong a { color: #fff; }
+.wrapper > .footer a { color: #D8D8D9; }
+.wrapper > .footer a:hover { color: #fff; }
 .wrapper > .footer .right { margin-top: 3px; }

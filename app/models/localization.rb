@@ -1,5 +1,6 @@
 class Localization < ActiveRecord::Base
 	has_many :jobs
+	named_scope :latest, :order => "created_at DESC", :limit => 1
 	
 	xss_terminate
 	has_permalink :name
