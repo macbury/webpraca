@@ -1,15 +1,16 @@
 class JobsController < ApplicationController
 	validates_captcha :only => [:create, :new]
-	ads_pos :right, :except => [:search]
-	
+	ads_pos :bottom
+	ads_pos :right, :except => [:home, :index, :search]
 	ads_pos :none, :only => [:home]
+	
 	def home
 		@page_title = ['najpopularniejsze oferty', 'najnowsze oferty']
 		
 		query = Job.active.search
 		
-		@recent_jobs = query.all(:order => "created_at DESC", :limit => 10, :include => :localization)
-		@top_jobs = query.all(:order => "rank DESC, created_at DESC", :limit => 10, :include => :localization)
+		@recent_jobs = query.all(:order => "created_at DESC", :limit => 10, :include => [:localization, :category])
+		@top_jobs = query.all(:order => "rank DESC, created_at DESC", :limit => 10, :include => [:localization, :category])
 	end
   # GET /jobs
   # GET /jobs.xml
@@ -19,7 +20,7 @@ class JobsController < ApplicationController
 								:page => params[:page], 
 								:per_page => 25,
 								:order => "created_at DESC, rank DESC",
-								:include => [:localization]
+								:include => [:localization, :category]
 							}
 		
 		@query.active
@@ -29,6 +30,12 @@ class JobsController < ApplicationController
 			@page_title = ['Najpopularniejsze oferty pracy']
 		else
 			@page_title = ['Najnowsze oferty pracy']
+		end
+		
+		if params[:category]
+			@category = Category.find_by_permalink!(params[:category])
+			@page_title << @category.name
+			@query.category_id_is(@category.id)
 		end
 		
 		if params[:localization]
@@ -81,7 +88,7 @@ class JobsController < ApplicationController
   def show
     @job = Job.find_by_permalink!(params[:id])
 		@job.visited_by(request.remote_ip)
-		
+		@category = @job.category
     respond_to do |format|
       format.html # show.html.erb
     end

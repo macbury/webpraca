@@ -33,6 +33,11 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
 		latest_job = l.jobs.first(:order => "created_at DESC")
 		sitemap.add localization_path(l), :lastmod => latest_job.nil? ? l.created_at : latest_job.created_at
 	end
+	
+	Category.all.each do |c|
+		latest_job = c.jobs.first(:order => "created_at DESC")
+		sitemap.add category_path(c), :lastmod => latest_job.nil? ? c.created_at : latest_job.created_at
+	end
 end
 
 # Including Sitemaps from Rails Engines.

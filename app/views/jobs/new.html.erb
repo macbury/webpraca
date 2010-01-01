@@ -8,6 +8,7 @@
 			<%= hidden_field_tag 'token', params[:token] unless params[:token].nil? %>
 			<% f.inputs :name => 'Szczegóły oferty pracy' do %>
 				<%= f.input :title %>
+				<%= f.input :category_id, :as => :select, :collection => Category.all.map { |c| [c.name, c.id] } %>
 				<li class="select">
 					<%= f.label :localization_id, 'Lokalizacja*' %>
 					<%= f.select :localization_id, Localization.all(:order => 'name').map { |localization| [localization.name, localization.id] } %> albo 

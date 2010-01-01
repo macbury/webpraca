@@ -13,3 +13,7 @@ end
 ['Warszawa', 'Kraków', 'Gdańsk', 'Radom', 'Kielce', 'Lublin', 'Łódź', 'Gdynia', 'Toruń'].each do |name|
 	Localization.find_or_create_by_name(name)
 end
+
+['Programowanie', 'Grafika', 'Administracja', 'Zarządzanie'].each do |name|
+	Category.find_or_create_by_name(name)
+end

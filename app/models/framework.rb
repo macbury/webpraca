@@ -5,8 +5,7 @@ class Framework < ActiveRecord::Base
 	has_many :jobs
 	
 	def self.find_job_frameworks
-		query = Job.search
-		query.active
+		query = Job.active.search
 		query.framework_id_not_null
 		
 		return query.all(:select => "count(jobs.framework_id) as jobs_count, frameworks.*",

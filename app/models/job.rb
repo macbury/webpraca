@@ -1,6 +1,8 @@
 JOB_TYPES = ["zlecenie (konkretna usługa do wykonania)", "poszukiwanie współpracowników / oferta pracy", "wolontariat (praca za reklamy, bannery, itp. lub praca za darmo)", "staż/praktyka"]
 JOB_LABELS = ["zlecenie", "etat", "wolontariat", "praktyka"]
 
+JOB_ETAT = 1;
+
 JOB_RANK_VALUES = { 
 										:default => 0.3, 
 										:price => 0.8, 
@@ -16,12 +18,12 @@ class Job < ActiveRecord::Base
 	xss_terminate
 	has_permalink :title
 	
-	named_scope :active, :conditions => ["((jobs.end_at >= ?) AND (jobs.published = ?))", Date.current, true], :include => :localization
+	named_scope :active, :conditions => ["((jobs.end_at >= ?) AND (jobs.published = ?))", Date.current, true]
 	named_scope :old, :conditions => ["jobs.end_at < ?", Date.current]
 	
 	named_scope :has_text, lambda { |text| { :conditions => ["((jobs.title ILIKE ?) OR (jobs.description ILIKE ?))", "%#{text}%", "%#{text}%"] } }
 	
-	validates_presence_of :title, :description, :email, :company_name, :localization_id
+	validates_presence_of :title, :description, :email, :company_name, :localization_id, :category_id
 	
 	validates_length_of :title, :within => 3..255
 	validates_length_of :description, :within => 10..5000
@@ -48,6 +50,7 @@ class Job < ActiveRecord::Base
 	
 	belongs_to :framework
 	belongs_to :localization
+	belongs_to :category
 	
 	has_many :applicants, :dependent => :delete_all
 	has_many :visits, 		:dependent => :delete_all
@@ -102,7 +105,11 @@ class Job < ActiveRecord::Base
 			elsif price >= 3000
 				self.rank += 0.3
 			elsif price < 2000
-				self.rank -= 0.6 # bo nikt za grosze nie chce pracować 
+				if self.type_id == JOB_ETAT
+					self.rank -= 0.6 # bo nikt za grosze nie chce pracować 
+				else
+					self.rank += 0.3 # chyba że to biedny student
+				end
 			end
 		end
 	end

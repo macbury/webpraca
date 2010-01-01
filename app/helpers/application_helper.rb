@@ -36,6 +36,8 @@ module ApplicationHelper
 			title = ["#{default} dla ", @framework.name]
 		elsif @type_id
 			title = ["#{default} dla ", JOB_LABELS[@type_id]]
+		elsif @category
+			title = ["#{default} w ", @category.name]
 		else
 			title = default.split(' ')
 			first = title.first

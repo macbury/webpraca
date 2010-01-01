@@ -17,7 +17,13 @@
 	<div class="wrapper">
 		<div class="header">
 			<h1 id="logo"><%= link_to "webpraca.net", root_path %></h1>
-
+			<ul class="categories">
+				<% for category in Category.all(:order => "position") %>
+					<li>
+						<%= link_to category.name, category_path(category), :class => (!@category.nil? && @category.id == category.id) ? "selected" : "normal" %>
+					</li>
+				<% end %>
+			</ul>
 			<ul class="menu">
 				<li><%= link_to "Strona główna", root_path %></li>
 				<li><%= link_to "Najnowsze oferty", jobs_path %></li>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091231133840) do
+ActiveRecord::Schema.define(:version => 20100101131632) do
 
   create_table "applicants", :force => true do |t|
     t.string   "email"
@@ -31,9 +31,12 @@ ActiveRecord::Schema.define(:version => 20091231133840) do
     t.datetime "updated_at"
   end
 
-  create_table "brain_busters", :force => true do |t|
-    t.string "question"
-    t.string "answer"
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "permalink"
+    t.integer  "position",   :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "frameworks", :force => true do |t|
@@ -68,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20091231133840) do
     t.integer  "visits_count",     :default => 0
     t.boolean  "apply_online",     :default => true
     t.integer  "applicants_count", :default => 0
+    t.integer  "category_id"
   end
 
   create_table "localizations", :force => true do |t|
@@ -97,7 +101,6 @@ ActiveRecord::Schema.define(:version => 20091231133840) do
     t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "visits_count",      :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

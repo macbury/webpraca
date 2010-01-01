@@ -3,6 +3,10 @@ namespace :webpraca do
 		task :applicants => :environment do
 			Applicant.all.each(&:destroy)
 		end
+		
+		task :visits => :environment do
+			Visit.all.each(&:destroy)
+		end
 	end
 	
 	namespace :jobs do

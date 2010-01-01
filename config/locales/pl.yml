@@ -118,6 +118,7 @@ pl:
         dlugosc_trwania: "Długość trwania"
         remote_job: "Praca zdalna"
         type_id: "Typ"
+        category_id: "Kategoria"
         company_name: "Nazwa"
         website: "Strona WWW"
         framework_name: "Framework"

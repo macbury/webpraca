@@ -24,7 +24,7 @@
 		<% semantic_form_for @search, :url => search_jobs_path, :html => { :method => :post } do |f| %>
 			<% f.inputs :name => "Wyszukiwarka" do %>
 				<%= f.input :has_text, :required => false, :label => "Zawierający tekst" %>
-				<%#= f.input :remote_job_not_null, :required => false, :as => :boolean, :label => "Praca zdalna" %>
+				<%= f.input :category_id_equals, :required => false, :as => :check_boxes, :collection => Category.all.map { |category| [category.name, category.id] }, :wrapper_html => { :class => "columns" }, :label => "Kategorie" %>
 				<%= f.input :type_id_equals, :required => false, :as => :check_boxes, :collection => collection_from_types(JOB_LABELS), :label => "Typ" %>
 				<%= f.input :localization_id_equals, :required => false, :as => :check_boxes, :collection => Localization.all.map { |l| [l.name, l.id] }, :wrapper_html => { :class => "columns" }, :label => "Lokalizacja" %>
 				<%= f.input :framework_id_equals, :required => false, :as => :check_boxes, :collection => Framework.all.map { |frame| [frame.name, frame.id] }, :wrapper_html => { :class => "columns" }, :label => "Używane frameworki" %>

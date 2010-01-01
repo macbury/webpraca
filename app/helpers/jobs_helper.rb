@@ -15,4 +15,11 @@ module JobsHelper
 		((rank*10).round/10.0).to_s.gsub('.', ',')
 	end
 	
+	def job_company(job)
+		if job.website.nil? || job.website.empty?
+			job.company_name
+		else
+			link_to job.company_name, job.website, :target => "_blank"
+		end
+	end
 end
