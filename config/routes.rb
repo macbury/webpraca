@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :categories
+	map.seo_page '/strona/:id/', :controller => 'pages', :action => 'show'
+  map.resources :pages
 
 	map.with_options :controller => 'jobs', :action => 'index' do |job| 
 		job.connect '/lokalizacja/:localization/:page'
@@ -9,20 +10,22 @@ ActionController::Routing::Routes.draw do |map|
 		job.connect '/typ/:type_id/:page'
 		job.job_type '/typ/:type_id'
 		job.connect '/kategoria/:category/:page'
-		job.category '/kategoria/:category'
+		job.job_category '/kategoria/:category'
 		job.connect '/najpopularniejsze/:page', :popular => true
 		job.popular_jobs '/najpopularniejsze', :popular => true
 	end
 	
+	map.resources :categories, :collection => { :reorder => :post }
 	map.resources :jobs, :member => { :publish => :get }, :collection => { :search => :any } do |jobs|
 		jobs.resources :applicants, :member => { :download => :get }
 	end
   map.resources :user_sessions
   map.resources :users
 	
-  map.login '/logowanie', :controller => 'user_sessions', :action => 'new'
-  map.logout '/wyloguj', :controller => 'user_sessions', :action => 'destroy'
-  map.register '/rejestruj', :controller => 'users', :action => 'new'
+  map.login '/login', :controller => 'user_sessions', :action => 'new'
+  map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
+	
+	map.admin '/admin', :controller => "pages"
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

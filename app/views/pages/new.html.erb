@@ -1,0 +1,20 @@
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><%= @page.new_record? ? "Nowa strona" : "Edycja strony" %></h2>
+		</div>
+		
+		<% semantic_form_for(@page) do |f| %>
+			<% f.inputs do %>
+				<%= f.input :name %>
+				<%= f.input :body %>
+			<% end %>
+			<div class="buttons">
+				<div class="button">
+					<%= f.submit 'Create' %>
+				</div> albo <%= link_to 'anuluj', pages_path %>
+			</div>
+		<% end %>
+		
+	</div>
+</div>

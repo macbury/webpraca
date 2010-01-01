@@ -1,6 +1,3 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
 	include ExceptionNotifiable
 	
@@ -37,8 +34,8 @@ class ApplicationController < ActionController::Base
 	
 	def seo
 		@ads_pos = :bottom
-		@standard_tags = 'test, test, test'
-		set_meta_tags :description => 'moja fajna aplikacja',
+		@standard_tags = 'oferty pracy, praca IT, zlecenia IT, praca w IT, praca oferty z IT, oferty z it, it, w IT'
+		set_meta_tags :description => 'Oferty pracy oraz zleceń w branży IT. Skutecznie rekrutuj z nami pracowników, freelancerów.',
 	                :keywords => @standard_tags
 		
 	end
@@ -75,7 +72,7 @@ class ApplicationController < ActionController::Base
   end
   
   def redirect_back_or_default
-    redirect_to session[:return_to] || root_path
+    redirect_to session[:return_to] || admin_path
     session[:return_to] = nil
   end
 
@@ -89,7 +86,8 @@ class ApplicationController < ActionController::Base
         end
         format.js { render :js => "window.location = #{login_path.inspect};" }
       end
-
+		else
+			@page_title = ["Panel administracyjny"]
     end
   end
 end

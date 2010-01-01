@@ -11,7 +11,7 @@
 			<dt>Typ</dt>
 			<dd><%= job_label(@job) %></dd>
 			<dt>Kategoria</dt>
-			<dd><%= link_to @job.category.name, category_path(@job.category) %></dd>
+			<dd><%= link_to @job.category.name, job_category_path(@job.category) %></dd>
 			<dt>Ocena</dt>
 			<dd><%= format_rank(@job.rank) %></dd>
 			<dt>Pracodawca</dt>

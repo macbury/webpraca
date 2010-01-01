@@ -1,24 +1,22 @@
-<h1>Listing categories</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Permalink</th>
-    <th>Position</th>
-  </tr>
-
-<% @categories.each do |category| %>
-  <tr>
-    <td><%=h category.name %></td>
-    <td><%=h category.permalink %></td>
-    <td><%=h category.position %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% content_for :sidebar do %>
+<div class="box">
+	<%= link_to "Dodaj kategorię!", new_category_path, :class => "more" %>
+</div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New category', new_category_path %>
+<div class="box">
+	<div>
+		<div class="title">
+			<h2>Kategorie</h2>
+		</div>
+		<ul class="list" id="categories">
+			<% @categories.each do |category| %>
+				<li class="<%= cycle('normal', 'alt') %>" id="category_<%= category.id %>">
+					<img src="/images/drag.gif" width="11" height="11" alt="Drag" class="handle" />
+					<%= link_to category.name, edit_category_path(category) %>
+				</li>
+			<% end %>
+		</ul>
+		
+		<div class="loader"></div>
+	</div>
+</div>

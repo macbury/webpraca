@@ -1,5 +1,4 @@
 class UserSessionsController < ApplicationController
-	before_filter :not_for_production
 	
   def new
     @user_session = UserSession.new

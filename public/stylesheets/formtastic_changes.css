@@ -18,5 +18,4 @@ form.formtastic #recaptcha_widget_div { margin-left: 25%; }
 form.formtastic .markItUpButton { margin-bottom: 2px !important; }
 form.formtastic .markItUpEditor { width: 99%; }
 form.formtastic .check_boxes.columns li { float: left; width: 33%; }
-form.formtastic fieldset ol li.numeric input, form.formtastic fieldset ol li.string input { width: 73%; }
-form.formtastic fieldset ol li.text textarea { width: 73%; }
+form.formtastic fieldset ol li.numeric input, form.formtastic fieldset ol li.string input, form.formtastic fieldset ol li.text textarea, form.formtastic fieldset ol li.password input { width: 73%; }

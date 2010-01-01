@@ -9,9 +9,9 @@
 	<%= rss_link("RSS", jobs_url(:format => :rss)) %>
 	<%= rss_link("ATOM", jobs_url(:format => :atom)) %>
 	
-	<%= stylesheet_link_tag 'markitup', 'textile','formtastic', 'formtastic_changes', 'ui', 'facybox_urls'  %>
 	<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
-	<%= javascript_include_tag 'jquery.min.js', 'jquery.form', 'jquery.markitup', 'textile', 'rails', 'application' %>
+	<%= javascript_include_merged :base %>
+	<%= stylesheet_link_merged :base %>
 </head>
 <body>
 	<div class="wrapper">
@@ -29,7 +29,7 @@
 				<li><%= link_to "Najnowsze oferty", jobs_path %></li>
 				<li><%= link_to "Najpopularniejsze oferty", popular_jobs_path %></li>
 				<li><%= link_to "Szukaj", search_jobs_path %></li>
-				<li><%= link_to "O nas", jobs_path %></li>
+				<li><%= link_to "O nas", "/strona/o-nas/" %></li>
 				<li><%= link_to "Kontakt", jobs_path %></li>
 			</ul>
 		</div>
@@ -67,17 +67,7 @@
 		</div>
 		
 		<div class="clear"></div>
-		<div class="footer">
-			<span class="right">
-				<%= link_to "Strona główna", root_path %> | 
-				<%= link_to "Oferty", jobs_path %> | 
-				<%= link_to "Szukaj", search_jobs_path %> | 
-				<%= link_to "Oferty", jobs_path %> | 
-				<%= link_to "O nas", jobs_path %> | 
-				<%= link_to "Kontakt", jobs_path %>
-			</span>
-			<strong><%= link_to "webpraca.net", root_path %></strong> <sup>BETA</sup> &copy; 2010. 
-		</div>
+		<%= render :partial => "/shared/footer" %>
 	</div>
 </body>
 </html>

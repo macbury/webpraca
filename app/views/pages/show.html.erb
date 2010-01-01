@@ -1,0 +1,8 @@
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><%= title @page.name %></h2>
+		</div>
+		<%= RedCloth.new(@page.body).to_html %>
+	</div>
+</div>

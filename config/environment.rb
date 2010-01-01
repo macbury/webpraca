@@ -13,6 +13,7 @@ Rails::Initializer.run do |config|
 	config.gem 'RedCloth', :lib => "redcloth"
   config.gem 'authlogic'
 	config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
+	config.gem 'highline', :lib => false
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

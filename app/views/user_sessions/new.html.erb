@@ -1,12 +1,18 @@
-<% title "Logowanie" %>
+<div class="box">
+	<div>
+		<div class="title"><h2><%= title "Logowanie" %></h2></div>
 
-<% semantic_form_for @user_session do |f| %>
-	<% f.inputs do %>
-		<%= f.input :email %>
-		<%= f.input :password %>
-	<% end %>
-	<p><%= f.submit "Zaloguj się" %></p>
+		<% semantic_form_for @user_session do |f| %>
+			<% f.inputs do %>
+				<%= f.input :email %>
+				<%= f.input :password %>
+			<% end %>
+			<div class="buttons">
+				<div class="button"><%= f.submit "Zaloguj się" %></div>
+			</div>
 
-<% end %>
+		<% end %>
+	</div>
+</div>
 
 

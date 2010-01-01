@@ -1,0 +1,22 @@
+--- 
+javascripts: 
+- base: 
+  - jquery.min
+  - jquery.form
+  - rails
+  - jquery.markitup
+  - textile
+  - application
+
+- admin:
+  - ui.core
+  - ui.sortable
+  - ui.draggable
+  - admin
+stylesheets: 
+- base: 
+  - ui
+  - formtastic
+  - formtastic_changes
+  - markitup
+  - textile

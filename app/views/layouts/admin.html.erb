@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+   
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<%= display_meta_tags :site => "webpraca.net" %>
+	<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
+	<%= javascript_include_merged :base %>
+	<%= javascript_include_merged :admin %>
+	<%= stylesheet_link_merged :base %>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<h1 id="logo"><%= link_to "Panel administracyjny", admin_path %></h1>
+			<ul class="categories">
+				<li><%= link_to "Strony", pages_path, :class => params[:controller] == "pages" ? "selected" : "normal" %></li>
+				<li><%= link_to "Kategorie", categories_path, :class => params[:controller] == "categories" ? "selected" : "normal" %></li>
+			</ul>
+			<ul class="menu">
+				<li>Witaj <strong><%= self.current_user.email %></strong>!</li>
+				<li><%= link_to "Wyloguj się", logout_path %></li>
+			</ul>
+		</div>
+		
+		<%- flash.each do |name, msg| -%>
+			<div class="<%= "flash #{name}" %>">
+				<a href="#" class="dismiss">X</a>
+				<p><%= msg %></p>
+			</div>
+		<%- end -%>
+		
+		<div class="sidebar">
+			<%= yield :sidebar %>
+		</div>
+		<div class="content">
+			<%= yield %>
+		</div>
+		
+		<div class="clear"></div>
+		<%= render :partial => "/shared/footer" %>
+	</div>
+</body>
+</html>

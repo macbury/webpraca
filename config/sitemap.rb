@@ -36,7 +36,11 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
 	
 	Category.all.each do |c|
 		latest_job = c.jobs.first(:order => "created_at DESC")
-		sitemap.add category_path(c), :lastmod => latest_job.nil? ? c.created_at : latest_job.created_at
+		sitemap.add job_category_path(c), :lastmod => latest_job.nil? ? c.created_at : latest_job.created_at
+	end
+	
+	Page.all.each do |page|
+		sitemap.add seo_page_path(page), :lastmod => page.updated_at
 	end
 end
 

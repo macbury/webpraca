@@ -1,23 +1,18 @@
-<h1>New category</h1>
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><%= @category.new_record? ? "Nowa kategoria" : "Edycja kategori" %></h2>
+		</div>
 
-<% form_for(@category) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :permalink %><br />
-    <%= f.text_field :permalink %>
-  </p>
-  <p>
-    <%= f.label :position %><br />
-    <%= f.text_field :position %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', categories_path %>
+		<% semantic_form_for(@category) do |f| %>
+		<% f.inputs do %>
+			<%= f.input :name %>
+		<% end %>
+		<div class="buttons">
+			<div class="button">
+				<%= f.submit 'Zapisz' %>
+			</div>, <%= link_to 'anuluj', categories_path %> albo <%= link_to 'Usuń', @category, :confirm => 'Usunięcie kateogri spowoduje usunięcie wszystkich ofert w niej zawartych', :method => :delete %>
+		</div>
+		<% end %>
+	</div>
+</div>
