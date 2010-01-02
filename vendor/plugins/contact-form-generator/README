@@ -1,0 +1,33 @@
+Contact form generator
+======================
+
+In almost every app I create there is a contact form. Since I repeat the same steps 
+over and over I decided to create a contact form generator.
+
+The generator gives you a good starting point for further modifications. 
+Specs will be generated if Rspec is available.
+
+
+Dependencies: ActiveForm plugin
+
+
+Installation
+============
+
+script/plugin install git://github.com/cs/active_form.git
+script/plugin install git://github.com/masone/contact-form-generator.git
+
+
+Example
+=======
+
+* Run the generator
+  script/generate contact_form
+
+* Configure the mail recipient settings in app/models/contact_mailer.rb
+
+* Go to http://yourapp/contact
+
+
+
+Copyright (c) 2008 Christian Felder (www.masone.ch), released under the MIT license

@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class Admin::PagesController < ApplicationController
 	before_filter :login_required, :setup_title, :except => "show"
 	layout 'admin'
 	ads_pos :right, :only => "show"
@@ -79,7 +79,7 @@ class PagesController < ApplicationController
     @page.destroy
 
     respond_to do |format|
-      format.html { redirect_to(pages_url) }
+      format.html { redirect_to(admin_pages_url) }
       format.xml  { head :ok }
     end
   end

@@ -1,0 +1,31 @@
+<div class="box">
+	<div>
+		<div class="title">
+			<h2><%= title "Kontakt" %></h2>
+		</div>
+		<p>Będziemy wdzięczni za wszelkie uwagi dotyczące funkcjonowania serwisu. </p>
+		<% semantic_form_for(@contact_handler, :url => contact_url) do |f| %>
+		<% f.inputs do %>
+			<%= f.input :email %>
+			<%= f.input :subject, :label => "Temat" %>
+			<%= f.input :body, :as => :text, :label => "Treść" %>
+		<% end %>
+		<% f.inputs :name => "Czy jesteś człowiekiem" do %>
+		<li class="string required captcha">
+			<%= f.label :captcha, 'Kod z obrazka*' %>
+			<%= f.captcha_challenge %>
+			<%= f.captcha_field %>
+			<%= inline_errors @contact_handler, :captcha_solution %>
+
+		</li>
+		<% end %>
+		<div class="buttons">
+			<div class="button">
+				<%= f.submit 'Wyślij!' %>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
+
+

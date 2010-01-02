@@ -20,7 +20,7 @@
 			<ul class="categories">
 				<% for category in Category.all(:order => "position") %>
 					<li>
-						<%= link_to category.name, category_path(category), :class => (!@category.nil? && @category.id == category.id) ? "selected" : "normal" %>
+						<%= link_to category.name, job_category_path(category), :class => (!@category.nil? && @category.id == category.id) ? "selected" : "normal" %>
 					</li>
 				<% end %>
 			</ul>
@@ -30,7 +30,7 @@
 				<li><%= link_to "Najpopularniejsze oferty", popular_jobs_path %></li>
 				<li><%= link_to "Szukaj", search_jobs_path %></li>
 				<li><%= link_to "O nas", "/strona/o-nas/" %></li>
-				<li><%= link_to "Kontakt", jobs_path %></li>
+				<li><%= link_to "Kontakt", contact_path %></li>
 			</ul>
 		</div>
 		

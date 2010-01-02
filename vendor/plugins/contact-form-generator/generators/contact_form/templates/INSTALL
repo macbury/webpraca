@@ -1,0 +1,17 @@
+
+
+== You can find me at
+
+  * www.masone.ch
+  * www.github.com/masone
+	
+
+== Important: Before you get started you might want to ...
+
+  * Install the active_form plugin
+    script/plugin install git://github.com/cs/active_form.git
+
+  * Configure the mail recipient settings in app/models/contact_mailer.rb
+
+  * Notice that the plugin generated specs if Rspec is installed
+

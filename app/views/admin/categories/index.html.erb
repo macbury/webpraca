@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
 <div class="box">
-	<%= link_to "Dodaj kategorię!", new_category_path, :class => "more" %>
+	<%= link_to "Dodaj kategorię!", new_admin_category_path, :class => "more" %>
 </div>
 <% end %>
 <div class="box">
@@ -12,7 +12,7 @@
 			<% @categories.each do |category| %>
 				<li class="<%= cycle('normal', 'alt') %>" id="category_<%= category.id %>">
 					<img src="/images/drag.gif" width="11" height="11" alt="Drag" class="handle" />
-					<%= link_to category.name, edit_category_path(category) %>
+					<%= link_to category.name, edit_admin_category_path(category) %>
 				</li>
 			<% end %>
 		</ul>

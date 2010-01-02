@@ -1,0 +1,44 @@
+<% content_for :sidebar do %>
+<div class="box">
+	<%= link_to 'Nowa strona', new_admin_page_path, :class => "more" %>
+</div>
+<% end %>
+<div class="box">
+	<div>
+		<div class="title">
+			<h2>Strony</h2>
+		</div>
+		
+		<table>
+			<thead>
+				<tr>
+			    <th>Nazwa</th>
+					<th width="130px" class="text_center">Ostatnia zmiana</th>
+			    <th width="100px" class="text_center">Edycja</th>
+			  </tr>
+			</thead>
+		
+			<% if @pages.nil? || @pages.empty? %>
+				<tr>
+					<td colspan="2" class="info">
+						Brak stron!
+					</td>
+				</tr>
+			<% else %>
+				<% @pages.each do |page| %>
+				  <tr>
+				    <td><%= link_to page.name, seo_page_path(page) %></td>
+						<td class="text_center">
+							<%= l page.updated_at, :format => :long %>
+						</td>
+				    <td class="text_center">
+							<%= link_to 'Edytuj', edit_admin_page_path(page) %> | 
+							<%= link_to 'Usuń', admin_page_path(page), :confirm => 'Czy na pewno chcesz usunąć stronę?', :method => :delete %>
+						</td>
+				  </tr>
+				<% end %>
+			<% end %>
+		</table>
+		
+	</div>
+</div>

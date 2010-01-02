@@ -9,7 +9,7 @@ $(document).ready(function () {
 			$('.loader').show();
 			$.ajax({
 				type: "POST",
-				url: "/categories/reorder",
+				url: "/admin/categories/reorder",
 				data: categories,
 				success: function(){
 					$('.loader').hide();

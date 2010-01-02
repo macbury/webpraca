@@ -4,14 +4,14 @@
 			<h2><%= @category.new_record? ? "Nowa kategoria" : "Edycja kategori" %></h2>
 		</div>
 
-		<% semantic_form_for(@category) do |f| %>
+		<% semantic_form_for([:admin, @category]) do |f| %>
 		<% f.inputs do %>
 			<%= f.input :name %>
 		<% end %>
 		<div class="buttons">
 			<div class="button">
 				<%= f.submit 'Zapisz' %>
-			</div>, <%= link_to 'anuluj', categories_path %> albo <%= link_to 'Usuń', @category, :confirm => 'Usunięcie kateogri spowoduje usunięcie wszystkich ofert w niej zawartych', :method => :delete %>
+			</div>, <%= link_to 'anuluj', admin_categories_path %> albo <%= link_to 'Usuń', [:admin, @category], :confirm => 'Usunięcie kateogri spowoduje usunięcie wszystkich ofert w niej zawartych', :method => :delete %>
 		</div>
 		<% end %>
 	</div>
