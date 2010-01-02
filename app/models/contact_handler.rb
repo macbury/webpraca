@@ -8,6 +8,9 @@ class ContactHandler < ActiveRecord::Base
   column :email, :string
   column :subject, :string
   column :body, :text
+	column :job_id, :integer
+	
+	belongs_to :job
 
   validates_presence_of :subject, :body
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i

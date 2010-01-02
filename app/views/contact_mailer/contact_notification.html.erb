@@ -1,5 +1,6 @@
 Temat: <%= @contact_handler.subject %>
 E-mail: <%= @contact_handler.email %>
+<%= "Oferta: #{@contact_handler.job.title}" unless @contact_handler.job.nil? -%>
 
 Treść: 
 <%= @contact_handler.body %>

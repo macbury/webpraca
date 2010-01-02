@@ -4,6 +4,7 @@ class ContactController < ApplicationController
 	
   def new
     @contact_handler = ContactHandler.new
+		@contact_handler.job_id = params[:job_id]
   end
 
   def create

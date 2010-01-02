@@ -41,7 +41,7 @@
 			<% end %>
 
 			<% f.inputs :name => 'Firma zatrudniająca lub osoba zlecająca' do %>
-				<%= f.input :email, :hint => "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie." %>
+				<%= f.input :email, :hint => "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie(zamiast niego będzie dostępny formularz kontaktowy)." %>
 				<%= f.input :company_name %>
 				<%= f.input :website, :hint => "zaczynający się od http://", :required => false %>
 				<%= f.input :nip, :required => false %>

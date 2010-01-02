@@ -1,11 +1,18 @@
 <div class="box">
 	<div>
 		<div class="title">
-			<h2><%= title "Kontakt" %></h2>
+			<h2><%= title @contact_handler.job.nil? ? "Kontakt" : "Kontakt z #{@contact_handler.job.company_name}" %></h2>
 		</div>
-		<p>Będziemy wdzięczni za wszelkie uwagi dotyczące funkcjonowania serwisu. </p>
+		<%= content_tag :p, "Będziemy wdzięczni za wszelkie uwagi dotyczące funkcjonowania serwisu. " if @contact_handler.job.nil? %>
 		<% semantic_form_for(@contact_handler, :url => contact_url) do |f| %>
 		<% f.inputs do %>
+			<% unless @contact_handler.job.nil? %>
+			<li class="text">
+				<label>Do:</label>
+				<%= link_to @contact_handler.job.company_name, @contact_handler.job.website, :target => "_blank" %>
+			</li>
+			<% end %>
+			<%= f.hidden_field :job_id %>
 			<%= f.input :email %>
 			<%= f.input :subject, :label => "Temat" %>
 			<%= f.input :body, :as => :text, :label => "Treść" %>

@@ -3,7 +3,7 @@ class ContactMailer < ActionMailer::Base
 
   def contact_notification(contact_handler)
     
-    @recipients  = ExceptionNotifier.exception_recipients
+    @recipients  = contact_handler.job.nil? ? ExceptionNotifier.exception_recipients : contact_handler.job.email
     @from        = contact_handler.email
     @subject     = "Kontakt od: #{contact_handler.subject}"
     
