@@ -147,10 +147,21 @@ class JobsController < ApplicationController
 	
 	def publish
 		@job = Job.find_by_permalink_and_token!(params[:id], params[:token])
-		@job.publish!
-		
-		flash[:notice] = "Twoja oferta jest już widoczna!"
-		
+		unless @job.published
+			@job.publish!
+			flash[:notice] = "Twoja oferta jest już widoczna!"
+			
+			spawn do
+				tags = [@job.localization.name, @job.category.name]
+				tags << @job.framework.name unless @job.framework.nil?
+				
+				MicroFeed.send	:streams => :all,
+												:msg => "[#{@job.company_name}] - #{@job.title}",
+												:tags => tags,
+												:link => seo_job_url(@job)
+			end
+		end
+
 		redirect_to @job
 	end
 	
@@ -159,7 +170,7 @@ class JobsController < ApplicationController
   def destroy
     @job = Job.find_by_permalink_and_token!(params[:id], params[:token])
     @job.destroy
-
+		flash[:notice] = "Oferta została usunięta"
     respond_to do |format|
       format.html { redirect_to(jobs_url) }
       format.xml  { head :ok }

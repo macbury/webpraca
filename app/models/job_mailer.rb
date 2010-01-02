@@ -17,6 +17,7 @@ class JobMailer < ActionMailer::Base
 		@body[:job_path] = seo_job_url(job)
 		@body[:publish_path] = publish_job_url(job, :token => job.token)
 		@body[:edit_path] = edit_job_url(job, :token => job.token)
+		@body[:destroy_path] = destroy_job_url(job, :token => job.token)
 	end
 	
   protected

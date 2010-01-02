@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.new_contact '/contact/new', :controller => 'contact', :action => 'new', :conditions => { :method => :get }
+  
+	map.new_contact '/contact/new', :controller => 'contact', :action => 'new', :conditions => { :method => :get }
   map.contact '/contact', :controller => 'contact', :action => 'new', :conditions => { :method => :get }
   map.contact '/contact', :controller => 'contact', :action => 'create', :conditions => { :method => :post }
 	map.seo_page '/strona/:id/', :controller => 'admin/pages', :action => 'show'
@@ -17,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
 		job.popular_jobs '/najpopularniejsze', :popular => true
 	end
 	
-	map.resources :jobs, :member => { :publish => :get }, :collection => { :search => :any } do |jobs|
+	map.resources :jobs, :member => { :publish => :get, :destroy => :any }, :collection => { :search => :any } do |jobs|
 		jobs.resources :applicants, :member => { :download => :get }
 	end
   map.resources :user_sessions

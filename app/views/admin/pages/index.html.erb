@@ -26,7 +26,7 @@
 				</tr>
 			<% else %>
 				<% @pages.each do |page| %>
-				  <tr>
+				  <tr class="<%= cycle('normal', 'alt') %>">
 				    <td><%= link_to page.name, seo_page_path(page) %></td>
 						<td class="text_center">
 							<%= l page.updated_at, :format => :long %>
