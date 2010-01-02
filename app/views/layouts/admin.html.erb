@@ -17,6 +17,7 @@
 			<ul class="categories">
 				<li><%= link_to "Strony", admin_pages_path, :class => params[:controller] == "admin/pages" ? "selected" : "normal" %></li>
 				<li><%= link_to "Kategorie", admin_categories_path, :class => params[:controller] == "admin/categories" ? "selected" : "normal" %></li>
+				<li><%= link_to "Oferty", admin_jobs_path, :class => params[:controller] == "admin/jobs" ? "selected" : "normal" %></li>
 			</ul>
 			<ul class="menu">
 				<li>Witaj <strong><%= self.current_user.email %></strong>!</li>
@@ -39,7 +40,7 @@
 		</div>
 		
 		<div class="clear"></div>
-		<%= render :partial => "/shared/footer" %>
 	</div>
+	<%= render :partial => "/shared/footer" %>
 </body>
 </html>

@@ -1,0 +1,17 @@
+<div class="box">
+	<div>
+		<div class="title">
+			<h2>Edycja oferty</h2>
+		</div>
+		<% semantic_form_for([:admin,@job]) do |f| %>
+			<%= render :partial => "/jobs/form", :object => f %>
+			<div class="buttons">
+				<div class="button">
+					<%= f.submit "Zapisz zmiany" %>
+				</div>
+				, <%= link_to "usuń", [:admin, @job], :method => :delete, :confirm => "Czy na pewno chcesz usunąć ofertę?" %>
+				 albo <%= link_to 'anuluj', admin_jobs_path %>
+			</div>
+		<% end %>
+	</div>
+</div>
