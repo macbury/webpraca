@@ -8,8 +8,33 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user, :logged_in?, :own?
   
   before_filter :staging_authentication, :seo, :user_for_authorization
+	
+	def rescue_action_in_public(exception)
+	  case exception
+	  when ActiveRecord::RecordNotFound
+	    render_404
+		when ActionController::RoutingError
+			render_404
+		when ActionController::UnknownController
+			render_404
+		when ActionController::UnknownAction
+			render_404
+		else
+			render_500
+	  end
+	end
 
   protected
+	
+	def render_404
+		@page_title = ["Błąd 404", "Nie znaleziono strony"]
+		render :template => "shared/error_404", :layout => 'application', :status => :not_found
+	end
+
+	def render_500
+		@page_title = ["Błąd 500", "Coś poszło nie tak"]
+		render :template => "shared/error_500", :layout => 'application', :status => :internal_server_error
+	end
 	
 	def not_for_production
 		redirect_to root_path if Rails.env == "production"
