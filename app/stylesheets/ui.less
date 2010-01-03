@@ -50,6 +50,7 @@ tr.alt { background:#f6f6f6; }
   -moz-border-radius: @radius;
   -webkit-border-radius: @radius;
   border-radius: @radius;
+	-o-border-radius: @radius;
 }
 
 .rounded_corner_top_left(@radius: 5px) { -moz-border-radius-topleft: @radius; -webkit-border-top-left-radius: @radius; border-top-left-radius: @radius; }
@@ -211,7 +212,7 @@ form > fieldset > legend {
 }
 
 @logo_width: 347px;
-@menu_color: #494B4E;
+@menu_color: #35373A;
 @header_link_color: #D8D8D9;
 
 .header > h1#logo { 
@@ -246,8 +247,8 @@ form > fieldset > legend {
 	background: @menu_color;
 }
 
-.header > ul.categories li > a:hover { background: #5D5F62; }
-.header > ul.categories li > .selected { color: #fff; background: #292929 !important; }
+.header > ul.categories li > a:hover { background: #5d5f62; }
+.header > ul.categories li > .selected { color: #fff; background: #2A2B2D !important; }
 
 .header > ul.menu { 
 	.reset;

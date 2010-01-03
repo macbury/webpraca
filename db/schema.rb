@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100101225137) do
+ActiveRecord::Schema.define(:version => 20100103183928) do
 
   create_table "applicants", :force => true do |t|
     t.string   "email"
@@ -117,10 +117,10 @@ ActiveRecord::Schema.define(:version => 20100101225137) do
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
 
   create_table "visits", :force => true do |t|
-    t.integer  "ip"
     t.integer  "job_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ip",         :limit => 8
   end
 
 end
