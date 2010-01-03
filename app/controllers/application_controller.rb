@@ -34,8 +34,8 @@ class ApplicationController < ActionController::Base
 	
 	def seo
 		@ads_pos = :bottom
-		@standard_tags = 'oferty pracy, praca IT, zlecenia IT, praca w IT, praca oferty z IT, oferty z it, it, w IT'
-		set_meta_tags :description => 'Oferty pracy oraz zleceń w branży IT. Skutecznie rekrutuj z nami pracowników, freelancerów.',
+		@standard_tags = WebSiteConfig['website']['tags']
+		set_meta_tags :description => WebSiteConfig['website']['description'],
 	                :keywords => @standard_tags
 		
 	end

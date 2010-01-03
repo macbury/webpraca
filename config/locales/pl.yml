@@ -107,6 +107,17 @@ pl:
             blank: 'musi być podane'
             invalid: 'odpowiedź jest niepoprawna'
     attributes:
+      websiteconfig:
+        groups:
+          website: "Strona WWW"
+          js: "Skrypty"
+        js:
+          google_analytics: "Google Analytics"
+          widget: "Reklama"
+        website:
+          name: "Nazwa"
+          tags: "Słowa kluczowe"
+          description: "Opis"
       applicant:
         email: "Twój E-Mail"
         body: "Treść"

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<%= display_meta_tags :site => "webpraca.net" %>
+	<%= display_meta_tags :site => WebSiteConfig['website']['name'] %>
 	<meta name="viewport" content="width=900" />
 	<%= rss_link("RSS", jobs_url(:format => :rss)) %>
 	<%= rss_link("ATOM", jobs_url(:format => :atom)) %>
@@ -16,7 +16,7 @@
 <body>
 	<div class="wrapper">
 		<div class="header">
-			<h1 id="logo"><%= link_to "webpraca.net", root_path %></h1>
+			<h1 id="logo"><%= link_to WebSiteConfig['website']['name'], root_path %></h1>
 			<ul class="categories">
 				<% for category in Category.all(:order => "position") %>
 					<li>
@@ -69,5 +69,6 @@
 		<div class="clear"></div>
 	</div>
 	<%= render :partial => "/shared/footer" %>
+	<%= WebSiteConfig['js']['google_analytics'] %>
 </body>
 </html>

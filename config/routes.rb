@@ -21,15 +21,17 @@ ActionController::Routing::Routes.draw do |map|
 	map.resources :jobs, :member => { :publish => :get, :destroy => :any }, :collection => { :search => :any } do |jobs|
 		jobs.resources :applicants, :member => { :download => :get }
 	end
+	
   map.resources :user_sessions
-  map.resources :users
 	
   map.login '/login', :controller => 'user_sessions', :action => 'new'
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
 	
 	map.namespace :admin do |admin|
+		admin.config '/config', :controller => "configs", :action => "new"
 		admin.resources :pages
 		admin.resources :jobs
+		admin.resource :configs
 		admin.resources :categories, :collection => { :reorder => :post }
 	end
 
