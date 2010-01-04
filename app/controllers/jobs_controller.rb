@@ -25,11 +25,14 @@ class JobsController < ApplicationController
 		
 		@query.active
 		
-		if params[:popular]
-			options[:order] = "rank DESC, created_at DESC"
+		if params[:order] =~ /najpopularniejsze/i
 			@page_title = ['Najpopularniejsze oferty pracy']
+			@order = :rank
+			options[:order] = "rank DESC, created_at DESC"
 		else
+			@order = :created_at
 			@page_title = ['Najnowsze oferty pracy']
+			options[:order] = "created_at DESC, rank DESC"
 		end
 		
 		if params[:category]
@@ -155,10 +158,12 @@ class JobsController < ApplicationController
 				tags = [@job.localization.name, @job.category.name]
 				tags << @job.framework.name unless @job.framework.nil?
 				
-				MicroFeed.send	:streams => :all,
-												:msg => "[#{@job.company_name}] - #{@job.title}",
-												:tags => tags,
-												:link => seo_job_url(@job)
+				if Rails.env == "production"
+					MicroFeed.send	:streams => :all,
+													:msg => "[#{@job.company_name}] - #{@job.title}",
+													:tags => tags,
+													:link => seo_job_url(@job)
+				end
 			end
 		end
 

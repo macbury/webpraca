@@ -1,0 +1,20 @@
+<h1>Listing frameworks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @frameworks.each do |framework| %>
+  <tr>
+    <td><%=h framework.name %></td>
+    <td><%= link_to 'Show', framework %></td>
+    <td><%= link_to 'Edit', edit_framework_path(framework) %></td>
+    <td><%= link_to 'Destroy', framework, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New framework', new_framework_path %>

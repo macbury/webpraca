@@ -1,0 +1,16 @@
+<h1>Editing framework</h1>
+
+<% form_for(@framework) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @framework %> |
+<%= link_to 'Back', frameworks_path %>

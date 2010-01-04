@@ -1,0 +1,9 @@
+Dzięki serwisowi webpraca.net będziesz mógł dodawać i przeglądać oferty pracy oraz zleceń z branży IT. Skutecznie rekrutuj z nami pracowników, freelancerów. Serwis posiada unikatową funkcję oceny oferty dzięki czemu wcale nie musisz płacić aby twoja oferta została wyróżniona. Ocenie podlega ilość wprowadzonych informacji przez zleceniodawcę(strona firmy, NIP, REGON, KRS, widełki zarobkowe itp. im więcej szczegółów tym lepiej) oraz ile osób wyświetli ofertę i będzie nią zainteresowane(poprzez formularz umożliwiający przesyłanie aplikacji online w ofercie).
+
+*Główne funkcje serwisu*
+* dodawanie ofert(bez zbędnej rejestracji. Dostaniesz e-mail z specjalnym linkiem dzięki któremu będziesz mógł edytować i usuwać swoje oferty)
+* możliwość aplikacji online(użytkownicy będą mieli specjalny formularz umożliwiający przesyłanie aplikacji online w ofercie)
+* różne typy ofert(zlecenie, etat, wolontariat, praktyka)
+* publikacja ofert w serwisach mikroblogowych(blip.pl, flaker.pl, pinger.pl, spinacz.pl)
+* kontakt z zleceniodawcą poprzez specjalny formularz(zabespieczenie antyspamowe)
+* aplikacja online w ofercie(z możliwością wysłania CV)

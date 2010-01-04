@@ -6,6 +6,13 @@ ActionController::Routing::Routes.draw do |map|
 	map.seo_page '/strona/:id/', :controller => 'admin/pages', :action => 'show'
 
 	map.with_options :controller => 'jobs', :action => 'index' do |job| 
+		job.with_options :category => nil, :page => 1, :order => "najnowsze", :requirements => { :order => /(najnowsze|najpopularniejsze)/, :page => /\d/ } do |seo|
+			seo.connect '/oferty/:page'
+			seo.connect '/oferty/:order'
+			seo.connect '/oferty/:order/:page'
+			seo.seo_jobs '/oferty/:order/:category/:page'
+		end
+		
 		job.connect '/lokalizacja/:localization/:page'
 		job.localization '/lokalizacja/:localization'
 		job.connect '/framework/:framework/:page'
@@ -14,8 +21,6 @@ ActionController::Routing::Routes.draw do |map|
 		job.job_type '/typ/:type_id'
 		job.connect '/kategoria/:category/:page'
 		job.job_category '/kategoria/:category'
-		job.connect '/najpopularniejsze/:page', :popular => true
-		job.popular_jobs '/najpopularniejsze', :popular => true
 	end
 	
 	map.resources :jobs, :member => { :publish => :get, :destroy => :any }, :collection => { :search => :any } do |jobs|
@@ -32,6 +37,7 @@ ActionController::Routing::Routes.draw do |map|
 		admin.resources :pages
 		admin.resources :jobs
 		admin.resource :configs
+		admin.resources :frameworks
 		admin.resources :categories, :collection => { :reorder => :post }
 	end
 

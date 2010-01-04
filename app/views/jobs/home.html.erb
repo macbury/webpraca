@@ -4,7 +4,10 @@
 <div class="box">
 	<div>
 		<div class="title">
-			<h2><span>najpopularniejsze</span> oferty</h2>
+			<h2>
+				<%= link_to image_tag('feed.png'), jobs_path(stripped_params(:format => :rss, :order => "najpopularniejsze")), :title => "najpopularniejsze", :class => "feed" %>
+				<span>najpopularniejsze</span> oferty
+			</h2>
 		</div>
 
 		<%= render :partial => "jobs", :object => @top_jobs %>
@@ -16,7 +19,10 @@
 	
 	<div>
 		<div class="title">
-			<h2><span>najnowsze</span> oferty</h2>
+			<h2>
+				<%= link_to image_tag('feed.png'), jobs_url(stripped_params(:format => :rss)), :title => "najnowsze oferty", :class => "feed" %>
+				<span>najnowsze</span> oferty
+			</h2>
 		</div>
 
 		<%= render :partial => "jobs", :object => @recent_jobs %>

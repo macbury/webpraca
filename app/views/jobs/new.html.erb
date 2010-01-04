@@ -8,7 +8,7 @@
 			<%= render :partial => "form", :object => f %>
 			<div class="buttons">
 				<div class="button">
-					<%= f.submit @job.new_record? ? "Dodaj oferte" : "Zapisz zmiany" %>
+					<%= f.submit @job.new_record? ? "Zgadzam się z regulaminem i chcę dodać ofertę" : "Zapisz zmiany" %>
 				</div>
 				<% unless @job.new_record? %>
 				, <%= link_to "usuń", @job, :method => :delete, :confirm => "Czy na pewno chcesz usunąć ofertę?" %>

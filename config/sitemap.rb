@@ -18,7 +18,6 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
   
   # add '/articles'
   sitemap.add jobs_path, :priority => 1.0, :changefreq => 'daily'
-	sitemap.add popular_jobs_path
   # add all individual articles
   Job.active.each do |o|
     sitemap.add seo_job_path(o), :lastmod => o.updated_at
