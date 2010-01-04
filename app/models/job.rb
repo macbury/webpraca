@@ -15,6 +15,7 @@ JOB_RANK_VALUES = {
 									}
 
 class Job < ActiveRecord::Base
+	include ActionController::UrlWriter
 	xss_terminate
 	has_permalink :title
 	
@@ -151,6 +152,7 @@ class Job < ActiveRecord::Base
 	def publish!
 		self.published = true
 		save
+
 		spawn do
 			tags = [localization.name, category.name]
 			tags << framework.name unless framework.nil?

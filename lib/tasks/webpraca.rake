@@ -44,7 +44,7 @@ namespace :webpraca do
 		end
 		
 		task :publish_all => :environment do
-			Job.all.each do |job|
+			Job.all(:conditions => { :published => false }).each do |job|
 				job.publish!
 			end
 		end
