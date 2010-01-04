@@ -7,5 +7,6 @@ config/database.yml
 config/mailer.yml
 config/exception_notifer.yml
 config/micro_feed.yml
+config/newrelic.yml
 config/deploy.rb
 db/*.sqlite3
