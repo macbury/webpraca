@@ -153,18 +153,6 @@ class JobsController < ApplicationController
 		unless @job.published
 			@job.publish!
 			flash[:notice] = "Twoja oferta jest już widoczna!"
-			
-			spawn do
-				tags = [@job.localization.name, @job.category.name]
-				tags << @job.framework.name unless @job.framework.nil?
-				
-				if Rails.env == "production"
-					MicroFeed.send	:streams => :all,
-													:msg => "[#{@job.company_name}] - #{@job.title}",
-													:tags => tags,
-													:link => seo_job_url(@job)
-				end
-			end
 		end
 
 		redirect_to @job
