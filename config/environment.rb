@@ -12,7 +12,7 @@ Rails::Initializer.run do |config|
   config.gem 'searchlogic'
 	config.gem 'RedCloth', :lib => "redcloth"
   config.gem 'authlogic'
-	#config.gem "newrelic_rpm"
+	config.gem "newrelic_rpm"
 	config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
 	config.gem 'highline', :lib => false
   # Settings in config/environments/* take precedence over those specified here.

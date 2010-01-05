@@ -15,15 +15,13 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
   def index
-		@query = Job.search
+		@query = Job.active.search
 		options = {
 								:page => params[:page], 
 								:per_page => 25,
 								:order => "created_at DESC, rank DESC",
 								:include => [:localization, :category]
 							}
-		
-		@query.active
 		
 		if params[:order] =~ /najpopularniejsze/i
 			@page_title = ['Najpopularniejsze oferty pracy']
