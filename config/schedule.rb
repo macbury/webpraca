@@ -5,9 +5,6 @@ every 1.hour do # Many shortcuts available: :hour, :day, :month, :year, :reboot
  	rake "validates_captcha:create_static_images COUNT=50"
 end
 
-shared_path = "/home/webpraca/www/apps/webpraca/shared"
-current_path = "/home/webpraca/www/apps/webpraca/current"
-
 every 1.day, :at => '1:30 am' do
 	rake "webpraca:jobs:remove_old"
   rake "sitemap:refresh"
