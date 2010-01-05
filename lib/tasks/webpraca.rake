@@ -45,6 +45,7 @@ namespace :webpraca do
 		
 		task :publish_all => :environment do
 			Job.all(:conditions => { :published => false }).each do |job|
+				job.send_notification
 				job.publish!
 			end
 		end

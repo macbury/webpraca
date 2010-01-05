@@ -61,7 +61,6 @@ class Job < ActiveRecord::Base
 	
 	before_create :create_from_name, :generate_token
 	before_save   :calculate_rank
-	after_create  :send_notification
 	
 	def self.find_grouped_by_type
 		return Job.active.count(:type_id, :group => "type_id")

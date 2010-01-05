@@ -115,6 +115,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
+				@job.send_notification
         flash[:notice] = 'Na twój e-mail został wysłany link którym opublikujesz ofertę.'
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
