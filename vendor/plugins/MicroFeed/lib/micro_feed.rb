@@ -5,6 +5,7 @@ require "feeds/blip_feed"
 require "feeds/flaker_feed"
 require "feeds/spinacz_feed"
 require "feeds/pinger_feed"
+require "feeds/twitter_feed"
 
 class MicroFeed
 	MICRO_FEED_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/micro_feed.yml")

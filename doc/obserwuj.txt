@@ -1,0 +1,8 @@
+# "RSS":/jobs.rss
+# "Atom":/jobs.atom
+# "Twitter":http://twitter.com/webpraca
+# "Facebook":http://www.facebook.com/pages/webpracanet/385396655455
+# "Blip":http://webpraca.blip.pl
+# "Flaker":http://flaker.pl/webpraca
+# "Spinacz":http://spinacz.pl/webpraca
+# "Pinger":http://webpraca.pinger.pl/

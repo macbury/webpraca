@@ -10,5 +10,9 @@ pinger:
   login: username
   password: secret
 
+twitter:
+  login: username
+  password: secret
+
 spinacz:
   hash: 139c82e0679b64132f528fa71a9ee8d1
