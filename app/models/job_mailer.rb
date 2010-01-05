@@ -3,7 +3,11 @@ class JobMailer < ActionMailer::Base
 	
 	def job_applicant(applicant)
 		setup_email(applicant.job.email)
-		@subject = "webpraca.net - Pojawiła się osoba zainteresowana ofertą '#{applicant.job.title}'"
+		if applicant.job.email_title.nil? || applicant.job.email_title.empty?
+			@subject = "webpraca.net - Pojawiła się osoba zainteresowana ofertą '#{applicant.job.title}'"
+		else
+			@subject = applicant.job.email_title
+		end
 		@body[:job] = applicant.job
 		@body[:applicant] = applicant
 		@body[:job_path] = seo_job_url(applicant.job)

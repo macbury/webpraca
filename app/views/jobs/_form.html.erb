@@ -11,7 +11,6 @@
 	</li>
 	<%= form.input :type_id, :as => :radio, :collection => collection_from_types(JOB_TYPES) %>
 	<%= form.input :remote_job, :required => false %>
-	<%= form.input :apply_online, :required => false, :hint => "uaktywnia formularz umożliwiający przesyłanie aplikacji online w ofercie" %>
 	<%= form.input :dlugosc_trwania, :as => :numeric, :hint => "ile dni oferta ma być ważna(od 1 do 60 dni)" %>
 	<li class="select">
 		<%= form.label :framework_id, 'Framework' %>
@@ -31,6 +30,11 @@
 		<%= form.text_area :description %>
 		<%= inline_errors @job, :description %>
 	</li>
+<% end %>
+
+<% form.inputs :name => "Aplikuj online" do %>
+	<%= form.input :apply_online, :required => false, :hint => "uaktywnia formularz umożliwiający przesyłanie aplikacji online w ofercie" %>
+	<%= form.input :email_title, :required => false, :hint => "np. Młodszy programista, Ruby Developer/18/12/71 itp" %>
 <% end %>
 
 <% form.inputs :name => 'Firma zatrudniająca lub osoba zlecająca' do %>

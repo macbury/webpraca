@@ -134,6 +134,7 @@ pl:
         website: "Strona WWW"
         framework_name: "Framework"
         apply_online: "Aplikuj online"
+        email_title: "Tytuł emaila"
       user:
         password: "Hasło"
         password_confirmation: "Powtórz hasło"
