@@ -70,7 +70,9 @@
 		<div class="title mini">
 			<h3>Opis oferty</h3>
 		</div>
-		<%= RedCloth.new(@job.description).to_html %>
+		<div>
+			<%= RedCloth.new(@job.description).to_html %>
+		</div>
 		<p>
 		<% if permitted_to? :edit, @job %>
 			<%= link_to 'Edytuj', edit_job_path(@job) %> |
