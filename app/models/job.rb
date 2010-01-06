@@ -153,7 +153,7 @@ class Job < ActiveRecord::Base
 		self.published = true
 		save
 
-
+		spawn do
 			tags = [localization.name, category.name]
 			tags << framework.name unless framework.nil?
 			
@@ -161,7 +161,7 @@ class Job < ActiveRecord::Base
 											:msg => "[#{company_name}] - #{title}",
 											:tags => tags,
 											:link => seo_job_url(self, :host => "webpraca.net")
-
+		end
 	end
 	
 	def visited_by(ip)
