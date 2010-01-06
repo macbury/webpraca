@@ -154,7 +154,7 @@ class Job < ActiveRecord::Base
 		save
 
 		spawn do
-			tags = [localization.name, category.name]
+			tags = [localization.name, category.name, "praca", JOB_LABELS[self.type_id]]
 			tags << framework.name unless framework.nil?
 			
 			MicroFeed.send	:streams => :all,
