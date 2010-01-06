@@ -49,6 +49,12 @@ namespace :webpraca do
 				job.publish!
 			end
 		end
+		
+		task :publish => :environment do
+			Job.all(:conditions => { :published => nil }).each do |job|
+				job.publish!
+			end
+		end
 	end
 	
 	namespace :admin do
