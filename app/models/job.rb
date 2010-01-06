@@ -160,7 +160,7 @@ class Job < ActiveRecord::Base
 			MicroFeed.send	:streams => :all,
 											:msg => "[#{company_name}] - #{title}",
 											:tags => tags,
-											:link => seo_job_url(job, :host => "webpraca.net")
+											:link => seo_job_url(self, :host => "webpraca.net")
 
 	end
 	
