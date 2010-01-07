@@ -93,6 +93,7 @@ class JobsController < ApplicationController
 		
 		@tags = WebSiteConfig['website']['tags'].split(',').map(&:strip) + [@job.category.name, @job.localization.name, @job.company_name]
 		@tags << @job.framework.name unless @job.framework.nil?
+		@tags << JOB_LABELS[@job.type_id]
 		
 		set_meta_tags :keywords => @tags.join(', ')
 		
