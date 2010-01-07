@@ -59,9 +59,8 @@ class ApplicationController < ActionController::Base
 	
 	def seo
 		@ads_pos = :bottom
-		@standard_tags = WebSiteConfig['website']['tags']
 		set_meta_tags :description => WebSiteConfig['website']['description'],
-	                :keywords => @standard_tags
+	                :keywords => WebSiteConfig['website']['tags']
 		
 	end
 	

@@ -90,6 +90,12 @@ class JobsController < ApplicationController
     @job = Job.find_by_permalink!(params[:id])
 		@job.visited_by(request.remote_ip)
 		@category = @job.category
+		
+		@tags = WebSiteConfig['website']['tags'].split(',').map(&:strip) + [@job.category.name, @job.localization.name, @job.company_name]
+		@tags << @job.framework.name unless @job.framework.nil?
+		
+		set_meta_tags :keywords => @tags.join(', ')
+		
     respond_to do |format|
       format.html # show.html.erb
     end
