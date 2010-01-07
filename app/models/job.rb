@@ -38,7 +38,7 @@ class Job < ActiveRecord::Base
 			:greater_than => 0, 
 			:unless => Proc.new { |j| j.price_to.nil? }
 	
-	validates_format_of :email, :with => Authlogic::Regex.email
+	validates_format_of :email, :with => /([a-z0-9_.-]+)@([a-z0-9-]+)\.([a-z.]+)/i
 	
 	validates_format_of :website, :with =>  /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
 	
