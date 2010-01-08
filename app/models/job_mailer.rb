@@ -30,7 +30,9 @@ class JobMailer < ActionMailer::Base
       @recipients  = email
       #@subject     = "[mycode] "
       @sent_on     = Time.now
-      @from        = ActionMailer::Base.smtp_settings[:from]
+      if ActionMailer::Base.smtp_settings
+        @from        = ActionMailer::Base.smtp_settings[:from]
+      end
 			default_url_options[:host] = "webpraca.net"
 			
     end
