@@ -6,6 +6,7 @@ public/images/captchas/*
 config/database.yml
 config/mailer.yml
 config/exception_notifer.yml
+config/exception_notifier.yml
 config/website_config.yml
 config/micro_feed.yml
 config/newrelic.yml

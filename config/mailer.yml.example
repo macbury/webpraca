@@ -1,0 +1,11 @@
+development: &DEVELOPMENT
+  from: example@example.org
+  address: mail.example.org
+  port: 25  
+  user_name: example
+  password: secret
+  authentication: :plain  
+  domain: example.org
+production:
+ <<: *DEVELOPMENt
+
