@@ -17,6 +17,8 @@ ActionController::Routing::Routes.draw do |map|
 		job.localization '/lokalizacja/:localization'
 		job.connect '/framework/:framework/:page'
 		job.framework '/framework/:framework'
+		job.connect '/jezyk/:language/:page'
+		job.language '/jezyk/:language'
 		job.connect '/typ/:type_id/:page'
 		job.job_type '/typ/:type_id'
 		job.connect '/kategoria/:category/:page'

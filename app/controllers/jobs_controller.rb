@@ -60,6 +60,12 @@ class JobsController < ApplicationController
 			options[:order] = "created_at DESC, rank DESC"
 		end
 		
+		if params[:language]
+			@language = Language.find_by_permalink!(params[:language])
+			@page_title << @language.name.downcase
+			@query.language_id_is(@language.id)
+		end
+		
 		if params[:category]
 			@category = Category.find_by_permalink!(params[:category])
 			@page_title << @category.name.downcase
@@ -118,14 +124,22 @@ class JobsController < ApplicationController
 		@job.visited_by(request.remote_ip)
 		@category = @job.category
 		
+		@page_title = ["oferta pracy IT", @job.category.name.downcase, @job.localization.name.downcase, @job.company_name.downcase, @job.title.downcase]
+		
 		@tags = WebSiteConfig['website']['tags'].split(',').map(&:strip) + [@job.category.name, @job.localization.name, @job.company_name]
-		@tags << @job.framework.name unless @job.framework.nil?
 		@tags << JOB_LABELS[@job.type_id]
 		
+		unless @job.framework.nil?
+			@tags << @job.framework.name 
+			@page_title.insert(1, @job.framework.name)
+		end
 		
-		set_meta_tags :keywords => @tags.join(', '),
-									:title => ["oferta pracy IT", @job.category.name.downcase, @job.localization.name.downcase, @job.company_name.downcase, @job.title.downcase],
-									:separator => " - "
+		unless @job.language.nil?
+			@page_title.insert(1, @job.language.name)
+			@tags << @job.language.name 
+		end
+		
+		set_meta_tags :keywords => @tags.join(', ')
 		
     respond_to do |format|
       format.html # show.html.erb

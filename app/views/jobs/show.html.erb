@@ -22,6 +22,10 @@
 			<dt>Framework</dt>
 			<dd><%= link_to @job.framework.name, framework_path(@job.framework) %></dd>
 			<% end %>
+			<% unless @job.language.nil? %>
+			<dt>Język</dt>
+			<dd><%= link_to @job.language.name, language_path(@job.language) %></dd>
+			<% end %>
 			<% if @job.pay_band? %>
 			<dt>Widełko zarobkowe</dt>
 			<dd>

@@ -135,6 +135,7 @@ pl:
         framework_name: "Framework"
         apply_online: "Aplikuj online"
         email_title: "Tytuł emaila"
+        language: "Język"
       user:
         password: "Hasło"
         password_confirmation: "Powtórz hasło"

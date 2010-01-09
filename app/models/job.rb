@@ -10,6 +10,7 @@ JOB_RANK_VALUES = {
 										:nip => 0.5, 
 										:regon => 0.6, 
 										:framework_id => 0.7, 
+										:language_id => 0.5,
 										:website => 0.3,
 										:apply_online => 0.2
 									}
@@ -52,6 +53,7 @@ class Job < ActiveRecord::Base
 	belongs_to :framework
 	belongs_to :localization
 	belongs_to :category
+	belongs_to :language
 	
 	has_many :applicants, :dependent => :delete_all
 	has_many :visits, 		:dependent => :delete_all
@@ -153,15 +155,14 @@ class Job < ActiveRecord::Base
 		self.published = true
 		save
 
-		spawn do
-			tags = [localization.name, category.name, "praca", JOB_LABELS[self.type_id]]
-			tags << framework.name unless framework.nil?
-			
-			MicroFeed.send	:streams => :all,
-											:msg => "[#{company_name}] - #{title}",
-											:tags => tags,
-											:link => seo_job_url(self, :host => "webpraca.net")
-		end
+		tags = [localization.name, category.name, "praca", JOB_LABELS[self.type_id]]
+		tags << framework.name unless framework.nil?
+		
+		MicroFeed.send	:streams => :all,
+										:msg => "[#{company_name}] - #{title}",
+										:tags => tags,
+										:link => seo_job_url(self, :host => "webpraca.net") if Rails.env == "production"
+
 	end
 	
 	def visited_by(ip)
