@@ -11,7 +11,7 @@
 	</li>
 	<%= form.input :type_id, :as => :radio, :collection => collection_from_types(JOB_TYPES) %>
 	<%= form.input :remote_job, :required => false %>
-	<%= form.input :dlugosc_trwania, :as => :numeric, :hint => "ile dni oferta ma być ważna(od 1 do 60 dni)" %>
+	<%= form.input :availability_time, :as => :numeric, :hint => "ile dni oferta ma być ważna(od 1 do 60 dni)" %>
 	<li class="select">
 		<%= form.label :framework_id, 'Framework' %>
 		<%= form.select :framework_id, Framework.all(:order => 'name').map { |frame| [frame.name, frame.id] }, :include_blank => true %> albo 

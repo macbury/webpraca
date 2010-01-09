@@ -15,6 +15,7 @@
 		<div class="header">
 			<h1 id="logo"><%= link_to "Panel administracyjny", admin_path %></h1>
 			<ul class="categories">
+				<li><%= link_to "Statystyki", admin_stats_path, :class => params[:controller] == "admin/stats" ? "selected" : "normal" %></li>
 				<li><%= link_to "Strony", admin_pages_path, :class => params[:controller] == "admin/pages" ? "selected" : "normal" %></li>
 				<li><%= link_to "Kategorie", admin_categories_path, :class => params[:controller] == "admin/categories" ? "selected" : "normal" %></li>
 				<li><%= link_to "Oferty", admin_jobs_path, :class => params[:controller] == "admin/jobs" ? "selected" : "normal" %></li>

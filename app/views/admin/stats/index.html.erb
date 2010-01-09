@@ -1,0 +1,19 @@
+<div class="box">
+	<div>
+		<div class="title mini"><h3>Dodawane oferty</h3></div>
+		<table>
+			<thead>
+				<tr>
+					<th>Dzień</th>
+					<th>Oferty</th>
+				</tr>
+			</thead>
+			<% @job_stats.each do |date,count| %>
+			<tr class="<%= cycle('alt', 'normal') %>">
+				<td><%= l date, :format => :long %></td>
+				<td><%= count %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+</div>

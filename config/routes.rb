@@ -33,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
 	
 	map.namespace :admin do |admin|
+		admin.stats '/stats', :controller => "stats"
 		admin.config '/config', :controller => "configs", :action => "new"
 		admin.resources :pages
 		admin.resources :jobs
@@ -41,7 +42,7 @@ ActionController::Routing::Routes.draw do |map|
 		admin.resources :categories, :collection => { :reorder => :post }
 	end
 
-	map.admin '/admin', :controller => "admin/pages"
+	map.admin '/admin', :controller => "admin/stats"
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

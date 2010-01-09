@@ -126,7 +126,7 @@ pl:
         title: "Tytuł"
         place_id: "Lokalizacja"
         description: "Opis"
-        dlugosc_trwania: "Długość trwania"
+        availability_time: "Długość trwania"
         remote_job: "Praca zdalna"
         type_id: "Typ"
         category_id: "Kategoria"

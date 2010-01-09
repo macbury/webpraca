@@ -6,7 +6,7 @@
 	 <li class="<%= cycle('normal', 'alt') %>">
 		<span class="rank"><%= format_rank(job.rank) %></span>
 		<%= job_label(job) %>
-		  <%= link_to job.title, seo_job_path(job), :class => job.highlited? ? 'ranked' : nil %> dla <%= job_company(job) %> / <%= link_to job.localization.name, localization_path(job.localization) %>
+		  <%= link_to job.title, seo_job_path(job), :class => job.highlighted? ? 'ranked' : nil %> dla <%= job_company(job) %> / <%= link_to job.localization.name, localization_path(job.localization) %>
 		<abbr class="date" title="<%= job.created_at.xmlschema %>">
 		<%= distance_of_time_in_words_to_now job.created_at %> temu
 		</abbr>

@@ -22,7 +22,7 @@
 			<dt>Framework</dt>
 			<dd><%= link_to @job.framework.name, framework_path(@job.framework) %></dd>
 			<% end %>
-			<% if @job.widelki_zarobkowe? %>
+			<% if @job.pay_band? %>
 			<dt>Widełko zarobkowe</dt>
 			<dd>
 				<%= "od #{number_to_currency(@job.price_from)}" unless @job.price_from.nil? %> 
