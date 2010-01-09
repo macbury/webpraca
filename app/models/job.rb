@@ -144,7 +144,8 @@ class Job < ActiveRecord::Base
 		date = created_at.nil? ? Date.current.to_date : created_at.to_date
 		write_attribute(:end_at, date+val.to_i.days)
 	end
-	
+
+  # TODO: highlited - it's a typo, should be highlighted, I would change it as soon as possible	
 	def highlited?
 		self.rank >= 4.75
 	end
