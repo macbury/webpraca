@@ -14,6 +14,9 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic'
 	config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
 	config.gem 'highline', :lib => false
+	config.gem "factory_girl", :lib => false
+	config.gem "faker", :lib => false
+	config.gem 'rspec', :lib => false, :version => '>=1.2.9'
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

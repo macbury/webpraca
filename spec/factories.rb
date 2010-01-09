@@ -8,7 +8,13 @@ Factory.define :job do |f|
   f.company_name "Google"
   f.email "google@google.com"
   f.published true
-  f.end_at { DateTime.now + 1.month }
+	f.availability_time 14
+	f.price_from 3000
+	f.price_to 4000
+	f.website "http://google.com/jobs"
+	f.regon "141066449"
+	f.nip "701-00-87-331"
+	f.krs "0000287684"
 end
 
 Factory.define :category do |f|

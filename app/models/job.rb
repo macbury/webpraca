@@ -29,7 +29,7 @@ class Job < ActiveRecord::Base
 	validates_length_of :title, :within => 3..255
 	validates_length_of :description, :within => 10..5000
 	validates_inclusion_of :type_id, :in => 0..JOB_TYPES.size-1
-	validates_inclusion_of :dlugosc_trwania, :in => 1..60
+	validates_inclusion_of :availability_time, :in => 1..60
 	
 	validates_numericality_of :price_from, 
 			:greater_than => 0, 
@@ -92,7 +92,7 @@ class Job < ActiveRecord::Base
 			self.rank += inc unless (val.nil? || (val.class == String && val.empty?) || (val.class == TrueClass))
 		end
 		
-		if widelki_zarobkowe?
+		if pay_band?
 			self.rank += JOB_RANK_VALUES[:price]
 			
 			price = price_from || price_to
@@ -115,7 +115,7 @@ class Job < ActiveRecord::Base
 		end
 	end
 	
-	def widelki_zarobkowe?
+	def pay_band?
 		((!self.price_from.nil? && self.price_from > 0) || (!self.price_to.nil? && self.price_to > 0))
 	end
 	
@@ -135,18 +135,17 @@ class Job < ActiveRecord::Base
 		end
 	end
 	
-	def dlugosc_trwania
+	def availability_time
 		date = created_at.nil? ? Date.current.to_date : created_at.to_date
 		return (read_attribute(:end_at) - date).to_i rescue 14
 	end
 	
-	def dlugosc_trwania=(val)
+	def availability_time=(val)
 		date = created_at.nil? ? Date.current.to_date : created_at.to_date
 		write_attribute(:end_at, date+val.to_i.days)
 	end
-
-  # TODO: highlited - it's a typo, should be highlighted, I would change it as soon as possible	
-	def highlited?
+	
+	def highlighted?
 		self.rank >= 4.75
 	end
 	
