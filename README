@@ -4,3 +4,17 @@
 2. rake db:migrate
 3. rake db:seed
 4. rake webpraca:admin:create
+
+= Running test suite
+
+== Specs
+
+    rake gems:install RAILS_ENV=test
+    rake spec
+
+== Cucumber with capybara
+
+    rake gems:install RAILS_ENV=cucumber
+    rake db:test:prepare # only needed if test database does not exist
+    cucumber features/
+
