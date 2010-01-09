@@ -157,6 +157,7 @@ class Job < ActiveRecord::Base
 
 		tags = [localization.name, category.name, "praca", JOB_LABELS[self.type_id]]
 		tags << framework.name unless framework.nil?
+		tags << language.name unless language.nil?
 		
 		MicroFeed.send	:streams => :all,
 										:msg => "[#{company_name}] - #{title}",
