@@ -5,7 +5,7 @@ class JobsController < ApplicationController
 	ads_pos :none, :only => [:home]
 	
 	def widget
-		@jobs = Job.active.all(:order => "rank DESC, created_at DESC", :limit => 10, :include => [:category, :localization])
+		@jobs = Job.active.all(:order => "rank DESC, created_at DESC", :limit => 15, :include => [:category, :localization])
 		@options = {
 			:width => "270px",
 			:background => "#FFFFFF",
@@ -36,8 +36,8 @@ class JobsController < ApplicationController
 		
 		query = Job.active.search
 		
-		@recent_jobs = query.all(:order => "created_at DESC", :limit => 10, :include => [:localization, :category])
-		@top_jobs = query.all(:order => "rank DESC, created_at DESC", :limit => 10, :include => [:localization, :category])
+		@recent_jobs = query.all(:order => "created_at DESC", :limit => 15, :include => [:localization, :category])
+		@top_jobs = query.all(:order => "rank DESC, created_at DESC", :limit => 15, :include => [:localization, :category])
 	end
   # GET /jobs
   # GET /jobs.xml
@@ -45,7 +45,7 @@ class JobsController < ApplicationController
 		@query = Job.active.search
 		options = {
 								:page => params[:page], 
-								:per_page => 25,
+								:per_page => 35,
 								:order => "created_at DESC, rank DESC",
 								:include => [:localization, :category]
 							}

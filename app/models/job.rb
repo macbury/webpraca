@@ -10,9 +10,9 @@ JOB_RANK_VALUES = {
 										:nip => 0.5, 
 										:regon => 0.6, 
 										:framework_id => 0.7, 
-										:language_id => 0.5,
-										:website => 0.3,
-										:apply_online => 0.2
+										:language_id => 0.7,
+										:website => 0.4,
+										:apply_online => 0.3
 									}
 
 class Job < ActiveRecord::Base
