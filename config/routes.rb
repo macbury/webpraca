@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
 		job.job_category '/kategoria/:category'
 	end
 	
-	map.resources :jobs, :member => { :publish => :get, :destroy => :any }, :collection => { :search => :any } do |jobs|
+	map.resources :jobs, :member => { :publish => :get, :destroy => :any }, :collection => { :search => :any, :widget => :get } do |jobs|
 		jobs.resources :applicants, :member => { :download => :get }
 	end
 	

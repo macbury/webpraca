@@ -31,11 +31,6 @@ ActiveRecord::Schema.define(:version => 20100105185950) do
     t.datetime "updated_at"
   end
 
-  create_table "brain_busters", :force => true do |t|
-    t.string "question"
-    t.string "answer"
-  end
-
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.string   "permalink"
@@ -115,7 +110,6 @@ ActiveRecord::Schema.define(:version => 20100105185950) do
     t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "visits_count",      :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

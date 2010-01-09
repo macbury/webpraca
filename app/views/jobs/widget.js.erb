@@ -1,0 +1,42 @@
+var jobs = <%= @jobs_hash.to_json %>;
+
+(function(){
+	document.write(<%= tag(:div, :style => "
+		border:1px solid #{@options[:border]} !important;
+		background-color: #{@options[:background]} !important;
+		width: #{@options[:width]} !important;
+		padding:0px !important;
+		text-decoration:none !important;
+	", :class => "webpraca_job_board").inspect.gsub('\n', '').gsub('\t', '') %>);
+	
+	document.write(<%= tag(:ul, :style => "
+		margin: 0px !important;
+		margin-top: 0px !important;
+		padding:0px 5px !important;
+		text-indent:0px !important;
+	").inspect.gsub('\n', '').gsub('\t', '') %>);
+	for (var i=0; i < jobs.length; i++) {
+		var job = jobs[i];
+		document.write(<%= tag(:li, :style => "
+			margin:0px !important;
+			padding:0px !important; 
+			text-indent:0px !important;
+			font-family:Arial,Helvetica !important;
+			list-style-type:none !important;
+			line-height:15px !important;
+		").inspect.gsub('\n', '').gsub('\t', '') %>);
+		
+		document.write(<%= tag(:a, :style => "
+			margin:0px !important;
+			padding:0px !important; 
+			text-indent:0px !important;
+			font-family:Arial,Helvetica !important;
+			list-style-type:none !important;
+			line-height:15px !important;
+		").inspect.gsub('\n', '').gsub('\t', '') %>);
+		
+		document.write('</a></li>') 
+	};
+ 
+	document.write('</ul></div>') 
+})();

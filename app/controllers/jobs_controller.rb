@@ -4,6 +4,32 @@ class JobsController < ApplicationController
 	ads_pos :right, :except => [:home, :index, :search]
 	ads_pos :none, :only => [:home]
 	
+	def widget
+		@jobs = Job.active.all(:order => "rank DESC, created_at DESC", :limit => 10, :include => [:category, :localization])
+		@options = {
+			:width => "270px",
+			:background => "#FFFFFF",
+			:border => "#CCCCCC",
+			
+		}.merge!(params)
+		
+		@jobs_hash = @jobs.map do |job|
+			{
+				:title => job.title,
+				:id => job.id,
+				:type => JOB_LABELS[job.type_id],
+				:category => job.category.name,
+				:company => job.company_name,
+				:localization => job.localization.name,
+				:url => seo_job_url(job)
+			}
+		end
+		
+		respond_to do |format|
+			format.js
+		end
+	end
+	
 	def home
 		@page_title = ['najpopularniejsze oferty', 'najnowsze oferty']
 		
