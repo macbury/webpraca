@@ -53,3 +53,5 @@ Cucumber::Rails::World.use_transactional_fixtures = true
 require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
+require 'factory_girl/step_definitions'
+
