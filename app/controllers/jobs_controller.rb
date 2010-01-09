@@ -31,7 +31,8 @@ class JobsController < ApplicationController
 	end
 	
 	def home
-		@page_title = ['najpopularniejsze oferty', 'najnowsze oferty']
+		set_meta_tags :title =>  'najpopularniejsze i najnowsze oferty pracy z IT',
+									:separator => " - "
 		
 		query = Job.active.search
 		
@@ -50,37 +51,37 @@ class JobsController < ApplicationController
 							}
 		
 		if params[:order] =~ /najpopularniejsze/i
-			@page_title = ['Najpopularniejsze oferty pracy']
+			@page_title = ['najpopularniejsze oferty pracy IT']
 			@order = :rank
 			options[:order] = "rank DESC, created_at DESC"
 		else
 			@order = :created_at
-			@page_title = ['Najnowsze oferty pracy']
+			@page_title = ['najnowsze oferty pracy IT']
 			options[:order] = "created_at DESC, rank DESC"
 		end
 		
 		if params[:category]
 			@category = Category.find_by_permalink!(params[:category])
-			@page_title << @category.name
+			@page_title << @category.name.downcase
 			@query.category_id_is(@category.id)
 		end
 		
 		if params[:localization]
 			@localization = Localization.find_by_permalink!(params[:localization])
-			@page_title << @localization.name
+			@page_title << @localization.name.downcase
 			@query.localization_id_is(@localization.id)
 		end
 		
 		if params[:framework]
 			@framework = Framework.find_by_permalink!(params[:framework])
-			@page_title << @framework.name
+			@page_title << @framework.name.downcase
 			options[:include] << :framework
 			@query.framework_id_is(@framework.id)
 		end
 		
 		if params[:type_id]
 			@type_id = JOB_LABELS.index(params[:type_id]) || 0
-			@page_title << JOB_LABELS[@type_id]
+			@page_title << JOB_LABELS[@type_id].downcase
 			@query.type_id_is(@type_id)
 		end
 		
@@ -121,7 +122,10 @@ class JobsController < ApplicationController
 		@tags << @job.framework.name unless @job.framework.nil?
 		@tags << JOB_LABELS[@job.type_id]
 		
-		set_meta_tags :keywords => @tags.join(', ')
+		
+		set_meta_tags :keywords => @tags.join(', '),
+									:title => ["oferta pracy IT", @job.category.name.downcase, @job.localization.name.downcase, @job.company_name.downcase, @job.title.downcase],
+									:separator => " - "
 		
     respond_to do |format|
       format.html # show.html.erb
