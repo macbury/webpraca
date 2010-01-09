@@ -154,16 +154,17 @@ class Job < ActiveRecord::Base
 	def publish!
 		self.published = true
 		save
-
-		tags = [localization.name, category.name, "praca", JOB_LABELS[self.type_id]]
-		tags << framework.name unless framework.nil?
-		tags << language.name unless language.nil?
 		
-		MicroFeed.send	:streams => :all,
-										:msg => "[#{company_name}] - #{title}",
-										:tags => tags,
-										:link => seo_job_url(self, :host => "webpraca.net") if Rails.env == "production"
-
+		spawn do
+			tags = [localization.name, category.name, "praca", JOB_LABELS[self.type_id]]
+			tags << framework.name unless framework.nil?
+			tags << language.name unless language.nil?
+		
+			MicroFeed.send	:streams => :all,
+											:msg => "[#{company_name}] - #{title}",
+											:tags => tags,
+											:link => seo_job_url(self, :host => "webpraca.net") if Rails.env == "production"
+		end
 	end
 	
 	def visited_by(ip)
