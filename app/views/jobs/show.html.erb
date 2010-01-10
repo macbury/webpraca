@@ -84,5 +84,5 @@
 		<% end %>
 		</p>
 	</div>
-	<%= link_to 'Aplikuj online!', new_job_applicant_path(@job), :class => "more" if @job.apply_online %>
+	<%= link_to 'Aplikuj online!', new_job_applicant_path(@job), :class => "more", :rel => "nofollow" if @job.apply_online %>
 </div>

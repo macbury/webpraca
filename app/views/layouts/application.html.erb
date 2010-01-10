@@ -50,7 +50,7 @@
 		
 		<div class="sidebar">
 			<div class="box">
-				<%= link_to "Dodaj ofertę za DARMO!", new_job_path, :id => "add_job", :class => "more" %>
+				<%= link_to "Dodaj ofertę za DARMO!", new_job_path, :id => "add_job", :class => "more", :rel => "nofollow" %>
 			</div>
 			<%= yield :sidebar %>
 			<% if @ads_pos == :right %>
