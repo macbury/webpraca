@@ -85,9 +85,10 @@ class Job < ActiveRecord::Base
 	def calculate_rank
 		self.rank = 1.0
 		
-		self.rank += visits_count * 0.01 unless visits_count.nil?
+		self.rank += visits_count * 0.001 unless visits_count.nil?
+		self.rank += applicants_count * 0.01 unless applicants_count.nil?
 		
-		[:regon, :nip, :krs, :framework_id, :website, :apply_online].each do |attribute|
+		[:regon, :nip, :krs, :framework_id, :website, :apply_online, :language_id].each do |attribute|
 			val = send(attribute)
 
 			inc = JOB_RANK_VALUES[attribute] || JOB_RANK_VALUES[:default]

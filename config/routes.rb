@@ -29,7 +29,8 @@ ActionController::Routing::Routes.draw do |map|
 		jobs.resources :applicants, :member => { :download => :get }
 	end
 	
-  map.resources :user_sessions
+  map.resource :widget
+	map.resources :user_sessions
 	
   map.login '/login', :controller => 'user_sessions', :action => 'new'
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
