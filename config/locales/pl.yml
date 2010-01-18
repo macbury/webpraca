@@ -2,6 +2,53 @@
 # by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
 
 pl:
+  formtastic:
+    labels:
+      websiteconfig:
+        groups:
+          website: "Strona WWW"
+          js: "Skrypty"
+        js:
+          google_analytics: "Google Analytics"
+          widget: "Reklama"
+        website:
+          name: "Nazwa"
+          tags: "Słowa kluczowe"
+          description: "Opis"
+      applicant:
+        email: "Twój E-Mail"
+        body: "Treść"
+        cv: "Dodaj ofertę/CV"
+      job:
+        title: "Tytuł"
+        place_id: "Lokalizacja"
+        description: "Opis"
+        availability_time: "Długość trwania"
+        remote_job: "Praca zdalna"
+        type_id: "Typ"
+        category_id: "Kategoria"
+        company_name: "Nazwa"
+        website: "Strona WWW"
+        framework_name: "Framework"
+        localization_id: "Lokalizacja"
+        apply_online: "Aplikuj online"
+        email_title: "Tytuł emaila"
+        language: "Język"
+        pay_band: "Widełki zarobkowe"
+        pay_band_detail: "PLN na miesiąc, netto"
+        captcha: 'Kod z obrazka*'
+      user:
+        password: "Hasło"
+        password_confirmation: "Powtórz hasło"
+    hints:
+      job:
+        availability_time: "ile dni oferta ma być ważna(od 1 do 60 dni)"
+        localization_id: "np. 'Warszawa', 'Kraków, UK'"
+        framework_id: "główny framework którego znajomość jest wymagana, podaj pełną nazwę"
+        apply_online: "uaktywnia formularz umożliwiający przesyłanie aplikacji online w ofercie"
+        email_title: "np. Młodszy programista, Ruby Developer/18/12/71 itp"
+        email: "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie(zamiast niego będzie dostępny formularz kontaktowy)."
+        website: "zaczynający się od http://"
   flash:
     notice:
       email_verification: "Na twój e-mail został wysłany link którym opublikujesz ofertę."
@@ -15,6 +62,21 @@ pl:
     finded_jobs: "Znalezione oferty"
     jobs: "Oferty pracy IT"
   jobs:
+    form:
+      new: 
+        title: "Nowa oferta"
+        submit: "Zgadzam się z regulaminem i chcę dodać ofertę"
+        cancel: "anuluj"
+      edit: 
+        title: "Edytuj ofertę"
+        submit: "Zapisz zmiany"
+        destroy: "usuń"
+        destroy_confirm: "Czy na pewno chcesz usunąć ofertę?"
+      fieldset:
+        job_details: "Szczegóły oferty pracy"
+        apply_online: "Aplikuj online"
+        company_details: "Firma zatrudniająca lub osoba zlecająca"
+        human_test: "Czy jesteś człowiekiem"
     type:
       full_time: "etat"
       freelance: "zlecenie"
@@ -153,39 +215,6 @@ pl:
           captcha_solution:
             blank: 'musi być podane'
             invalid: 'odpowiedź jest niepoprawna'
-    attributes:
-      websiteconfig:
-        groups:
-          website: "Strona WWW"
-          js: "Skrypty"
-        js:
-          google_analytics: "Google Analytics"
-          widget: "Reklama"
-        website:
-          name: "Nazwa"
-          tags: "Słowa kluczowe"
-          description: "Opis"
-      applicant:
-        email: "Twój E-Mail"
-        body: "Treść"
-        cv: "Dodaj ofertę/CV"
-      job:
-        title: "Tytuł"
-        place_id: "Lokalizacja"
-        description: "Opis"
-        availability_time: "Długość trwania"
-        remote_job: "Praca zdalna"
-        type_id: "Typ"
-        category_id: "Kategoria"
-        company_name: "Nazwa"
-        website: "Strona WWW"
-        framework_name: "Framework"
-        apply_online: "Aplikuj online"
-        email_title: "Tytuł emaila"
-        language: "Język"
-      user:
-        password: "Hasło"
-        password_confirmation: "Powtórz hasło"
     errors:
       template:
         header:
@@ -223,3 +252,4 @@ pl:
       last_word_connector: " oraz "
       for_word_connector: " dla "
       in_word_connector: " w "
+      or_word_connector: " albo "
