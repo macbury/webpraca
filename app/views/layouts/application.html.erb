@@ -20,10 +20,10 @@
 			<h1 id="logo"><%= link_to WebSiteConfig['website']['name'], root_path %></h1>
 			<ul class="categories">
 				<li class="right">
-					<%= link_to "Najpopularniejsze", seo_jobs_path(:order => 'najpopularniejsze',  :category => params[:category]), :class => (!@order.nil? && @order == :rank) ? "selected" : "normal"  %>
+					<%= link_to t('layout.popular'), seo_jobs_path(:order => 'najpopularniejsze',  :category => params[:category]), :class => (!@order.nil? && @order == :rank) ? "selected" : "normal"  %>
 				</li>
 				<li class="right">
-					<%= link_to "Najnowsze", seo_jobs_path(:order => 'najnowsze',  :category => params[:category] ), :class => (!@order.nil? && @order == :created_at) ? "selected" : "normal"  %>
+					<%= link_to t('layout.latest'), seo_jobs_path(:order => 'najnowsze',  :category => params[:category] ), :class => (!@order.nil? && @order == :created_at) ? "selected" : "normal"  %>
 				</li>
 				<% for category in Category.all(:order => "position") %>
 					<li>
@@ -32,13 +32,12 @@
 				<% end %>
 			</ul>
 			<ul class="menu">
-				<li><%= link_to "Strona główna", root_path %></li>
-				<li><%= link_to "Szukaj", search_jobs_path %></li>
-				<li><%= link_to "Informacje", "/strona/informacje/" %></li>
-				<li><%= link_to "Regulamin", "/strona/regulamin/" %></li>
-				<li><%= link_to "Obserwuj nas", "/strona/obserwuj-nas" %></li>
-				<li><%= link_to "Kontakt", contact_path %></li>
-				<li><%= link_to "Gadżet na stronę", new_widget_path %></li>
+				<li><%= link_to t('layout.menu.main'), root_path %></li>
+				<li><%= link_to t('layout.menu.search'), search_jobs_path %></li>
+				<li><%= link_to t('layout.menu.about'), "/strona/informacje/" %></li>
+				<li><%= link_to t('layout.menu.terms'), "/strona/regulamin/" %></li>
+				<li><%= link_to t('layout.menu.follow'), "/strona/obserwuj-nas" %></li>
+				<li><%= link_to t('layout.menu.contact'), contact_path %></li>
 			</ul>
 		</div>
 		
@@ -51,7 +50,7 @@
 		
 		<div class="sidebar">
 			<div class="box">
-				<%= link_to "Dodaj ofertę za DARMO!", new_job_path, :id => "add_job", :class => "more", :rel => "nofollow" %>
+				<%= link_to t('layout.sidebar.post_job'), new_job_path, :id => "add_job", :class => "more", :rel => "nofollow" %>
 			</div>
 			<%= yield :sidebar %>
 			<% if @ads_pos == :right %>

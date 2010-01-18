@@ -1,6 +1,4 @@
-JOB_TYPES = ["zlecenie (konkretna usługa do wykonania)", "poszukiwanie współpracowników / oferta pracy", "wolontariat (praca za reklamy, bannery, itp. lub praca za darmo)", "staż/praktyka"]
-JOB_LABELS = ["zlecenie", "etat", "wolontariat", "praktyka"]
-
+JOB_TYPES = ["freelance", "full_time", "free", "practice"]
 JOB_ETAT = 1;
 
 JOB_RANK_VALUES = { 
@@ -157,7 +155,7 @@ class Job < ActiveRecord::Base
 		save
 		
 		spawn do
-			tags = [localization.name, category.name, "praca", JOB_LABELS[self.type_id]]
+			tags = [localization.name, category.name, "praca", JOB_TYPE[self.type_id]]
 			tags << framework.name unless framework.nil?
 			tags << language.name unless language.nil?
 		

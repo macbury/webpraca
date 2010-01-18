@@ -5,7 +5,7 @@ class JobsController < ApplicationController
 	ads_pos :none, :only => [:home]
 
 	def home
-		set_meta_tags :title =>  'najpopularniejsze i najnowsze oferty pracy z IT',
+		set_meta_tags :title => t('home.title'),
 									:separator => " - "
 		
 		query = Job.active.search
@@ -25,12 +25,12 @@ class JobsController < ApplicationController
 							}
 		
 		if params[:order] =~ /najpopularniejsze/i
-			@page_title = ['najpopularniejsze oferty pracy IT']
+			@page_title = [t('title.popular')]
 			@order = :rank
 			options[:order] = "rank DESC, created_at DESC"
 		else
 			@order = :created_at
-			@page_title = ['najnowsze oferty pracy IT']
+			@page_title = [t('title.latest')]
 			options[:order] = "created_at DESC, rank DESC"
 		end
 		
@@ -60,8 +60,8 @@ class JobsController < ApplicationController
 		end
 		
 		if params[:type_id]
-			@type_id = JOB_LABELS.index(params[:type_id]) || 0
-			@page_title << JOB_LABELS[@type_id].downcase
+			@type_id = JOB_TYPES.index(params[:type_id]) || 0
+			@page_title << JOB_TYPES[@type_id].downcase
 			@query.type_id_is(@type_id)
 		end
 		
@@ -75,11 +75,11 @@ class JobsController < ApplicationController
   end
 	
 	def search
-		@page_title = ["Szukaj oferty"]
+		@page_title = [t('title.search')]
 		
 		@search = Job.active.search(params[:search])
 		if params[:search]
-			@page_title = ["Znalezione oferty"]
+			@page_title = [t('title.finded_jobs')]
 			@jobs = @search.paginate( :page => params[:page],
 																:per_page => 30,
 													 			:order => "created_at DESC, rank DESC" )
@@ -98,10 +98,10 @@ class JobsController < ApplicationController
 		@job.visited_by(request.remote_ip)
 		@category = @job.category
 		
-		@page_title = ["oferta pracy IT", @job.category.name.downcase, @job.localization.name.downcase, @job.company_name.downcase, @job.title.downcase]
+		@page_title = [t('title.jobs'), @job.category.name.downcase, @job.localization.name.downcase, @job.company_name.downcase, @job.title.downcase]
 		
 		@tags = WebSiteConfig['website']['tags'].split(',').map(&:strip) + [@job.category.name, @job.localization.name, @job.company_name]
-		@tags << JOB_LABELS[@job.type_id]
+		@tags << JOB_TYPES[@job.type_id]
 		
 		unless @job.framework.nil?
 			@tags << @job.framework.name 
@@ -138,7 +138,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-        flash[:notice] = 'Na twój e-mail został wysłany link którym opublikujesz ofertę.'
+        flash[:notice] = t('flash.notice.email_verification')
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
@@ -161,7 +161,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.update_attributes(params[:job])
-        flash[:notice] = 'Zapisano zmiany w ofercie.'
+        flash[:notice] = t('flash.notice.job_updated')
         format.html { redirect_to(@job) }
         format.xml  { head :ok }
       else
@@ -175,7 +175,7 @@ class JobsController < ApplicationController
 		@job = Job.find_by_permalink_and_token!(params[:id], params[:token])
 		unless @job.published
 			@job.publish!
-			flash[:notice] = "Twoja oferta jest już widoczna!"
+			flash[:notice] = t('flash.notice.job_published')
 		end
 
 		redirect_to @job
@@ -186,7 +186,7 @@ class JobsController < ApplicationController
   def destroy
     @job = Job.find_by_permalink_and_token!(params[:id], params[:token])
     @job.destroy
-		flash[:notice] = "Oferta została usunięta"
+		flash[:notice] = t('flash.notice.job_deleted')
     respond_to do |format|
       format.html { redirect_to(jobs_url) }
       format.xml  { head :ok }

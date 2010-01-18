@@ -13,7 +13,7 @@ class WidgetsController < ApplicationController
 			{
 				:title => "#{job.title} dla #{job.company_name} w #{job.localization.name}",
 				:id => job.id,
-				:type => JOB_LABELS[job.type_id],
+				:type => JOB_TYPES[job.type_id],
 				:url => seo_job_url(job)
 			}
 		end

@@ -26,18 +26,18 @@ module ApplicationHelper
 		content_tag :p, errors.class == Array ? errors.join(', ') : errors, :class => 'inline-errors' unless errors.nil?
 	end
 	
-	def title_from_params(default="oferty pracy")
+	def title_from_params(default)
 		if default.class == Array
 			default = default.first
 		end
 		if @localization
-			title = ["#{default} w ", @localization.name]
+			title = ["#{default} #{t('support.array.in_word_connector')} ", @localization.name]
 		elsif @framework
-			title = ["#{default} dla ", @framework.name]
+			title = ["#{default} #{t('support.array.for_word_connector')} ", @framework.name]
 		elsif @type_id
-			title = ["#{default} dla ", JOB_LABELS[@type_id]]
+			title = ["#{default} #{t('support.array.for_word_connector')} ", t("jobs.type.#{JOB_TYPES[@type_id]}")]
 		elsif @category
-			title = ["#{default} w ", @category.name]
+			title = ["#{default} #{t('support.array.in_word_connector')} ", @category.name]
 		else
 			title = default.split(' ')
 			first = title.first
@@ -47,7 +47,7 @@ module ApplicationHelper
 		return [first,title]
 	end
 	
-	def render_title_from_params(default="ofery pracy")
+	def render_title_from_params(default)
 		title = title_from_params(default)
 		
 		return content_tag(:span, title[0]) + ' ' + title[1].join(' ')

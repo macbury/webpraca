@@ -2,6 +2,52 @@
 # by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
 
 pl:
+  flash:
+    notice:
+      email_verification: "Na twój e-mail został wysłany link którym opublikujesz ofertę."
+      job_updated: "Zapisano zmiany w ofercie."
+      job_published: "Twoja oferta jest już widoczna!"
+      job_deleted: "Oferta została usunięta"
+  title:
+    popular: "najpopularniejsze oferty pracy IT"
+    latest: "najnowsze oferty pracy IT"
+    search: "Szukaj oferty"
+    finded_jobs: "Znalezione oferty"
+    jobs: "Oferty pracy IT"
+  jobs:
+    type:
+      full_time: "etat"
+      freelance: "zlecenie"
+      free: "wolontariat"
+      practice: "praktyka"
+      remote: "praca zdalna"
+    type_long:
+      full_time: "poszukiwanie współpracowników / oferta pracy"
+      freelance: "zlecenie (konkretna usługa do wykonania)"
+      free: "wolontariat (praca za reklamy, bannery, itp. lub praca za darmo)"
+      practice: "staż/praktyka"
+  layout:
+    popular: "Najpopularniejsze"
+    latest: "Najnowsze"
+    menu:
+      main: "Strona główna"
+      search: "Szukaj"
+      about: "O serwisie"
+      terms: "Regulamin"
+      follow: "Obserwuj nas"
+      contact: "Kontakt"
+    sidebar:
+      post_job: "Dodaj ofertę za DARMO!"
+      type: "typ"
+      localization: "lokalizacje"
+      language: "język"
+      frameworks: "framework"
+  home:
+    title: "najpopularniejsze i najnowsze oferty pracy z IT"
+    popular: "Najpopularniejsze"
+    latest: "Najnowsze"
+    jobs: "oferty"
+    more_jobs: "pokaż więcej ofert"
   number:
     format:
       separator: ","
@@ -57,6 +103,7 @@ pl:
 
   datetime:
     distance_in_words:
+      ago: "temu"
       half_a_minute: "pół minuty"
       less_than_x_seconds:
         one:   "mniej niż sekundę"
@@ -174,3 +221,5 @@ pl:
       words_connector: ", "
       two_words_connector: " i "
       last_word_connector: " oraz "
+      for_word_connector: " dla "
+      in_word_connector: " w "
