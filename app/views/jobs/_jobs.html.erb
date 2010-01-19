@@ -1,5 +1,5 @@
 <% if jobs.nil? || jobs.empty? %>
-	<p class="info">Brak ofert</p>
+	<p class="info"><%= t('jobs.empty') %></p>
 <% else %>
 	<ul class="list">
 	<% jobs.each do |job| %>

@@ -2,6 +2,13 @@
 # by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
 
 pl:
+  mailer:
+    job_posted:
+      greetings: "Witaj"
+      publish: "Aby opublikować swoją ofertę kliknij na link poniżej"
+      path_to_job: "Twoja oferta została dodana i znajduje się poda adresem:"
+      path_to_edit_job: "Jeżeli chcesz wprowadzić zmiany w ofercie kliknij na link poniżej"
+      path_to_destroy_job: "Aby usunąć ofertę kliknij na poniższy link"
   formtastic:
     labels:
       websiteconfig:
@@ -62,6 +69,22 @@ pl:
     finded_jobs: "Znalezione oferty"
     jobs: "Oferty pracy IT"
   jobs:
+    empty: "Brak ofert"
+    show:
+      type: "Typ"
+      category: "Kategoria"
+      rank: "Ocena"
+      employer: "Pracodawca"
+      localization: "Localization"
+      framework: "Framework"
+      language: "Język"
+      pay_band: "Widełko zarobkowe"
+      contact: "Kontakt"
+      published_at: "Data rozpoczęcia"
+      end_at: "Data zakończenia"
+      visited: "Wyświetlona"
+      description: "Opis oferty"
+      apply_online: "Aplikuj online!"
     form:
       new: 
         title: "Nowa oferta"

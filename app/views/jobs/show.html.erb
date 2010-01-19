@@ -8,26 +8,26 @@
 		</div>
 
 		<dl>
-			<dt>Typ</dt>
+			<dt><%= t('jobs.show.type') %></dt>
 			<dd><%= job_label(@job) %></dd>
-			<dt>Kategoria</dt>
+			<dt><%= t('jobs.show.category') %></dt>
 			<dd><%= link_to @job.category.name, job_category_path(@job.category) %></dd>
-			<dt>Ocena</dt>
+			<dt><%= t('jobs.show.rank') %></dt>
 			<dd><%= format_rank(@job.rank) %></dd>
-			<dt>Pracodawca</dt>
+			<dt><%= t('jobs.show.employer') %></dt>
 			<dd><%= link_to @job.company_name, @job.website, :target => "_blank" %></dd>
-			<dt>Lokalizacja</dt>
+			<dt><%= t('jobs.show.localization') %></dt>
 			<dd><%= link_to @job.localization.name, localization_path(@job.localization) %></dd>
 			<% unless @job.framework.nil? %>
-			<dt>Framework</dt>
+			<dt><%= t('jobs.show.framework') %></dt>
 			<dd><%= link_to @job.framework.name, framework_path(@job.framework) %></dd>
 			<% end %>
 			<% unless @job.language.nil? %>
-			<dt>Język</dt>
+			<dt><%= t('jobs.show.language') %></dt>
 			<dd><%= link_to @job.language.name, language_path(@job.language) %></dd>
 			<% end %>
 			<% if @job.pay_band? %>
-			<dt>Widełko zarobkowe</dt>
+			<dt><%= t('jobs.show.pay_band') %></dt>
 			<dd>
 				<%= "od #{number_to_currency(@job.price_from)}" unless @job.price_from.nil? %> 
 				<%= "do #{number_to_currency(@job.price_to)}" unless @job.price_to.nil? %> na miesiąc, netto
@@ -35,7 +35,7 @@
 			<% end %>
 			
 			<% unless @job.apply_online %>
-			<dt>Kontakt</dt>
+			<dt><%= t('jobs.show.contact') %></dt>
 			<dd><%= link_to "Formularz kontaktowy", contact_path(:job_id => @job.id) %></dd>
 			<% end %>
 			<% unless (@job.regon.nil? || @job.regon.empty?) %>
@@ -51,19 +51,19 @@
 			<dd><%= link_to @job.krs, "http://krs.ms.gov.pl/Podmiot.aspx?nrkrs=#{@job.krs}", :target => "_blank" %>&nbsp;</dd>
 			<% end %>
 			
-			<dt>Data rozpoczęcia</dt>
+			<dt><%= t('jobs.show.published_at') %></dt>
 			<dd>
 				<%= l @job.created_at, :format => :long %>
 				<br />
-				<abbr title="<%= @job.created_at.xmlschema %>"><%= distance_of_time_in_words_to_now @job.created_at %> temu</abbr>
+				<abbr title="<%= @job.created_at.xmlschema %>"><%= distance_of_time_in_words_to_now @job.created_at %> <%= t('datetime.distance_in_words.ago') %></abbr>
 			</dd>
-			<dt>Data zakończenia</dt>
+			<dt><%= t('jobs.show.end_at') %></dt>
 			<dd>
 				<%= l @job.end_at, :format => :long %>
 				<br />
 				za <abbr title="<%= @job.end_at.xmlschema %>"><%= distance_of_time_in_words_to_now(@job.end_at) %></abbr>
 			</dd>
-			<dt>Wyświetlona</dt>
+			<dt><%= t('jobs.show.visited') %></dt>
 			<dd><%= @job.visits_count %> razy</dd>
 		</dl>
 
@@ -72,17 +72,11 @@
 	
 	<div>
 		<div class="title mini">
-			<h3>Opis oferty</h3>
+			<h3><%= t('jobs.show.description') %></h3>
 		</div>
 		<div class="text">
 			<%= RedCloth.new(highlight(@job.description, @tags, :highlighter => '<i>\1</i>')).to_html %>
 		</div>
-		<p>
-		<% if permitted_to? :edit, @job %>
-			<%= link_to 'Edytuj', edit_job_path(@job) %> |
-			<%= link_to 'Wstecz', jobs_path %>
-		<% end %>
-		</p>
 	</div>
-	<%= link_to 'Aplikuj online!', new_job_applicant_path(@job), :class => "more", :rel => "nofollow" if @job.apply_online %>
+	<%= link_to t('jobs.show.apply_online'), new_job_applicant_path(@job), :class => "more", :rel => "nofollow" if @job.apply_online %>
 </div>
