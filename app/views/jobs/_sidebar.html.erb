@@ -6,6 +6,7 @@
 			<li class="<%= cycle('normal', 'alt') %>">
 				<span class="badge"><%= jobs_count %></span>
 				<%= link_to t("jobs.type.#{JOB_TYPES[type_id]}"), job_type_path(JOB_TYPES[type_id]) , :class => "etykieta #{JOB_TYPES[type_id]}"%>
+				<span class="clear"></span>
 			</li>
 			<% end %>
 		</ul>

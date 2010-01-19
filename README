@@ -1,4 +1,12 @@
-=	Instalacja
+= Configuration
+
+1. database info (config/database.yml)
+2. email for exception notificator(config/exception_notifier.yml)
+3. email configuration for mailer(config/mailer.yml)
+4. configuration for streams (config/micro_feed.yml)
+5. timezone and language(English or Polish) in config/environment.rb
+
+=	Instalation
 
 1. rake db:create
 2. rake db:migrate

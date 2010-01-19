@@ -3,26 +3,26 @@ ActionController::Routing::Routes.draw do |map|
 	map.new_contact '/contact/new', :controller => 'contact', :action => 'new', :conditions => { :method => :get }
   map.contact '/contact', :controller => 'contact', :action => 'new', :conditions => { :method => :get }
   map.contact '/contact', :controller => 'contact', :action => 'create', :conditions => { :method => :post }
-	map.seo_page '/strona/:id/', :controller => 'admin/pages', :action => 'show'
+	map.seo_page '/page/:id/', :controller => 'admin/pages', :action => 'show'
 
 	map.with_options :controller => 'jobs', :action => 'index' do |job| 
-		job.with_options :category => nil, :page => 1, :order => "najnowsze", :requirements => { :order => /(najnowsze|najpopularniejsze)/, :page => /\d/ } do |seo|
-			seo.connect '/oferty/:page'
-			seo.connect '/oferty/:order'
-			seo.connect '/oferty/:order/:page'
-			seo.seo_jobs '/oferty/:order/:category/:page'
+		job.with_options :category => nil, :page => 1, :order => "latest", :requirements => { :order => /(latest|popular)/, :page => /\d/ } do |seo|
+			seo.connect '/jobs/:page'
+			seo.connect '/jobs/:order'
+			seo.connect '/jobs/:order/:page'
+			seo.seo_jobs '/jobs/:order/:category/:page'
 		end
 		
-		job.connect '/lokalizacja/:localization/:page'
-		job.localization '/lokalizacja/:localization'
+		job.connect '/localization/:localization/:page'
+		job.localization '/localization/:localization'
 		job.connect '/framework/:framework/:page'
 		job.framework '/framework/:framework'
-		job.connect '/jezyk/:language/:page'
-		job.language '/jezyk/:language'
-		job.connect '/typ/:type_id/:page'
-		job.job_type '/typ/:type_id'
-		job.connect '/kategoria/:category/:page'
-		job.job_category '/kategoria/:category'
+		job.connect '/language/:language/:page'
+		job.language '/language/:language'
+		job.connect '/type/:type_id/:page'
+		job.job_type '/type/:type_id'
+		job.connect '/category/:category/:page'
+		job.job_category '/category/:category'
 	end
 	
 	map.resources :jobs, :member => { :publish => :get, :destroy => :any }, :collection => { :search => :any, :widget => :get } do |jobs|

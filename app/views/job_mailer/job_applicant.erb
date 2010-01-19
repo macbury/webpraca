@@ -1,13 +1,12 @@
-Witaj <%= @job.company_name %>!,
+<%= t('mailer.job_posted.greetings') %> <%= @job.company_name %>!,
 
-Pojawiła się osoba zainteresowana twoją ofertą: 
+<%= t('mailer.job_applicant.body') %>
 <%= @job_path %>
 
 -----------------------------------------------------------------------------------
 E-Mail: <%= @applicant.email %>
-Treść:
 <%= @applicant.body %>
 -----------------------------------------------------------------------------------
 <%- if @applicant.have_attachment? -%>
-Załącznik: <%= @attachment_path %>
+<%= t('mailer.job_applicant.attachment') %>: <%= @attachment_path %>
 <%- end -%>

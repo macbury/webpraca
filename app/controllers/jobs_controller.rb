@@ -24,7 +24,7 @@ class JobsController < ApplicationController
 								:include => [:localization, :category]
 							}
 		
-		if params[:order] =~ /najpopularniejsze/i
+		if params[:order] =~ /popular/i
 			@page_title = [t('title.popular')]
 			@order = :rank
 			options[:order] = "rank DESC, created_at DESC"

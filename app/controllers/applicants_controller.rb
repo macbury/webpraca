@@ -6,7 +6,7 @@ class ApplicantsController < ApplicationController
   def create
     @applicant = @job.applicants.new(params[:applicant])
     if @applicant.save
-      flash[:notice] = "Twoja aplikacja została wysłana"
+      flash[:notice] = t('flash.notice.application_sended')
       redirect_to seo_job_path(@job)
     else
       render :action => 'new'
@@ -31,6 +31,6 @@ class ApplicantsController < ApplicationController
 			@job = Job.active.find_by_permalink!(params[:job_id])
 			redirect_to seo_job_path(@job) unless @job.apply_online
 			
-			@page_title = [@job.title, "Aplikuj online"]
+			@page_title = [@job.title, t('applicant.title')]
 		end
 end

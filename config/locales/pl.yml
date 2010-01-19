@@ -2,7 +2,24 @@
 # by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
 
 pl:
+  500:
+    title: "Coś poszło nie tak... Aplikacja trafiła na nieobsługiwany wyjątek."
+  404:
+    title: "Nie znaleziono strony!"
+  applicant:
+    title: "Aplikuj online"
+    fieldset: "Treść aplikacji"
+  contact:
+    title: "Kontakt"
+    description: "Będziemy wdzięczni za wszelkie uwagi dotyczące funkcjonowania serwisu."
+    recipient: "Od"
+    subject: "Temat"
+    body: "Treść"
+    submit: "Wyślij!"
   mailer:
+    job_applicant:
+      body: "Pojawiła się osoba zainteresowana twoją ofertą: "
+      attachment: "Załącznik"
     job_posted:
       greetings: "Witaj"
       publish: "Aby opublikować swoją ofertę kliknij na link poniżej"
@@ -11,6 +28,15 @@ pl:
       path_to_destroy_job: "Aby usunąć ofertę kliknij na poniższy link"
   formtastic:
     labels:
+      search:
+        fieldset: "Wyszukiwarka"
+        categories: "Kategorie"
+        has_text: "Zawierający tekst"
+        type: "Typ"
+        localizations: "Lokalizacja"
+        frameworks: "Używane frameworki"
+        pay_band: "Widełki zarobkowe"
+        submit: "Szukaj!"
       websiteconfig:
         groups:
           website: "Strona WWW"
@@ -48,6 +74,9 @@ pl:
         password: "Hasło"
         password_confirmation: "Powtórz hasło"
     hints:
+      applicant:
+        body: "wiadomość lub list motywacyjny"
+        cv: "Max. 5 MB. Rekomendowane formaty: PDF, DOC, TXT, RTF, ZIP, RAR."
       job:
         availability_time: "ile dni oferta ma być ważna(od 1 do 60 dni)"
         localization_id: "np. 'Warszawa', 'Kraków, UK'"
@@ -57,17 +86,22 @@ pl:
         email: "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie(zamiast niego będzie dostępny formularz kontaktowy)."
         website: "zaczynający się od http://"
   flash:
+    error:
+      access_denied: "Nie masz wystarczających uprawnień aby móc odwiedzić tą stronę"
     notice:
       email_verification: "Na twój e-mail został wysłany link którym opublikujesz ofertę."
       job_updated: "Zapisano zmiany w ofercie."
       job_published: "Twoja oferta jest już widoczna!"
       job_deleted: "Oferta została usunięta"
+      contact_sended: "Dziękujemy za wiadomość!"
+      application_sended: "Twoja aplikacja została wysłana"
   title:
     popular: "najpopularniejsze oferty pracy IT"
     latest: "najnowsze oferty pracy IT"
     search: "Szukaj oferty"
     finded_jobs: "Znalezione oferty"
     jobs: "Oferty pracy IT"
+    admin: "Panel administracyjny"
   jobs:
     empty: "Brak ofert"
     show:
@@ -75,7 +109,7 @@ pl:
       category: "Kategoria"
       rank: "Ocena"
       employer: "Pracodawca"
-      localization: "Localization"
+      localization: "Lokalizacje"
       framework: "Framework"
       language: "Język"
       pay_band: "Widełko zarobkowe"

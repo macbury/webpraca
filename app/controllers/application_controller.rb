@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def permission_denied
-    flash[:error] = "Nie masz wystarczających uprawnień aby móc odwiedzić tą stronę"
+    flash[:error] = t('flash.error.access_denied')
     redirect_to root_url
   end
 	
@@ -104,14 +104,14 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       respond_to do |format|
         format.html do
-          flash[:error] = "Musisz się zalogować aby móc objrzeć tą strone"
+          flash[:error] = t('flash.error.access_denied')
           store_location
           redirect_to login_path
         end
         format.js { render :js => "window.location = #{login_path.inspect};" }
       end
 		else
-			@page_title = ["Panel administracyjny"]
+			@page_title = [t('title.admin')]
     end
   end
 end

@@ -4,7 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="google-site-verification" content="zE20xzrx6CCNbFsmsNTok9xaPavS0Cmu7hJxdUbNqN8" />
 	<%= display_meta_tags :site => WebSiteConfig['website']['name'] %>
 	<meta name="viewport" content="width=900" />
 	<%= rss_link("RSS", jobs_url(:format => :rss)) %>
@@ -20,10 +19,10 @@
 			<h1 id="logo"><%= link_to WebSiteConfig['website']['name'], root_path %></h1>
 			<ul class="categories">
 				<li class="right">
-					<%= link_to t('layout.popular'), seo_jobs_path(:order => 'najpopularniejsze',  :category => params[:category]), :class => (!@order.nil? && @order == :rank) ? "selected" : "normal"  %>
+					<%= link_to t('layout.popular'), seo_jobs_path(:order => 'popular',  :category => params[:category]), :class => (!@order.nil? && @order == :rank) ? "selected" : "normal"  %>
 				</li>
 				<li class="right">
-					<%= link_to t('layout.latest'), seo_jobs_path(:order => 'najnowsze',  :category => params[:category] ), :class => (!@order.nil? && @order == :created_at) ? "selected" : "normal"  %>
+					<%= link_to t('layout.latest'), seo_jobs_path(:order => 'latest',  :category => params[:category] ), :class => (!@order.nil? && @order == :created_at) ? "selected" : "normal"  %>
 				</li>
 				<% for category in Category.all(:order => "position") %>
 					<li>
@@ -34,9 +33,9 @@
 			<ul class="menu">
 				<li><%= link_to t('layout.menu.main'), root_path %></li>
 				<li><%= link_to t('layout.menu.search'), search_jobs_path %></li>
-				<li><%= link_to t('layout.menu.about'), "/strona/informacje/" %></li>
-				<li><%= link_to t('layout.menu.terms'), "/strona/regulamin/" %></li>
-				<li><%= link_to t('layout.menu.follow'), "/strona/obserwuj-nas" %></li>
+				<li><%= link_to t('layout.menu.about'), "/page/informacje/" %></li>
+				<li><%= link_to t('layout.menu.terms'), "/page/regulamin/" %></li>
+				<li><%= link_to t('layout.menu.follow'), "/page/obserwuj-nas" %></li>
 				<li><%= link_to t('layout.menu.contact'), contact_path %></li>
 			</ul>
 		</div>
@@ -76,16 +75,5 @@
 		<div class="clear"></div>
 	</div>
 	<%= render :partial => "/shared/footer" %>
-	<script type="text/javascript" src="http://flaker.pl/track/site/1122612"></script>
-	<script type="text/javascript" src="http://app.sugester.pl/webpraca/widget.js"></script>
-	<script type="text/javascript">
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-11469054-5");
-	pageTracker._trackPageview();
-	} catch(err) {}</script>
 </body>
 </html>
