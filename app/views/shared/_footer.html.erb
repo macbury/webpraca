@@ -1,11 +1,11 @@
 <div class="footer">
 	<span class="right">
-		<%= link_to "Strona główna", root_path %> | 
-		<%= link_to "Oferty", jobs_path %> | 
-		<%= link_to "Szukaj", search_jobs_path %> | 
-		<%= link_to "Informacje", "/strona/informacje/" %> | 
-		<%= link_to "Regulamin", "/strona/regulamin/" %> | 
-		<%= link_to "Kontakt", contact_path %> | 
+		<%= link_to t('layout.menu.main'), root_path %> | 
+		<%= link_to t('layout.menu.search'), search_jobs_path %> | 
+		<%= link_to t('layout.menu.about'), "/strona/informacje/" %> | 
+		<%= link_to t('layout.menu.terms'), "/strona/regulamin/" %> | 
+		<%= link_to t('layout.menu.follow'), "/strona/obserwuj-nas" %> | 
+		<%= link_to t('layout.menu.contact'), contact_path %> | 
 		<%= link_to "GitHub", "http://github.com/macbury/webpraca" %>
 	</span>
 	<strong><%= link_to WebSiteConfig['website']['name'], root_path %></strong> <sup>BETA</sup> &copy; <%= Date.current.year %>. 

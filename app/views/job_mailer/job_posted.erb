@@ -1,13 +1,13 @@
-Witaj <%= @job.company_name %>!,
+<%= t('mailer.job_posted.greetings') %> <%= @job.company_name %>!,
 
-Aby opublikować swoją ofertę kliknij na link poniżej:
+<%= t('mailer.job_posted.publish') %>:
 <%= @publish_path %>
 
-Twoja oferta została dodana i znajduje się poda adresem:
+<%= t('mailer.job_posted.path_to_job') %>:
 <%= @job_path %>
 
-Jeżeli chcesz wprowadzić zmiany w ofercie kliknij na link poniżej:
+<%= t('mailer.job_posted.path_to_edit_job') %>:
 <%= @edit_path %>
 
-Aby usunąć ofertę kliknij na poniższy link:
+<%= t('mailer.job_posted.path_to_destroy_job') %>:
 <%= @destroy_path %>

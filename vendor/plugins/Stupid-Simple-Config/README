@@ -1,0 +1,46 @@
+StupidSimpleConfig
+==================
+
+Stupid simple rails application configuration
+
+* simple YAML config files
+* config files support ERB
+
+Basic Usage
+=======
+
+You simply write a configuration file in YAML and save in your rails conifg directory. Notice you can use ERB.
+
+website
+	name: My website
+	tags: [ cool, website ]
+	author: Buras Arkadiusz
+	last_update: <%= Time.now %>
+
+Now create initializer and load your configuration:
+
+::WebSiteConfig = StupidSimpleConfig.new("website_config.yml")
+
+WebSiteConfig["website"]["name"] # => "My website"
+WebSiteConfig["website"]["tags"] # => ["cool", "webiste"]
+WebSiteConfig["webiste"]["last_update"] => Sun Jan 03 15:31:18 +0100 2010
+
+You can reload your configuration:
+
+WebSiteConfig.reload!
+
+And save changes:
+
+WebSiteConfig["website"]["name"] = "My website is cool"
+WebSiteConfig.save!
+
+or
+
+WebSiteConfig.update_attributes({
+	"website" => {
+		"name" => "My website is cool",
+		"tags" => ["cool", "website"]
+	}
+})
+
+Copyright (c) 2010 Buras Arkadiusz, released under the MIT license

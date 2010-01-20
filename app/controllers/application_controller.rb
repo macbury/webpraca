@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user, :logged_in?, :own?
   
-  before_filter :staging_authentication, :seo, :user_for_authorization
+  before_filter :set_locale, :staging_authentication, :seo, :user_for_authorization
 	
 	def rescue_action_in_public(exception)
 	  case exception
@@ -25,6 +25,23 @@ class ApplicationController < ActionController::Base
 	end
 
   protected
+	
+	def set_locale
+	  I18n.locale = extract_locale_from_subdomain
+	end
+	
+	def extract_locale_from_subdomain
+		redirect_to :subdomain => params[:locale] if params[:locale]
+		
+		if ENV["RAILS_ENV"] == 'development'
+		  parsed_locale = request.subdomains(0).first || '' #We do this for OS X in Development mode
+		else
+		  parsed_locale = request.subdomains.first || ''
+		end
+		
+		logger.debug "Language: #{parsed_locale}"
+		(AVAILABLE_LOCALES.include? parsed_locale) ? parsed_locale  : WebSiteConfig['website']['default_language']
+	end
 	
 	def render_404
 		@page_title = ["Błąd 404", "Nie znaleziono strony"]
@@ -53,15 +70,14 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def permission_denied
-    flash[:error] = "Nie masz wystarczających uprawnień aby móc odwiedzić tą stronę"
+    flash[:error] = t('flash.error.access_denied')
     redirect_to root_url
   end
 	
 	def seo
 		@ads_pos = :bottom
-		@standard_tags = WebSiteConfig['website']['tags']
-		set_meta_tags :description => WebSiteConfig['website']['description'],
-	                :keywords => @standard_tags
+		set_meta_tags :description => t('head.description'),
+	                :keywords => t('head.tags')
 		
 	end
 	
@@ -105,14 +121,14 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       respond_to do |format|
         format.html do
-          flash[:error] = "Musisz się zalogować aby móc objrzeć tą strone"
+          flash[:error] = t('flash.error.access_denied')
           store_location
           redirect_to login_path
         end
         format.js { render :js => "window.location = #{login_path.inspect};" }
       end
 		else
-			@page_title = ["Panel administracyjny"]
+			@page_title = [t('title.admin')]
     end
   end
 end

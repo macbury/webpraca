@@ -1,25 +1,25 @@
 <div class="box">
 	<div>
 		<div class="title">
-			<h2><%= title @contact_handler.job.nil? ? "Kontakt" : "Kontakt z #{@contact_handler.job.company_name}" %></h2>
+			<h2><%= title @contact_handler.job.nil? ? t('contact.title') : "#{t('contact.title')} #{@contact_handler.job.company_name}" %></h2>
 		</div>
-		<%= content_tag :p, "Będziemy wdzięczni za wszelkie uwagi dotyczące funkcjonowania serwisu. " if @contact_handler.job.nil? %>
+		<%= content_tag :p, t('contact.description') if @contact_handler.job.nil? %>
 		<% semantic_form_for(@contact_handler, :url => contact_url) do |f| %>
 		<% f.inputs do %>
 			<% unless @contact_handler.job.nil? %>
 			<li class="text">
-				<label>Do:</label>
+				<label><%= t('contact.recipient') %></label>
 				<%= link_to @contact_handler.job.company_name, @contact_handler.job.website, :target => "_blank" %>
 			</li>
 			<% end %>
 			<%= f.hidden_field :job_id %>
 			<%= f.input :email %>
-			<%= f.input :subject, :label => "Temat" %>
-			<%= f.input :body, :as => :text, :label => "Treść" %>
+			<%= f.input :subject, :label => t('contact.subject') %>
+			<%= f.input :body, :as => :text, :label => t('contact.body') %>
 		<% end %>
-		<% f.inputs :name => "Czy jesteś człowiekiem" do %>
+		<% f.inputs :name => t('jobs.form.fieldset.human_test') do %>
 		<li class="string required captcha">
-			<%= f.label :captcha, 'Kod z obrazka*' %>
+			<%= f.label :captcha, t('formtastic.labels.job.captcha') %>
 			<%= f.captcha_challenge %>
 			<%= f.captcha_field %>
 			<%= inline_errors @contact_handler, :captcha_solution %>
@@ -28,7 +28,7 @@
 		<% end %>
 		<div class="buttons">
 			<div class="button">
-				<%= f.submit 'Wyślij!' %>
+				<%= f.submit t('contact.submit') %>
 			</div>
 		</div>
 		<% end %>

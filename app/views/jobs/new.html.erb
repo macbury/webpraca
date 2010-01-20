@@ -1,19 +1,19 @@
-<% title @job.new_record? ? "Nowa oferta" : ["Edycja oferty", @job.title] %>
+<% title @job.new_record? ? t('jobs.form.new.title') : [t('jobs.form.edit.title'), @job.title] %>
 <div class="box">
 	<div>
 		<div class="title">
-			<h2><%= @job.new_record? ? "Nowa oferta" : "Edycja oferty" %></h2>
+			<h2><%= @job.new_record? ? t('jobs.form.new.title') : t('jobs.form.edit.title') %></h2>
 		</div>
 		<% semantic_form_for(@job) do |f| %>
 			<%= render :partial => "form", :object => f %>
 			<div class="buttons">
 				<div class="button">
-					<%= f.submit @job.new_record? ? "Zgadzam się z regulaminem i chcę dodać ofertę" : "Zapisz zmiany" %>
+					<%= f.submit @job.new_record? ? t('jobs.form.new.submit') : t('jobs.form.edit.submit') %>
 				</div>
 				<% unless @job.new_record? %>
-				, <%= link_to "usuń", @job, :method => :delete, :confirm => "Czy na pewno chcesz usunąć ofertę?" %>
+				, <%= link_to t('jobs.form.edit.destroy'), @job, :method => :delete, :confirm => t('jobs.form.edit.destroy_confirm') %>
 				<% end %>
-				 albo <%= link_to 'anuluj', jobs_path %>
+				 <%= t('support.array.or_word_connector') %> <%= link_to t('jobs.form.new.cancel'), jobs_path %>
 			</div>
 		<% end %>
 	</div>

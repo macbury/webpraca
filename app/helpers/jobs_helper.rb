@@ -2,13 +2,13 @@ module JobsHelper
 	def job_label(job)
 		html = ""
 		html += etykieta(job.type_id)
-		html += content_tag :abbr, "Praca zdalna", :class => "etykieta zdalnie" if job.remote_job
+		html += content_tag :abbr, t("jobs.type.remote"), :class => "etykieta remote" if job.remote_job
 		
 		return html
 	end
 	
 	def etykieta(type_id)
-		content_tag :abbr, JOB_LABELS[type_id], :class => "etykieta #{JOB_LABELS[type_id]}", :title => JOB_TYPES[type_id]
+		content_tag :abbr, t("jobs.type.#{JOB_TYPES[type_id]}"), :class => "etykieta #{JOB_TYPES[type_id]}", :title => t("jobs.type.#{JOB_TYPES[type_id]}")
 	end
 	
 	def format_rank(rank)

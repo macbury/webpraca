@@ -2,6 +2,174 @@
 # by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
 
 pl:
+  head:
+    tags: "oferty pracy, praca IT, zlecenia IT, praca w IT, praca oferty z IT, oferty z it, it, w IT"
+    description: "Oferty pracy oraz zlece\xC5\x84 w bran\xC5\xBCy IT. Skutecznie rekrutuj z nami pracownik\xC3\xB3w, freelancer\xC3\xB3w."
+  500:
+    title: "Coś poszło nie tak... Aplikacja trafiła na nieobsługiwany wyjątek."
+  404:
+    title: "Nie znaleziono strony!"
+  applicant:
+    title: "Aplikuj online"
+    fieldset: "Treść aplikacji"
+  contact:
+    title: "Kontakt"
+    description: "Będziemy wdzięczni za wszelkie uwagi dotyczące funkcjonowania serwisu."
+    recipient: "Od"
+    subject: "Temat"
+    body: "Treść"
+    submit: "Wyślij!"
+  mailer:
+    job_applicant:
+      body: "Pojawiła się osoba zainteresowana twoją ofertą: "
+      attachment: "Załącznik"
+    job_posted:
+      greetings: "Witaj"
+      publish: "Aby opublikować swoją ofertę kliknij na link poniżej"
+      path_to_job: "Twoja oferta została dodana i znajduje się poda adresem:"
+      path_to_edit_job: "Jeżeli chcesz wprowadzić zmiany w ofercie kliknij na link poniżej"
+      path_to_destroy_job: "Aby usunąć ofertę kliknij na poniższy link"
+  formtastic:
+    labels:
+      search:
+        fieldset: "Wyszukiwarka"
+        categories: "Kategorie"
+        has_text: "Zawierający tekst"
+        type: "Typ"
+        localizations: "Lokalizacja"
+        frameworks: "Używane frameworki"
+        pay_band: "Widełki zarobkowe"
+        submit: "Szukaj!"
+      websiteconfig:
+        groups:
+          website: "Strona WWW"
+          js: "Skrypty"
+        js:
+          google_analytics: "Google Analytics"
+          widget: "Reklama"
+        website:
+          name: "Nazwa"
+          tags: "Słowa kluczowe"
+          description: "Opis"
+      applicant:
+        email: "Twój E-Mail"
+        body: "Treść"
+        cv: "Dodaj ofertę/CV"
+      job:
+        title: "Tytuł"
+        place_id: "Lokalizacja"
+        description: "Opis"
+        availability_time: "Długość trwania"
+        remote_job: "Praca zdalna"
+        type_id: "Typ"
+        category_id: "Kategoria"
+        company_name: "Nazwa"
+        website: "Strona WWW"
+        framework_name: "Framework"
+        localization_id: "Lokalizacja"
+        apply_online: "Aplikuj online"
+        email_title: "Tytuł emaila"
+        language: "Język"
+        pay_band: "Widełki zarobkowe"
+        pay_band_detail: "PLN na miesiąc, netto"
+        captcha: 'Kod z obrazka*'
+      user:
+        password: "Hasło"
+        password_confirmation: "Powtórz hasło"
+    hints:
+      applicant:
+        body: "wiadomość lub list motywacyjny"
+        cv: "Max. 5 MB. Rekomendowane formaty: PDF, DOC, TXT, RTF, ZIP, RAR."
+      job:
+        availability_time: "ile dni oferta ma być ważna(od 1 do 60 dni)"
+        localization_id: "np. 'Warszawa', 'Kraków, UK'"
+        framework_id: "główny framework którego znajomość jest wymagana, podaj pełną nazwę"
+        apply_online: "uaktywnia formularz umożliwiający przesyłanie aplikacji online w ofercie"
+        email_title: "np. Młodszy programista, Ruby Developer/18/12/71 itp"
+        email: "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie(zamiast niego będzie dostępny formularz kontaktowy)."
+        website: "zaczynający się od http://"
+  flash:
+    error:
+      access_denied: "Nie masz wystarczających uprawnień aby móc odwiedzić tą stronę"
+    notice:
+      email_verification: "Na twój e-mail został wysłany link którym opublikujesz ofertę."
+      job_updated: "Zapisano zmiany w ofercie."
+      job_published: "Twoja oferta jest już widoczna!"
+      job_deleted: "Oferta została usunięta"
+      contact_sended: "Dziękujemy za wiadomość!"
+      application_sended: "Twoja aplikacja została wysłana"
+  title:
+    popular: "najpopularniejsze oferty pracy IT"
+    latest: "najnowsze oferty pracy IT"
+    search: "Szukaj oferty"
+    finded_jobs: "Znalezione oferty"
+    jobs: "Oferty pracy IT"
+    admin: "Panel administracyjny"
+  jobs:
+    empty: "Brak ofert"
+    show:
+      type: "Typ"
+      category: "Kategoria"
+      rank: "Ocena"
+      employer: "Pracodawca"
+      localization: "Lokalizacje"
+      framework: "Framework"
+      language: "Język"
+      pay_band: "Widełko zarobkowe"
+      contact: "Kontakt"
+      published_at: "Data rozpoczęcia"
+      end_at: "Data zakończenia"
+      visited: "Wyświetlona"
+      description: "Opis oferty"
+      apply_online: "Aplikuj online!"
+    form:
+      new: 
+        title: "Nowa oferta"
+        submit: "Zgadzam się z regulaminem i chcę dodać ofertę"
+        cancel: "anuluj"
+      edit: 
+        title: "Edytuj ofertę"
+        submit: "Zapisz zmiany"
+        destroy: "usuń"
+        destroy_confirm: "Czy na pewno chcesz usunąć ofertę?"
+      fieldset:
+        job_details: "Szczegóły oferty pracy"
+        apply_online: "Aplikuj online"
+        company_details: "Firma zatrudniająca lub osoba zlecająca"
+        human_test: "Czy jesteś człowiekiem"
+    type:
+      full_time: "etat"
+      freelance: "zlecenie"
+      free: "wolontariat"
+      practice: "praktyka"
+      remote: "praca zdalna"
+    type_long:
+      full_time: "poszukiwanie współpracowników / oferta pracy"
+      freelance: "zlecenie (konkretna usługa do wykonania)"
+      free: "wolontariat (praca za reklamy, bannery, itp. lub praca za darmo)"
+      practice: "staż/praktyka"
+  layout:
+    popular: "Najpopularniejsze"
+    latest: "Najnowsze"
+    menu:
+      main: "Strona główna"
+      search: "Szukaj"
+      about: "O serwisie"
+      terms: "Regulamin"
+      follow: "Obserwuj nas"
+      contact: "Kontakt"
+    sidebar:
+      post_job: "Dodaj ofertę za DARMO!"
+      type: "typ"
+      localization: "lokalizacje"
+      language: "język"
+      frameworks: "framework"
+  home:
+    title: "najpopularniejsze i najnowsze oferty pracy z IT"
+    popular: "Najpopularniejsze"
+    latest: "Najnowsze"
+    jobs: "oferty"
+    more_jobs: "pokaż więcej ofert"
   number:
     format:
       separator: ","
@@ -57,6 +225,7 @@ pl:
 
   datetime:
     distance_in_words:
+      ago: "temu"
       half_a_minute: "pół minuty"
       less_than_x_seconds:
         one:   "mniej niż sekundę"
@@ -106,37 +275,6 @@ pl:
           captcha_solution:
             blank: 'musi być podane'
             invalid: 'odpowiedź jest niepoprawna'
-    attributes:
-      websiteconfig:
-        groups:
-          website: "Strona WWW"
-          js: "Skrypty"
-        js:
-          google_analytics: "Google Analytics"
-          widget: "Reklama"
-        website:
-          name: "Nazwa"
-          tags: "Słowa kluczowe"
-          description: "Opis"
-      applicant:
-        email: "Twój E-Mail"
-        body: "Treść"
-        cv: "Dodaj ofertę/CV"
-      job:
-        title: "Tytuł"
-        place_id: "Lokalizacja"
-        description: "Opis"
-        dlugosc_trwania: "Długość trwania"
-        remote_job: "Praca zdalna"
-        type_id: "Typ"
-        category_id: "Kategoria"
-        company_name: "Nazwa"
-        website: "Strona WWW"
-        framework_name: "Framework"
-        apply_online: "Aplikuj online"
-      user:
-        password: "Hasło"
-        password_confirmation: "Powtórz hasło"
     errors:
       template:
         header:
@@ -172,3 +310,6 @@ pl:
       words_connector: ", "
       two_words_connector: " i "
       last_word_connector: " oraz "
+      for_word_connector: " dla "
+      in_word_connector: " w "
+      or_word_connector: " albo "

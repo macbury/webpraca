@@ -1,0 +1,20 @@
+(function(){
+	var jobs = <%= @jobs_hash.to_json %>;
+	
+	document.write('<div class="webpraca_job_board" style="<%= " border:1px solid #{@options[:border]} !important; background-color: #{@options[:background]} !important; width: #{@options[:width]} !important; padding:0px !important; text-decoration:none !important; ".gsub('\n', '').gsub('\t', '') -%>">');
+	
+	document.write('<ul style="margin: 0px !important; margin-top: 0px !important; padding: 5px !important; text-indent:0px !important;">');
+		
+	for (var i=0; i < jobs.length; i++) {
+		var job = jobs[i];
+		document.write('<li style="margin:0px !important; padding:0px !important;  text-indent:0px !important; font-family:Arial,Helvetica !important; list-style-type:none !important; line-height:15px !important;">');
+
+		document.write('<a href="'+job.url+'" style="margin:0px !important; padding:0px !important; text-indent:0px !important; font: 12px Arial,Helvetica !important; line-height:15px !important; text-decoration: none;">'+job.title+'</a>');
+
+		document.write('</li>');
+	};
+	
+	document.write('<li style="margin-left:0px!important;margin-right:0px!important;margin-bottom:0px!important;margin-top:0px!important;text-align:right;!important; padding-top:3px!important;padding-bottom:2px!important;padding-left:0px!important;padding-right:0px!important;line-height:9px!important;list-style-type:none!important;font-family:Arial,Helvetica!important;">');
+	document.write('<span style="font-family:Arial,Helvetica!important;font-weight:normal!important;font-size:10px!important;color:#777777!important;text-decoration:none!important;"><a style="font-family:Arial,Helvetica!important;text-decoration:none!important;border:none!important;color:inherit;" href="<%= root_url %>">webpraca.net oferty pracy, zlecenia it</a></span></li>');
+	document.write('</ul></div>');
+})();

@@ -27,6 +27,9 @@
 							<%= l job.created_at, :format => :long %>
 						</td>
 				    <td class="text_center">
+							<% unless job.published %>
+							<%= link_to "Publikuj", publish_job_path(job, :token => job.token) %>
+							<% end %>
 							<%= link_to 'Edytuj', edit_admin_job_path(job) %> | 
 							<%= link_to 'Usuń', admin_job_path(job), :confirm => 'Czy na pewno chcesz usunąć ofertę?', :method => :delete %>
 						</td>

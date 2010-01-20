@@ -1,0 +1,10 @@
+<%
+rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""
+#rerun_opts = rerun.to_s.strip.empty? ? "--format progress features" : "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} #{rerun}"
+#std_opts = "#{rerun_opts} --format rerun --out rerun.txt --strict --tags ~@wip"
+# options above are from generated cucumber config, I don't like the whole idea of rerun feature, so I will
+# just stick to plain old options
+std_opts = "--format pretty --strict --tags ~@wip"
+%>
+default: <%= std_opts %>
+wip: --tags @wip:3 --wip features

@@ -1,0 +1,41 @@
+MicroFeed
+=========
+
+Plugin do wysyłania statusów do serwisów mikroblogowych(blip.pl, flaker.pl, spinacz.pl, pinger.pl)
+
+Konfiguracja
+=======
+
+Tworzymy plik micro_feed.yml w katalogu config:
+
+blip:
+  login: username
+  password: secret
+
+flaker:
+  login: username
+  password: secret
+
+pinger:
+  login: username
+  password: secret
+
+spinacz:
+  hash: 139c82e0679b64132f528fa71a9ee8d1
+
+Sposób użycia
+=======
+
+Wysyłanie do wszystkich serwisów
+MicroFeed.send :streams => :all, :msg => "Witaj świecie"
+
+Wysyłanie do wybranych serwisów:
+MicroFeed.send :streams => [:blip, :flaker], :msg => "Witaj świecie z flakera i blipa!"
+
+Otagowanie wpisów:
+MicroFeed.send :streams => :all, :msg => "Witaj świecie", :tags => ["wiadomosc", "omg", "news"]
+
+Wysyłanie linku:
+MicroFeed.send :streams => :all, :msg => "Sprawdzcie ten link!", :link => "http://google.pl"
+
+Copyright (c) 2010 Buras Arkadiusz, released under the MIT license

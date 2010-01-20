@@ -1,6 +1,4 @@
-JOB_TYPES = ["zlecenie (konkretna usługa do wykonania)", "poszukiwanie współpracowników / oferta pracy", "wolontariat (praca za reklamy, bannery, itp. lub praca za darmo)", "staż/praktyka"]
-JOB_LABELS = ["zlecenie", "etat", "wolontariat", "praktyka"]
-
+JOB_TYPES = ["freelance", "full_time", "free", "practice"]
 JOB_ETAT = 1;
 
 JOB_RANK_VALUES = { 
@@ -10,11 +8,13 @@ JOB_RANK_VALUES = {
 										:nip => 0.5, 
 										:regon => 0.6, 
 										:framework_id => 0.7, 
-										:website => 0.3,
-										:apply_online => 0.2
+										:language_id => 0.7,
+										:website => 0.4,
+										:apply_online => 0.3
 									}
 
 class Job < ActiveRecord::Base
+	include ActionController::UrlWriter
 	xss_terminate
 	has_permalink :title
 	
@@ -28,7 +28,7 @@ class Job < ActiveRecord::Base
 	validates_length_of :title, :within => 3..255
 	validates_length_of :description, :within => 10..5000
 	validates_inclusion_of :type_id, :in => 0..JOB_TYPES.size-1
-	validates_inclusion_of :dlugosc_trwania, :in => 1..60
+	validates_inclusion_of :availability_time, :in => 1..60
 	
 	validates_numericality_of :price_from, 
 			:greater_than => 0, 
@@ -37,7 +37,7 @@ class Job < ActiveRecord::Base
 			:greater_than => 0, 
 			:unless => Proc.new { |j| j.price_to.nil? }
 	
-	validates_format_of :email, :with => Authlogic::Regex.email
+	validates_format_of :email, :with => /([a-z0-9_.-]+)@([a-z0-9-]+)\.([a-z.]+)/i
 	
 	validates_format_of :website, :with =>  /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
 	
@@ -51,6 +51,7 @@ class Job < ActiveRecord::Base
 	belongs_to :framework
 	belongs_to :localization
 	belongs_to :category
+	belongs_to :language
 	
 	has_many :applicants, :dependent => :delete_all
 	has_many :visits, 		:dependent => :delete_all
@@ -82,16 +83,17 @@ class Job < ActiveRecord::Base
 	def calculate_rank
 		self.rank = 1.0
 		
-		self.rank += visits_count * 0.01 unless visits_count.nil?
+		self.rank += visits_count * 0.001 unless visits_count.nil?
+		self.rank += applicants_count * 0.01 unless applicants_count.nil?
 		
-		[:regon, :nip, :krs, :framework_id, :website, :apply_online].each do |attribute|
+		[:regon, :nip, :krs, :framework_id, :website, :apply_online, :language_id].each do |attribute|
 			val = send(attribute)
 
 			inc = JOB_RANK_VALUES[attribute] || JOB_RANK_VALUES[:default]
 			self.rank += inc unless (val.nil? || (val.class == String && val.empty?) || (val.class == TrueClass))
 		end
 		
-		if widelki_zarobkowe?
+		if pay_band?
 			self.rank += JOB_RANK_VALUES[:price]
 			
 			price = price_from || price_to
@@ -114,7 +116,7 @@ class Job < ActiveRecord::Base
 		end
 	end
 	
-	def widelki_zarobkowe?
+	def pay_band?
 		((!self.price_from.nil? && self.price_from > 0) || (!self.price_to.nil? && self.price_to > 0))
 	end
 	
@@ -134,23 +136,34 @@ class Job < ActiveRecord::Base
 		end
 	end
 	
-	def dlugosc_trwania
+	def availability_time
 		date = created_at.nil? ? Date.current.to_date : created_at.to_date
 		return (read_attribute(:end_at) - date).to_i rescue 14
 	end
 	
-	def dlugosc_trwania=(val)
+	def availability_time=(val)
 		date = created_at.nil? ? Date.current.to_date : created_at.to_date
 		write_attribute(:end_at, date+val.to_i.days)
 	end
 	
-	def highlited?
+	def highlighted?
 		self.rank >= 4.75
 	end
 	
 	def publish!
 		self.published = true
 		save
+		
+		spawn do
+			tags = [localization.name, category.name, "praca", JOB_TYPE[self.type_id]]
+			tags << framework.name unless framework.nil?
+			tags << language.name unless language.nil?
+		
+			MicroFeed.send( :streams => :all,
+											:msg => "#{title} dla #{company_name}",
+											:tags => tags,
+											:link => seo_job_url(self, :host => "webpraca.net")) if Rails.env == "production"
+		end
 	end
 	
 	def visited_by(ip)

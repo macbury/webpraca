@@ -1,0 +1,20 @@
+== 2009-09-13
+
+* Added current_domain method
+* Added controller & view usage to readme
+* Added more tests
+* Fixing load paths
+
+== 2009-08-26
+
+* Fixed needs_rewrite? method
+* Added is_mirror? method
+* Added tests, and fixed failing tests
+
+== 2009-08-24
+
+* Merged forks that added lots of features, tests, and fixes
+
+== 2008-06-25
+
+* Removed stray puts

@@ -15,32 +15,38 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
 
   
   # Examples:
-  
-  # add '/articles'
-  sitemap.add jobs_path, :priority => 1.0, :changefreq => 'daily'
-  # add all individual articles
-  Job.active.each do |o|
-    sitemap.add seo_job_path(o), :lastmod => o.updated_at
+  AVAILABLE_LOCALES.each do |lang|
+  	sitemap.add jobs_path(:locale => lang), :priority => 1.0, :changefreq => 'daily'
+	  # add all individual articles
+	  Job.active.each do |o|
+	    sitemap.add seo_job_path(o,:locale => lang), :lastmod => o.updated_at
+	  end
+
+		Framework.all.each do |f|
+			latest_job = f.jobs.first(:order => "created_at DESC")
+			sitemap.add framework_path(f,:locale => lang), :lastmod => latest_job.nil? ? f.created_at : latest_job.created_at
+		end
+
+		Localization.all.each do |l|
+			latest_job = l.jobs.first(:order => "created_at DESC")
+			sitemap.add localization_path(l,:locale => lang), :lastmod => latest_job.nil? ? l.created_at : latest_job.created_at
+		end
+
+		Category.all.each do |c|
+			latest_job = c.jobs.first(:order => "created_at DESC")
+			sitemap.add job_category_path(c,:locale => lang), :lastmod => latest_job.nil? ? c.created_at : latest_job.created_at
+		end
+
+		Language.all.each do |l|
+			latest_job = l.jobs.first(:order => "created_at DESC")
+			sitemap.add language_path(l,:locale => lang), :lastmod => latest_job.nil? ? l.created_at : latest_job.created_at
+		end
+
+		Page.all.each do |page|
+			sitemap.add seo_page_path(page,:locale => lang), :lastmod => page.updated_at
+		end
   end
-  
-	Framework.all.each do |f|
-		latest_job = f.jobs.first(:order => "created_at DESC")
-		sitemap.add framework_path(f), :lastmod => latest_job.nil? ? f.created_at : latest_job.created_at
-	end
-	
-	Localization.all.each do |l|
-		latest_job = l.jobs.first(:order => "created_at DESC")
-		sitemap.add localization_path(l), :lastmod => latest_job.nil? ? l.created_at : latest_job.created_at
-	end
-	
-	Category.all.each do |c|
-		latest_job = c.jobs.first(:order => "created_at DESC")
-		sitemap.add job_category_path(c), :lastmod => latest_job.nil? ? c.created_at : latest_job.created_at
-	end
-	
-	Page.all.each do |page|
-		sitemap.add seo_page_path(page), :lastmod => page.updated_at
-	end
+
 end
 
 # Including Sitemaps from Rails Engines.

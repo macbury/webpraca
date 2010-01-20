@@ -1,55 +1,56 @@
 <%= hidden_field_tag 'token', params[:token] unless params[:token].nil? %>
-<% form.inputs :name => 'Szczegóły oferty pracy' do %>
+<% form.inputs :name => t('jobs.form.fieldset.job_details') do %>
 	<%= form.input :title %>
 	<%= form.input :category_id, :as => :select, :collection => Category.all.map { |c| [c.name, c.id] } %>
 	<li class="select">
-		<%= form.label :localization_id, 'Lokalizacja*' %>
-		<%= form.select :localization_id, Localization.all(:order => 'name').map { |localization| [localization.name, localization.id] } %> albo 
+		<%= form.label :localization_id, t('formtastic.labels.job.localization_id')+'*' %>
+		<%= form.select :localization_id, Localization.all(:order => 'name').map { |localization| [localization.name, localization.id] } %> <%= t('support.array.or_word_connector') %> 
 		<%= form.text_field :localization_name %>
-		<p class="inline-hints">np. 'Warszawa', 'Kraków, UK'</p>
+		<p class="inline-hints"><%= t('formtastic.hints.job.localization_id') %></p>
 		<%= inline_errors @job, :localization_name %>
 	</li>
-	<%= form.input :type_id, :as => :radio, :collection => collection_from_types(JOB_TYPES) %>
+	<%= form.input :type_id, :as => :radio, :collection => JOB_TYPES.enum_for(:each_with_index).map { |type, index| [t("jobs.type_long.#{type}"), index] } %>
 	<%= form.input :remote_job, :required => false %>
-	<%= form.input :apply_online, :required => false, :hint => "uaktywnia formularz umożliwiający przesyłanie aplikacji online w ofercie" %>
-	<%= form.input :dlugosc_trwania, :as => :numeric, :hint => "ile dni oferta ma być ważna(od 1 do 60 dni)" %>
+	<%= form.input :availability_time, :as => :numeric %>
+	<%= form.input :language, :collection => Language.all(:order => 'name').map { |l| [l.name, l.id] }, :include_blank => true, :required => false %>
 	<li class="select">
 		<%= form.label :framework_id, 'Framework' %>
-		<%= form.select :framework_id, Framework.all(:order => 'name').map { |frame| [frame.name, frame.id] }, :include_blank => true %> albo 
+		<%= form.select :framework_id, Framework.all(:order => 'name').map { |frame| [frame.name, frame.id] }, :include_blank => true %> <%= t('support.array.or_word_connector') %> 
 		<%= form.text_field :framework_name %>
-		<p class="inline-hints">główny framework którego znajomość jest wymagana, podaj pełną nazwę</p>
+		<p class="inline-hints"><%= t('formtastic.hints.job.framework_id') %></p>
 		<%= inline_errors @job, :framework_name %>
 	</li>
 	<li class="numeric prices">
-		<label>Widełki zarobkowe:</label>
-		<%= form.text_field :price_from %> do <%= form.text_field :price_to %> PLN na miesiąc, netto
+		<label><%= t('formtastic.labels.job.pay_band') %></label>
+		<%= form.text_field :price_from %> - <%= form.text_field :price_to %> <%= t('formtastic.labels.job.pay_band_detail') %>
 		<%= inline_errors @job, :price_from %>
 		<%= inline_errors @job, :price_to %>
 	</li>
-	<li>
-		<%= form.label :description, 'Opis*' %>
-		<%= form.text_area :description %>
-		<%= inline_errors @job, :description %>
-	</li>
+	<%= form.input :description %>
+
 <% end %>
 
-<% form.inputs :name => 'Firma zatrudniająca lub osoba zlecająca' do %>
-	<%= form.input :email, :hint => "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie(zamiast niego będzie dostępny formularz kontaktowy)." %>
+<% form.inputs :name => t('jobs.form.fieldset.apply_online') do %>
+	<%= form.input :apply_online, :required => false %>
+	<%= form.input :email_title, :required => false %>
+<% end %>
+
+<% form.inputs :name => t('jobs.form.fieldset.company_details') do %>
+	<%= form.input :email %>
 	<%= form.input :company_name %>
-	<%= form.input :website, :hint => "zaczynający się od http://", :required => false %>
+	<%= form.input :website, :required => false %>
 	<%= form.input :nip, :required => false %>
 	<%= form.input :regon, :required => false %>
 	<%= form.input :krs, :required => false %>
 <% end %>
 
 <% if @job.new_record? %>
-	<% form.inputs :name => "Czy jesteś człowiekiem" do %>
+	<% form.inputs :name => t('jobs.form.fieldset.human_test') do %>
 	<li class="string required">
-		<%= form.label :captcha, 'Kod z obrazka*' %>
+		<%= form.label :captcha, t('formtastic.labels.job.captcha') %>
 		<%= form.captcha_challenge %>
 		<%= form.captcha_field %>
 		<%= inline_errors @job, :captcha_solution %>
-
 	</li>
 	<% end %>
 <% end %>

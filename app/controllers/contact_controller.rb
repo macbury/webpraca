@@ -12,7 +12,7 @@ class ContactController < ApplicationController
 
     if @contact_handler.valid?
       ContactMailer.deliver_contact_notification(@contact_handler)
-      flash[:notice] = 'Dziękujemy za wiadomość!'
+      flash[:notice] = t('flash.notice.contact_sended')
       redirect_to root_path
     else
       render :action => "new"

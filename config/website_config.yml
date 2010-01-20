@@ -1,8 +1,0 @@
---- !map:StupidSimpleConfig 
-website: !map:HashWithIndifferentAccess 
-  name: webpraca.net
-  tags: oferty pracy, praca IT, zlecenia IT, praca w IT, praca oferty z IT, oferty z it, it, w IT
-  description: "Oferty pracy oraz zlece\xC5\x84 w bran\xC5\xBCy IT. Skutecznie rekrutuj z nami pracownik\xC3\xB3w, freelancer\xC3\xB3w."
-js: !map:HashWithIndifferentAccess 
-  google_analytics: ""
-  widget: "<script type=\"text/javascript\" id=\"AdTaily_Widget\" key=\"X4ycGaq8yMlXCo4\" src=\"http://static.adtaily.com/widget.js\"></script> \t<noscript>Reklamy na tej stronie sprzedawane s\xC4\x85 przez widget z AdTaily.com (PLBLOADTAILY0001)</noscript>"

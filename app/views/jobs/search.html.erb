@@ -8,7 +8,7 @@
 			<div class="title">
 				<h2>
 					<%= link_to image_tag('feed.png'), search_jobs_url(stripped_params(:format => :rss)), :title => "Subskrybuj wyszukiwanie", :class => "feed" %>
-					Wyniki dla <span>wyszukiwania</span>
+					<%= t('title.finded_jobs') %>
 				</h2>
 			</div>
 			<%= render :partial => "jobs", :object => @jobs %>
@@ -19,24 +19,24 @@
 <div class="box">
 	<div>
 		<div class="title">
-			<h2><span>Szukaj</span> oferty</h2>
+			<h2><%= t('title.search') %></h2>
 		</div>
 		<% semantic_form_for @search, :url => search_jobs_path, :html => { :method => :post } do |f| %>
-			<% f.inputs :name => "Wyszukiwarka" do %>
-				<%= f.input :has_text, :required => false, :label => "Zawierający tekst" %>
-				<%= f.input :category_id_equals, :required => false, :as => :check_boxes, :collection => Category.all.map { |category| [category.name, category.id] }, :wrapper_html => { :class => "columns" }, :label => "Kategorie" %>
-				<%= f.input :type_id_equals, :required => false, :as => :check_boxes, :collection => collection_from_types(JOB_LABELS), :label => "Typ" %>
-				<%= f.input :localization_id_equals, :required => false, :as => :check_boxes, :collection => Localization.all.map { |l| [l.name, l.id] }, :wrapper_html => { :class => "columns" }, :label => "Lokalizacja" %>
-				<%= f.input :framework_id_equals, :required => false, :as => :check_boxes, :collection => Framework.all.map { |frame| [frame.name, frame.id] }, :wrapper_html => { :class => "columns" }, :label => "Używane frameworki" %>
+			<% f.inputs :name => t('formtastic.labels.search.fieldset') do %>
+				<%= f.input :has_text, :required => false, :label => t('formtastic.labels.search.has_text') %>
+				<%= f.input :category_id_equals, :required => false, :as => :check_boxes, :collection => Category.all.map { |category| [category.name, category.id] }, :wrapper_html => { :class => "columns" }, :label => t('formtastic.labels.search.categories') %>
+				<%= f.input :type_id_equals, :required => false, :as => :check_boxes, :collection => JOB_TYPES.enum_for(:each_with_index).map { |type, index| [t("jobs.type.#{type}"), index] }, :label => t('formtastic.labels.search.type') %>
+				<%= f.input :localization_id_equals, :required => false, :as => :check_boxes, :collection => Localization.all.map { |l| [l.name, l.id] }, :wrapper_html => { :class => "columns" }, :label => t('formtastic.labels.search.localizations') %>
+				<%= f.input :framework_id_equals, :required => false, :as => :check_boxes, :collection => Framework.all.map { |frame| [frame.name, frame.id] }, :wrapper_html => { :class => "columns" }, :label => t('formtastic.labels.search.frameworks') %>
 				<li class="numeric prices">
-					<label>Widełki zarobkowe:</label>
-					<%= f.text_field :price_from_greater_than_or_equal_to %> do <%= f.text_field :price_to_less_than_or_equal_to %> PLN
+					<label><%= t('formtastic.labels.search.pay_band') %></label>
+					<%= f.text_field :price_from_greater_than_or_equal_to %> do <%= f.text_field :price_to_less_than_or_equal_to %> <%= t('number.currency.format.unit') %>
 				</li>
 
 			<% end %>
 
 			<div class="buttons">
-				<div class="button"><%= f.submit "Szukaj!" %></div>
+				<div class="button"><%= f.submit t('formtastic.labels.search.submit') %></div>
 			</div>
 		<% end %>
 	</div>

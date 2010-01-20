@@ -1,0 +1,6 @@
+website:
+  name: My website
+	default_language: en
+js: 
+	google_analytics: ""
+	widget: ""

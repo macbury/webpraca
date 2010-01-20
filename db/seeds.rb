@@ -17,3 +17,7 @@ end
 ['Programowanie', 'Grafika', 'Administracja', 'Zarządzanie'].each do |name|
 	Category.find_or_create_by_name(name)
 end
+
+["Ruby", "Python", "Java", "PHP", "C++", "C", "Objective-C", "C#", "Javascript", "CSS/HTML", "ActionScript", "Perl", "Bash", "Erlang", "SQL", "Scala"].each do |name|
+	Language.find_or_create_by_name(name)
+end

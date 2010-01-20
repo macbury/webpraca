@@ -1,11 +1,12 @@
 <div class="box">
 	<div>
-		<div class="title"><h3>typ</h3></div>
+		<div class="title"><h3><%= t('layout.sidebar.type') %></h3></div>
 		<ul class="list">
 			<% Job.find_grouped_by_type.each do | type_id, jobs_count | %>
 			<li class="<%= cycle('normal', 'alt') %>">
 				<span class="badge"><%= jobs_count %></span>
-				<%= link_to JOB_LABELS[type_id], job_type_path(JOB_LABELS[type_id]) , :class => "etykieta #{JOB_LABELS[type_id]}"%>
+				<%= link_to t("jobs.type.#{JOB_TYPES[type_id]}"), job_type_path(JOB_TYPES[type_id]) , :class => "etykieta #{JOB_TYPES[type_id]}"%>
+				<span class="clear"></span>
 			</li>
 			<% end %>
 		</ul>
@@ -13,7 +14,7 @@
 	</div>
 	<div>
 		<div class="title">
-			<h3>lokalizacje</h3>
+			<h3><%= t('layout.sidebar.localization') %></h3>
 		</div>
 		<ul class="list">
 			<% for place in Localization.find_job_localizations %>
@@ -27,7 +28,21 @@
 
 	<div>
 		<div class="title">
-			<h3>frameworki</h3>
+			<h3><%= t('layout.sidebar.language') %></h3>
+		</div>
+		<ul class="list">
+			<% for language in Language.find_job_languages %>
+			<li class="<%= cycle('normal', 'alt') %>">
+				<span class="badge"><%= language.jobs_count %></span>
+				<%= link_to language.name, language_path(language) %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+
+	<div>
+		<div class="title">
+			<h3><%= t('layout.sidebar.frameworks') %></h3>
 		</div>
 		<ul class="list">
 			<% for framework in Framework.find_job_frameworks %>

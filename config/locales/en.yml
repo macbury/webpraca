@@ -1,5 +1,193 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# Polish translations for Ruby on Rails
+# by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
 
 en:
-  hello: "Hello world"
+  head:
+    tags: "jobs, offers, IT, poland, developer, freelancer, job board, jobboard"
+    description: "Job board for ruby and rails developers. Subscribe to rss to keep up with new postings."
+  500:
+    title: "We're sorry, but something went wrong"
+  404:
+    title: "he page you were looking for doesn't exist"
+  applicant:
+    title: "Apply now"
+    fieldset: "Apply now"
+  contact:
+    title: "Contact"
+    description: ""
+    recipient: "From"
+    subject: "Subject"
+    body: "Body"
+    submit: "Send!"
+  mailer:
+    job_applicant:
+      body: "Somebody just applied to your job opening: "
+      attachment: "Attachment"
+    job_posted:
+      greetings: "Hello"
+      publish: "Click link below to publish your job"
+      path_to_job: "Your link to your job:"
+      path_to_edit_job: "If you want to edit job, click link below"
+      path_to_destroy_job: "If you want to remove job, click link below"
+  formtastic:
+    labels:
+      search:
+        fieldset: "Search"
+        categories: "Category"
+        has_text: "Keywords"
+        type: "Type"
+        localizations: "Localization"
+        frameworks: "Framework"
+        pay_band: "Pay Band"
+        submit: "Search!"
+      websiteconfig:
+        groups:
+          website: "Strona WWW"
+          js: "Skrypty"
+        js:
+          google_analytics: "Google Analytics"
+          widget: "Reklama"
+        website:
+          name: "Nazwa"
+          tags: "Słowa kluczowe"
+          description: "Opis"
+      applicant:
+        email: "Your E-Mail"
+        body: "Body"
+        cv: "Upload resume/CV"
+      job:
+        title: "Title"
+        place_id: "Location"
+        description: "Descripion"
+        availability_time: "Availability time"
+        remote_job: "Remote job"
+        type_id: "Type"
+        category_id: "Category"
+        company_name: "Company"
+        website: "Website"
+        framework_name: "Framework"
+        localization_id: "Localization"
+        apply_online: "Apply online"
+        email_title: "Email title"
+        language: "Language"
+        pay_band: "Pay Band"
+        pay_band_detail: "$"
+        captcha: 'Captcha*'
+      user:
+        password: "password"
+        password_confirmation: "Password Confirmation"
+    hints:
+      applicant:
+        body: "Message or letter of intention"
+        cv: "Max. 5 MB. Recommended formats: PDF, DOC, TXT, RTF, ZIP, RAR."
+      job:
+        availability_time: "from 1 to 60 days"
+        localization_id: "ex. 'London', 'Berlin, UK'"
+        email_title: "ex. Senior Developer, Ruby Developer/18/12/71"
+        website: "http://"
+        framework_id: "ex. Ruby On Rails, Sinatra"
+  flash:
+    error:
+      access_denied: "Access denied"
+    notice:
+      email_verification: "On your email was verification email!"
+      job_updated: "Your job was successfully updated!"
+      job_published: "Your job was successfully published!"
+      job_deleted: "Job was deleted!"
+      contact_sended: "Thank you!"
+      application_sended: "Your application was sended!"
+  title:
+    popular: "popular jobs"
+    latest: "latest jobs"
+    search: "Search Job"
+    finded_jobs: "Finded Jobs"
+    jobs: "Jobs"
+    admin: "Admin panel"
+  jobs:
+    empty: "Empty"
+    show:
+      type: "Type"
+      category: "Category"
+      rank: "Rank"
+      employer: "Employer"
+      localization: "Localization"
+      framework: "Framework"
+      language: "Language"
+      pay_band: "Pay Band"
+      contact: "Contact"
+      published_at: "Posted"
+      end_at: "End at"
+      visited: "Visited"
+      description: "Description"
+      apply_online: "Apply online!"
+    form:
+      new: 
+        title: "Post Job"
+        submit: "I agree with Terms and I want post job"
+        cancel: "cancel"
+      edit: 
+        title: "Edit job"
+        submit: "Save changes"
+        destroy: "delete"
+        destroy_confirm: "Are you sure?"
+      fieldset:
+        job_details: "Details"
+        apply_online: "Apply on-line!"
+        company_details: "Company info"
+        human_test: "Are you human?"
+    type:
+      full_time: "Full-Time"
+      freelance: "freelance"
+      free: "free"
+      practice: "practice"
+      remote: "remote"
+    type_long:
+      full_time: "Full time job"
+      freelance: "freelance"
+      free: "free"
+      practice: "practice"
+  layout:
+    popular: "Popular"
+    latest: "Latest"
+    menu:
+      main: "Home"
+      search: "Search"
+      about: "About"
+      terms: "Terms"
+      follow: "Follow us"
+      contact: "Contact"
+    sidebar:
+      post_job: "Post Job for FREE!"
+      type: "type"
+      localization: "localization"
+      language: "language"
+      frameworks: "framework"
+  home:
+    title: "latest jobs from IT"
+    popular: "Popular"
+    latest: "Latest"
+    jobs: "jobs"
+    more_jobs: "show more"
+
+  datetime:
+    distance_in_words:
+      ago: "ago"
+
+  activerecord:
+    models:
+      user: "User"
+      job: "Job"
+      search: "Search"
+      applicant: "Applicant"
+      comment:
+        attributes:
+          captcha_solution:
+            blank: 'must be presented'
+            invalid: 'invalid input'
+        
+  support:
+    array:
+      last_word_connector: " and "
+      for_word_connector: " for "
+      in_word_connector: " in "
+      or_word_connector: " or "

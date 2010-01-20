@@ -42,6 +42,19 @@ namespace :webpraca do
 		task :remove_old => :environment do
 			Job.old.each(&:destroy)
 		end
+		
+		task :publish_all => :environment do
+			Job.all(:conditions => { :published => false }).each do |job|
+				job.send_notification
+				job.publish!
+			end
+		end
+		
+		task :publish => :environment do
+			Job.all(:conditions => { :published => nil }).each do |job|
+				job.publish!
+			end
+		end
 	end
 	
 	namespace :admin do

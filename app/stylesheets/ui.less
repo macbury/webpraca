@@ -322,6 +322,8 @@ form > fieldset > legend {
 	.rounded_corners(@box_div_border_radius);
 }
 
+.box > div > .text { margin: 10px; }
+.box > div > .text p { margin: 10px 0; }
 .box > div:last-child { margin-bottom: 0; }
 
 @title_height: 39px;
@@ -368,7 +370,7 @@ form > fieldset > legend {
 	.clear;
 }
 
-.list > li { clear: both; padding: 5px; }
+.list > li { clear: both; padding: 5px; min-height: 14px; }
 .list > .alt { background:#f6f6f6; }
 .list > li > .ranked { font-weight: bold; }
 .list > li .handle { cursor: move; margin: 3px 5px 0 5px; }
@@ -451,22 +453,22 @@ form > fieldset > legend {
 
 .etykieta:hover { color: #fff; }
 
-.etykieta.zdalnie {
+.etykieta.remote {
 	background: #357CCB;
 	border: 1px solid #2C6AB0;
 }
 
-.etykieta.zlecenie {
+.etykieta.freelance {
 	background: #F8854E;
 	border: 1px solid #D27244;
 }
 
-.etykieta.etat {
+.etykieta.full_time {
 	background: #408000;
 	border: 1px solid #366E01;
 }
 
-.etykieta.praktyka {
+.etykieta.practice {
 	background: #FF6;
 	border: 1px solid #E2E25C;
 	color: #31627E;
@@ -474,7 +476,7 @@ form > fieldset > legend {
 
 .praktyka:hover { color: #31627E; }
 
-.etykieta.wolontariat {
+.etykieta.free {
 	background: #D6D6D6;
 	border: 1px solid #B1B1B1;
 	color: #31627E;
