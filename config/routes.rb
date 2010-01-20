@@ -4,7 +4,31 @@ ActionController::Routing::Routes.draw do |map|
   map.contact '/contact', :controller => 'contact', :action => 'new', :conditions => { :method => :get }
   map.contact '/contact', :controller => 'contact', :action => 'create', :conditions => { :method => :post }
 	map.seo_page '/page/:id/', :controller => 'admin/pages', :action => 'show'
+	
+	# HACK
+	
+	map.connect '/strona/:id/', :controller => 'admin/pages', :action => 'show'
 
+	map.with_options :controller => 'jobs', :action => 'index' do |job| 
+		job.with_options :category => nil, :page => 1, :order => "najnowsze", :requirements => { :order => /(najnowsze|najpopularniejsze)/, :page => /\d/ } do |seo|
+			seo.connect '/oferty/:page'
+			seo.connect '/oferty/:order'
+			seo.connect '/oferty/:order/:page'
+			seo.connect '/oferty/:order/:category/:page'
+		end
+
+		job.connect '/lokalizacja/:localization/:page'
+		job.connect '/lokalizacja/:localization'
+		job.connect '/framework/:framework/:page'
+		job.connect '/framework/:framework'
+		job.connect '/typ/:type_id/:page'
+		job.connect '/typ/:type_id'
+		job.connect '/kategoria/:category/:page'
+		job.connect '/kategoria/:category'
+	end
+	
+	# HACK
+	
 	map.with_options :controller => 'jobs', :action => 'index' do |job| 
 		job.with_options :category => nil, :page => 1, :order => "latest", :requirements => { :order => /(latest|popular)/, :page => /\d/ } do |seo|
 			seo.connect '/jobs/:page'
