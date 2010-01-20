@@ -37,7 +37,6 @@ ActionController::Routing::Routes.draw do |map|
 	
 	map.namespace :admin do |admin|
 		admin.stats '/stats', :controller => "stats"
-		admin.config '/config', :controller => "configs", :action => "new"
 		admin.resources :pages
 		admin.resources :jobs
 		admin.resource :configs

@@ -2,41 +2,44 @@
 # by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
 
 en:
+  head:
+    tags: "jobs, offers, IT, poland, developer, freelancer, job board, jobboard"
+    description: "Job board for ruby and rails developers. Subscribe to rss to keep up with new postings."
   500:
-    title: "Coś poszło nie tak... Aplikacja trafiła na nieobsługiwany wyjątek."
+    title: "We're sorry, but something went wrong"
   404:
-    title: "Nie znaleziono strony!"
+    title: "he page you were looking for doesn't exist"
   applicant:
-    title: "Aplikuj online"
-    fieldset: "Treść aplikacji"
+    title: "Apply now"
+    fieldset: "Apply now"
   contact:
-    title: "Kontakt"
-    description: "Będziemy wdzięczni za wszelkie uwagi dotyczące funkcjonowania serwisu."
-    recipient: "Od"
-    subject: "Temat"
-    body: "Treść"
-    submit: "Wyślij!"
+    title: "Contact"
+    description: ""
+    recipient: "From"
+    subject: "Subject"
+    body: "Body"
+    submit: "Send!"
   mailer:
     job_applicant:
-      body: "Pojawiła się osoba zainteresowana twoją ofertą: "
-      attachment: "Załącznik"
+      body: "Somebody just applied to your job opening: "
+      attachment: "Attachment"
     job_posted:
-      greetings: "Witaj"
-      publish: "Aby opublikować swoją ofertę kliknij na link poniżej"
-      path_to_job: "Twoja oferta została dodana i znajduje się poda adresem:"
-      path_to_edit_job: "Jeżeli chcesz wprowadzić zmiany w ofercie kliknij na link poniżej"
-      path_to_destroy_job: "Aby usunąć ofertę kliknij na poniższy link"
+      greetings: "Hello"
+      publish: "Click link below to publish your job"
+      path_to_job: "Your link to your job:"
+      path_to_edit_job: "If you want to edit job, click link below"
+      path_to_destroy_job: "If you want to remove job, click link below"
   formtastic:
     labels:
       search:
-        fieldset: "Wyszukiwarka"
-        categories: "Kategorie"
-        has_text: "Zawierający tekst"
-        type: "Typ"
-        localizations: "Lokalizacja"
-        frameworks: "Używane frameworki"
-        pay_band: "Widełki zarobkowe"
-        submit: "Szukaj!"
+        fieldset: "Search"
+        categories: "Category"
+        has_text: "Keywords"
+        type: "Type"
+        localizations: "Localization"
+        frameworks: "Framework"
+        pay_band: "Pay Band"
+        submit: "Search!"
       websiteconfig:
         groups:
           website: "Strona WWW"
@@ -49,42 +52,40 @@ en:
           tags: "Słowa kluczowe"
           description: "Opis"
       applicant:
-        email: "Twój E-Mail"
-        body: "Treść"
-        cv: "Dodaj ofertę/CV"
+        email: "Your E-Mail"
+        body: "Body"
+        cv: "Upload resume/CV"
       job:
-        title: "Tytuł"
-        place_id: "Lokalizacja"
-        description: "Opis"
-        availability_time: "Długość trwania"
-        remote_job: "Praca zdalna"
-        type_id: "Typ"
-        category_id: "Kategoria"
-        company_name: "Nazwa"
-        website: "Strona WWW"
+        title: "Title"
+        place_id: "Location"
+        description: "Descripion"
+        availability_time: "Availability time"
+        remote_job: "Remote job"
+        type_id: "Type"
+        category_id: "Category"
+        company_name: "Company"
+        website: "Website"
         framework_name: "Framework"
-        localization_id: "Lokalizacja"
-        apply_online: "Aplikuj online"
-        email_title: "Tytuł emaila"
-        language: "Język"
-        pay_band: "Widełki zarobkowe"
-        pay_band_detail: "PLN na miesiąc, netto"
-        captcha: 'Kod z obrazka*'
+        localization_id: "Localization"
+        apply_online: "Apply online"
+        email_title: "Email title"
+        language: "Language"
+        pay_band: "Pay Band"
+        pay_band_detail: "$"
+        captcha: 'Captcha*'
       user:
-        password: "Hasło"
-        password_confirmation: "Powtórz hasło"
+        password: "password"
+        password_confirmation: "Password Confirmation"
     hints:
       applicant:
-        body: "wiadomość lub list motywacyjny"
-        cv: "Max. 5 MB. Rekomendowane formaty: PDF, DOC, TXT, RTF, ZIP, RAR."
+        body: "Message or letter of intention"
+        cv: "Max. 5 MB. Recommended formats: PDF, DOC, TXT, RTF, ZIP, RAR."
       job:
-        availability_time: "ile dni oferta ma być ważna(od 1 do 60 dni)"
-        localization_id: "np. 'Warszawa', 'Kraków, UK'"
-        framework_id: "główny framework którego znajomość jest wymagana, podaj pełną nazwę"
-        apply_online: "uaktywnia formularz umożliwiający przesyłanie aplikacji online w ofercie"
-        email_title: "np. Młodszy programista, Ruby Developer/18/12/71 itp"
-        email: "Pod wskazany adres zostaną przesłane linki do edycji oferty, nie będzie on widoczny publicznie(zamiast niego będzie dostępny formularz kontaktowy)."
+        availability_time: "from 1 to 60 days"
+        localization_id: "ex. 'London', 'Berlin, UK'"
+        email_title: "ex. Senior Developer, Ruby Developer/18/12/71"
         website: "http://"
+        framework_id: "ex. Ruby On Rails, Sinatra"
   flash:
     error:
       access_denied: "Access denied"

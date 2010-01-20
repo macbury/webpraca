@@ -160,7 +160,7 @@ class Job < ActiveRecord::Base
 			tags << language.name unless language.nil?
 		
 			MicroFeed.send( :streams => :all,
-											:msg => "[#{company_name}] - #{title}",
+											:msg => "#{title} dla #{company_name}",
 											:tags => tags,
 											:link => seo_job_url(self, :host => "webpraca.net")) if Rails.env == "production"
 		end

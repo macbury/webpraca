@@ -100,7 +100,7 @@ class JobsController < ApplicationController
 		
 		@page_title = [t('title.jobs'), @job.category.name.downcase, @job.localization.name.downcase, @job.company_name.downcase, @job.title.downcase]
 		
-		@tags = WebSiteConfig['website']['tags'].split(',').map(&:strip) + [@job.category.name, @job.localization.name, @job.company_name]
+		@tags = t('head.tags').split(',').map(&:strip) + [@job.category.name, @job.localization.name, @job.company_name]
 		@tags << JOB_TYPES[@job.type_id]
 		
 		unless @job.framework.nil?

@@ -2,6 +2,9 @@
 # by Jacek Becela (jacek.becela@gmail.com, http://github.com/ncr)
 
 pl:
+  head:
+    tags: "oferty pracy, praca IT, zlecenia IT, praca w IT, praca oferty z IT, oferty z it, it, w IT"
+    description: "Oferty pracy oraz zlece\xC5\x84 w bran\xC5\xBCy IT. Skutecznie rekrutuj z nami pracownik\xC3\xB3w, freelancer\xC3\xB3w."
   500:
     title: "Coś poszło nie tak... Aplikacja trafiła na nieobsługiwany wyjątek."
   404:

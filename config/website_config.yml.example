@@ -1,5 +1,6 @@
 website:
   name: My website
-  tags: [ cool, website ]
-  author: Buras Arkadiusz
-  last_update: <%= Time.now %>
+	default_language: en
+js: 
+	google_analytics: ""
+	widget: ""
