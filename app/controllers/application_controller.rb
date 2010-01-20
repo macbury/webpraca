@@ -31,13 +31,7 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def extract_locale_from_subdomain
-		redirect_to :subdomain => params[:locale] if params[:locale]
-		
-		if ENV["RAILS_ENV"] == 'development'
-		  parsed_locale = request.subdomains(0).first || '' #We do this for OS X in Development mode
-		else
-		  parsed_locale = request.subdomains.first || ''
-		end
+		parsed_locale = params[:locale]
 		
 		logger.debug "Language: #{parsed_locale}"
 		(AVAILABLE_LOCALES.include? parsed_locale) ? parsed_locale  : WebSiteConfig['website']['default_language']
