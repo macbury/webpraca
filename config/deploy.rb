@@ -2,7 +2,7 @@ set :application, "webpraca"
 set :repository, "git://github.com/macbury/webpraca.git"
 set :scm, :git
 
-set :branch, "master"
+set :branch, "deploy"
 set :user, "webpraca"
 set :deploy_to, "/home/webpraca/www/apps/#{application}"
 set :rails_env, "production"

@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
 	# HACK
 	
 	map.with_options :controller => 'jobs', :action => 'index' do |job| 
-		job.with_options :category => nil, :page => 1, :order => "latest", :requirements => { :order => /(latest|popular)/, :page => /\d/ } do |seo|
+		job.with_options :category => nil, :page => 1, :order => "latest", :requirements => { :page => /\d/ } do |seo|
 			seo.connect '/jobs/:page'
 			seo.connect '/jobs/:order'
 			seo.connect '/jobs/:order/:page'
