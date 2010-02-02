@@ -6,7 +6,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem 'sitemap_generator', :lib => false, :source => 'http://gemcutter.org'
-  config.gem 'less', :source => 'http://gemcutter.org', :lib => false
+  #config.gem 'less', :source => 'http://gemcutter.org', :lib => false
+  config.gem 'more', :source => 'http://gemcutter.org', :lib => false
   config.gem 'meta-tags', :lib => 'meta_tags', :source => 'http://gemcutter.org'
   config.gem 'declarative_authorization'
   config.gem 'searchlogic'
