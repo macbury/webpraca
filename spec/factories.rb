@@ -1,3 +1,8 @@
+Factory.sequence :email do |n|
+  "person#{n}@example.com"
+end
+
+
 Factory.define :job do |f|
   f.title { "Google CEO" }
   # it's faster to fing existing record, than create new one
@@ -15,6 +20,16 @@ Factory.define :job do |f|
 	f.regon "141066449"
 	f.nip "701-00-87-331"
 	f.krs "0000287684"
+end
+
+Factory.define :applicant do |f|
+  f.email { Factory.next(:email) }
+  f.body "I am the boss"
+  f.job { |j| Job.find(:first) || j.association(:job) }
+  f.cv_file_name "lorem_cv.pdf"
+  f.cv_content_type "application/pdf"
+  f.cv_file_size 1024
+  f.token "f9ece2216c3e25961b1e7f0ed428f1bed0015f72"
 end
 
 Factory.define :category do |f|
