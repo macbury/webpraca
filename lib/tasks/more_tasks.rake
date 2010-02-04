@@ -1,3 +1,5 @@
+unless ARGV.any? {|a| a =~ /^gems/} # Don't load anything when running the gems:* tasks
+
 require 'less'
 require 'more'
 
@@ -17,4 +19,6 @@ namespace :more do
     Less::More.clean
     puts "Done."
   end
+end
+
 end
