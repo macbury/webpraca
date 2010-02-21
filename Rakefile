@@ -14,4 +14,8 @@ class Object
     $verbose = true
   end
 end
-require 'sitemap_generator/tasks' rescue LoadError
+
+
+unless ARGV.any? {|a| a =~ /^gems/} # Don't load anything when running the gems:* tasks
+  require 'sitemap_generator/tasks' rescue LoadError
+end

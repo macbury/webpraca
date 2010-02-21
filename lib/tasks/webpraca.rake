@@ -1,4 +1,7 @@
+unless ARGV.any? {|a| a =~ /^gems/} # Don't load anything when running the gems:* tasks
+
 require 'highline/import'
+
 
 def ask_for_password(message)
 	val = ask(message) {|q| q.echo = false}
@@ -71,4 +74,6 @@ namespace :webpraca do
 			end
 		end
 	end
+end
+
 end
